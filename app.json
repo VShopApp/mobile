@@ -1,0 +1,34 @@
+{
+  "expo": {
+    "name": "valo-app",
+    "slug": "valo-app",
+    "version": "1.0.0",
+    "orientation": "portrait",
+    "icon": "./assets/icon.png",
+    "splash": {
+      "image": "./assets/splash.png",
+      "resizeMode": "contain",
+      "backgroundColor": "#ffffff"
+    },
+    "updates": {
+      "fallbackToCacheTimeout": 0
+    },
+    "assetBundlePatterns": [
+      "**/*"
+    ],
+    "ios": {
+      "supportsTablet": false,
+      "bundleIdentifier": "dev.vasc.valo"
+    },
+    "android": {
+      "adaptiveIcon": {
+        "foregroundImage": "./assets/adaptive-icon.png",
+        "backgroundColor": "#242424"
+      },
+      "package": "dev.vasc.valo"
+    },
+    "web": {
+      "favicon": "./assets/favicon.png"
+    }
+  }
+}
