@@ -1,3 +1,8 @@
+# Expo
+.expo
+__generated__
+web-build
+
 # Logs
 logs
 *.log

@@ -1,31 +1,29 @@
 {
   "expo": {
-    "name": "valo-app",
-    "slug": "valo-app",
+    "name": "vshop",
+    "slug": "vshop",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
     "splash": {
       "image": "./assets/splash.png",
       "resizeMode": "contain",
-      "backgroundColor": "#ffffff"
+      "backgroundColor": "#fa4454"
     },
     "updates": {
       "fallbackToCacheTimeout": 0
     },
-    "assetBundlePatterns": [
-      "**/*"
-    ],
+    "assetBundlePatterns": ["**/*"],
     "ios": {
       "supportsTablet": false,
-      "bundleIdentifier": "dev.vasc.valo"
+      "bundleIdentifier": "dev.vasc.vshop"
     },
     "android": {
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png",
-        "backgroundColor": "#242424"
+        "backgroundColor": "#fa4454"
       },
-      "package": "dev.vasc.valo"
+      "package": "dev.vasc.vshop"
     },
     "web": {
       "favicon": "./assets/favicon.png"
