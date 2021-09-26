@@ -1,12 +1,14 @@
 import React, { PropsWithChildren, useState } from "react";
 import { View, StyleSheet } from "react-native";
-import { Button, TextInput } from "react-native-paper";
+import { Button, Snackbar, TextInput } from "react-native-paper";
 import DropDown from "react-native-paper-dropdown";
 import { login } from "../utils/ValorantAPI";
 
 interface props {
   user: user | undefined;
   setUser: Function;
+  setSnackbarVisible: Function;
+  setSnackbarTxt: Function;
 }
 export default function Login(props: PropsWithChildren<props>) {
   const [username, setUsername] = useState("");
@@ -16,12 +18,24 @@ export default function Login(props: PropsWithChildren<props>) {
 
   const handleLogin = async () => {
     props.setUser({ loading: true });
-    const data = await login(username, password, region);
-    props.setUser(data);
+    let user = await login(username, password, region);
+    if (user.error) {
+      props.setUser(null);
+      props.setSnackbarTxt(user.error);
+      props.setSnackbarVisible(true);
+    } else {
+      props.setUser(user);
+    }
   };
 
   return (
-    <View style={styles.container}>
+    <View
+      style={{
+        flex: 1,
+        justifyContent: "center",
+        alignItems: "center",
+      }}
+    >
       <TextInput
         style={{ width: 250, height: 50, marginBottom: 10 }}
         onChangeText={(text) => {
@@ -66,7 +80,3 @@ export default function Login(props: PropsWithChildren<props>) {
     </View>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {},
-});

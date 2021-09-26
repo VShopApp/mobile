@@ -5,23 +5,37 @@ import { Provider as PaperProvider } from "react-native-paper";
 import Shop from "./components/Shop";
 import AppBar from "./components/AppBar";
 import Settings from "./components/Settings";
+import SnackBar from "./components/SnackBar";
 
 export default function App() {
   const [user, setUser] = useState<user>();
   const [view, setView] = useState(0);
 
+  const [snackbarVisible, setSnackbarVisible] = useState(false);
+  const [snackbarTxt, setSnackbarTxt] = useState("");
+
   return (
     <PaperProvider>
-      <SafeAreaView>
-        <AppBar setView={setView} />
+      <SafeAreaView style={{ width: "100%", height: "100%" }}>
+        <AppBar setView={setView} showActions={user != null && !user.loading} />
         {!user || user.loading ? (
-          <Login user={user} setUser={setUser} />
+          <Login
+            user={user}
+            setUser={setUser}
+            setSnackbarTxt={setSnackbarTxt}
+            setSnackbarVisible={setSnackbarVisible}
+          />
         ) : (
           <>
             <Shop user={user} visible={view == 0} />
             <Settings user={user} setUser={setUser} visible={view == 1} />
           </>
         )}
+        <SnackBar
+          visible={snackbarVisible}
+          setVisible={setSnackbarVisible}
+          txt={snackbarTxt}
+        />
         <StatusBar barStyle="default" />
       </SafeAreaView>
     </PaperProvider>

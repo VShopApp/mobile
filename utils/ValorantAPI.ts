@@ -10,7 +10,7 @@ export async function login(
 ) {
   clearCookies();
 
-  let response = await (
+  await (
     await fetch(getUrl("auth"), {
       method: "POST",
       body: JSON.stringify({
@@ -26,77 +26,78 @@ export async function login(
     })
   ).json();
 
-  if (response.type === "auth") {
-    /* LOG IN */
-    let response = await (
-      await fetch(getUrl("auth"), {
-        method: "PUT",
-        body: JSON.stringify({
-          type: "auth",
-          username,
-          password,
-        }),
+  /* LOG IN */
+  let response = await (
+    await fetch(getUrl("auth"), {
+      method: "PUT",
+      body: JSON.stringify({
+        type: "auth",
+        username,
+        password,
+      }),
+      headers: {
+        "Content-Type": "application/json",
+      },
+      credentials: "include",
+    })
+  ).json();
+
+  if (response.error === "auth_failure")
+    return { error: "The given credentials are invalid." } as user;
+
+  const uri = response["response"]["parameters"]["uri"];
+
+  const regexResult = uri.match(
+    /access_token=((?:[a-zA-Z]|\d|\.|-|_)*).*id_token=((?:[a-zA-Z]|\d|\.|-|_)*).*expires_in=(\d*)/
+  );
+  const accessToken = regexResult[1];
+  const idtoken = regexResult[2];
+  const expiresIn = regexResult[3];
+
+  /* Entitlements */
+  const entitlementsToken = (
+    await (
+      await fetch(getUrl("entitlements"), {
+        method: "POST",
+        body: "",
         headers: {
           "Content-Type": "application/json",
+          Authorization: `Bearer ${accessToken}`,
         },
         credentials: "include",
       })
-    ).json();
+    ).json()
+  ).entitlements_token;
 
-    const uri = response["response"]["parameters"]["uri"];
+  /* UserId */
+  const userId = (
+    await (
+      await fetch(getUrl("userinfo"), {
+        method: "POST",
+        body: "",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${accessToken}`,
+        },
+        credentials: "include",
+      })
+    ).json()
+  ).sub;
 
-    const regexResult = uri.match(
-      /access_token=((?:[a-zA-Z]|\d|\.|-|_)*).*id_token=((?:[a-zA-Z]|\d|\.|-|_)*).*expires_in=(\d*)/
-    );
-    const accessToken = regexResult[1];
-    const idtoken = regexResult[2];
-    const expiresIn = regexResult[3];
+  const user: user = {
+    name: username,
+    accessToken,
+    entitlementsToken,
+    idtoken,
+    expiresIn,
+    region,
+    id: userId,
+    loading: false,
+  };
 
-    /* Entitlements */
-    const entitlementsToken = (
-      await (
-        await fetch(getUrl("entitlements"), {
-          method: "POST",
-          body: "",
-          headers: {
-            "Content-Type": "application/json",
-            Authorization: `Bearer ${accessToken}`,
-          },
-          credentials: "include",
-        })
-      ).json()
-    ).entitlements_token;
+  await loadOffers(user);
 
-    /* UserId */
-    const userId = (
-      await (
-        await fetch(getUrl("userinfo"), {
-          method: "POST",
-          body: "",
-          headers: {
-            "Content-Type": "application/json",
-            Authorization: `Bearer ${accessToken}`,
-          },
-          credentials: "include",
-        })
-      ).json()
-    ).sub;
-
-    const user = {
-      name: username,
-      accessToken,
-      entitlementsToken,
-      idtoken,
-      expiresIn,
-      region,
-      id: userId,
-      loading: false,
-    };
-
-    await loadOffers(user);
-
-    return user;
-  }
+  return user;
 }
 
 export async function clearCookies() {

@@ -1,5 +1,5 @@
 import React, { PropsWithChildren } from "react";
-import { View, StyleSheet } from "react-native";
+import { View } from "react-native";
 import { Button, Text } from "react-native-paper";
 import { clearCookies } from "../utils/ValorantAPI";
 
@@ -17,15 +17,20 @@ export default function Settings(props: PropsWithChildren<props>) {
   if (!props.visible) return <></>;
 
   return (
-    <View style={styles.container}>
-      <Text>Logged in as {props.user.name}</Text>
-      <Button onPress={handleLogout} mode="contained">
+    <View
+      style={{
+        flex: 1,
+        justifyContent: "center",
+        alignItems: "center",
+      }}
+    >
+      <Text style={{ fontSize: 15 }}>
+        Logged in as{" "}
+        <Text style={{ fontWeight: "bold" }}>{props.user.name}</Text>
+      </Text>
+      <Button style={{ marginTop: 10 }} onPress={handleLogout} mode="contained">
         Log Out
       </Button>
     </View>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {},
-});

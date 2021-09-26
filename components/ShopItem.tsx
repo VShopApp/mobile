@@ -13,7 +13,7 @@ export default function Item(props: PropsWithChildren<props>) {
 
   return (
     <>
-      <Card style={{ height: 315, width: 400 }}>
+      <Card>
         <Card.Content>
           <Title>{props.item.displayName}</Title>
           <Paragraph>{props.item.price} Creds</Paragraph>

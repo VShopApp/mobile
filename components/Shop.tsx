@@ -21,7 +21,7 @@ export default function Shop(props: PropsWithChildren<props>) {
 
   return (
     <>
-      <ScrollView style={{ marginBottom: 75 }}>
+      <ScrollView>
         {items?.singleItems.map((item: singleItem) => (
           <ShopItem item={item} key={item.uuid} />
         ))}

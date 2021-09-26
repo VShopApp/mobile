@@ -7,6 +7,7 @@ interface user {
   expiresIn: number;
   region: string;
   id: string;
+  error?: string | undefined;
 }
 
 interface singleItem {
