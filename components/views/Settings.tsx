@@ -1,20 +1,17 @@
 import React, { PropsWithChildren } from "react";
 import { View } from "react-native";
 import { Button, Text } from "react-native-paper";
-import { clearCookies } from "../utils/ValorantAPI";
+import { clearCookies } from "../../utils/ValorantAPI";
 
 interface props {
   user: user;
   setUser: Function;
-  visible: boolean;
 }
 export default function Settings(props: PropsWithChildren<props>) {
   const handleLogout = () => {
     clearCookies();
     props.setUser(null);
   };
-
-  if (!props.visible) return <></>;
 
   return (
     <View

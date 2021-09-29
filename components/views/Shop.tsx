@@ -1,12 +1,11 @@
 import React, { PropsWithChildren } from "react";
 import { useEffect, useState } from "react";
 import { ScrollView } from "react-native";
-import { getShop } from "../utils/ValorantAPI";
-import ShopItem from "./ShopItem";
+import { getShop } from "../../utils/ValorantAPI";
+import ShopItem from "../ShopItem";
 
 interface props {
   user: user;
-  visible: boolean;
 }
 export default function Shop(props: PropsWithChildren<props>) {
   const [items, setItems] = useState<shopItems>();
@@ -16,8 +15,6 @@ export default function Shop(props: PropsWithChildren<props>) {
       setItems(items);
     });
   }, []);
-
-  if (!props.visible) return <></>;
 
   return (
     <>

@@ -2,7 +2,7 @@ import React, { PropsWithChildren, useState } from "react";
 import { View, StyleSheet } from "react-native";
 import { Button, Snackbar, TextInput } from "react-native-paper";
 import DropDown from "react-native-paper-dropdown";
-import { login } from "../utils/ValorantAPI";
+import { login } from "../../utils/ValorantAPI";
 
 interface props {
   user: user | undefined;

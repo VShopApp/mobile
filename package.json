@@ -16,6 +16,7 @@
     "react": "16.13.1",
     "react-dom": "16.13.1",
     "react-native": "https://github.com/expo/react-native/archive/sdk-42.0.0.tar.gz",
+    "react-native-image-zoom-viewer": "^3.0.1",
     "react-native-paper": "^4.9.2",
     "react-native-paper-dropdown": "^1.0.7",
     "react-native-popup-dialog": "^0.18.3",

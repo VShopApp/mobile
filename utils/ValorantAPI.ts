@@ -1,7 +1,7 @@
 const RCTNetworkingAndroid = require("react-native/Libraries/Network/RCTNetworking.android");
 const RCTNetworkingIOS = require("react-native/Libraries/Network/RCTNetworking.ios");
 
-var offers: any = {};
+export var offers: any = {};
 
 export async function login(
   username: string,
