@@ -1,8 +1,9 @@
-import React, { PropsWithChildren, useState } from "react";
-import { View, StyleSheet } from "react-native";
-import { Button, Snackbar, TextInput } from "react-native-paper";
+import React, { PropsWithChildren, useEffect, useState } from "react";
+import { View } from "react-native";
+import { Button, TextInput, Checkbox } from "react-native-paper";
 import DropDown from "react-native-paper-dropdown";
 import { login } from "../../utils/ValorantAPI";
+import * as SecureStore from "expo-secure-store";
 
 interface props {
   user: user | undefined;
@@ -14,6 +15,7 @@ export default function Login(props: PropsWithChildren<props>) {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [region, setRegion] = useState("eu");
+  const [savePw, setSavePw] = useState(true);
   const [dropdownShown, setDropdownShown] = useState(false);
 
   const handleLogin = async () => {
@@ -25,8 +27,27 @@ export default function Login(props: PropsWithChildren<props>) {
       props.setSnackbarVisible(true);
     } else {
       props.setUser(user);
+      if (savePw) {
+        await SecureStore.setItemAsync("username", username);
+        await SecureStore.setItemAsync("pw", password);
+      } else {
+        await SecureStore.deleteItemAsync("username");
+        await SecureStore.deleteItemAsync("pw");
+      }
     }
   };
+
+  useEffect(() => {
+    // Restore username & password
+    SecureStore.getItemAsync("username").then((storedUsername) => {
+      SecureStore.getItemAsync("pw").then((storedPw) => {
+        if (storedUsername && storedPw) {
+          setUsername(storedUsername);
+          setPassword(storedPw);
+        }
+      });
+    });
+  }, []);
 
   return (
     <View
@@ -41,6 +62,7 @@ export default function Login(props: PropsWithChildren<props>) {
         onChangeText={(text) => {
           setUsername(text);
         }}
+        value={username}
         label="Username"
         autoCompleteType="username"
       />
@@ -49,9 +71,17 @@ export default function Login(props: PropsWithChildren<props>) {
         onChangeText={(text) => {
           setPassword(text);
         }}
+        value={password}
         style={{ width: 250, height: 50, marginBottom: 10 }}
         autoCompleteType="password"
         secureTextEntry={true}
+      />
+      <Checkbox.Item
+        label="Save credentials"
+        status={savePw ? "checked" : "unchecked"}
+        onPress={() => {
+          setSavePw(!savePw);
+        }}
       />
       <View style={{ width: 100, marginBottom: 15 }}>
         <DropDown
