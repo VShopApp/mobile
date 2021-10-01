@@ -30,23 +30,27 @@ export default function Login(props: PropsWithChildren<props>) {
       if (savePw) {
         await SecureStore.setItemAsync("username", username);
         await SecureStore.setItemAsync("pw", password);
+        await SecureStore.setItemAsync("region", region);
       } else {
         await SecureStore.deleteItemAsync("username");
         await SecureStore.deleteItemAsync("pw");
+        await SecureStore.deleteItemAsync("region");
       }
     }
   };
 
   useEffect(() => {
-    // Restore username & password
-    SecureStore.getItemAsync("username").then((storedUsername) => {
-      SecureStore.getItemAsync("pw").then((storedPw) => {
-        if (storedUsername && storedPw) {
-          setUsername(storedUsername);
-          setPassword(storedPw);
-        }
-      });
-    });
+    const restoreCredentials = async () => {
+      let username = await SecureStore.getItemAsync("username");
+      let password = await SecureStore.getItemAsync("pw");
+      let region = await SecureStore.getItemAsync("region");
+      if (username && password && region) {
+        setUsername(username);
+        setPassword(password);
+        setRegion(region);
+      }
+    };
+    restoreCredentials();
   }, []);
 
   return (
