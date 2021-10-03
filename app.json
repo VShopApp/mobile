@@ -10,6 +10,7 @@
       "resizeMode": "contain",
       "backgroundColor": "#fa4454"
     },
+    "permissions": [],
     "updates": {
       "fallbackToCacheTimeout": 0
     },
