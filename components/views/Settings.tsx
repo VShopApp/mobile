@@ -1,14 +1,16 @@
-import React, { PropsWithChildren, useState } from "react";
+import React, { PropsWithChildren } from "react";
 import { View } from "react-native";
 import { Button, Text } from "react-native-paper";
 import { clearCookies } from "../../utils/ValorantAPI";
+import * as SecureStore from "expo-secure-store";
 
 interface props {
   user: user;
   setUser: Function;
 }
 export default function Settings(props: PropsWithChildren<props>) {
-  const handleLogout = () => {
+  const handleLogout = async () => {
+    await SecureStore.deleteItemAsync("user");
     clearCookies();
     props.setUser(null);
   };
