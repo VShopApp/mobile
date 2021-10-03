@@ -6,6 +6,7 @@ import AppBar from "./components/AppBar";
 import SnackBar from "./components/SnackBar";
 import Navigation from "./components/Navigation";
 import * as Updates from "expo-updates";
+import { UpdateEventType } from "expo-updates";
 
 export default function App() {
   const [user, setUser] = useState<user>();
@@ -21,9 +22,11 @@ export default function App() {
     },
   };
 
-  Updates.addListener(async () => {
+  Updates.addListener(async (event) => {
     // Reload app once update is downloaded
-    await Updates.reloadAsync();
+    if (event.type === UpdateEventType.UPDATE_AVAILABLE) {
+      await Updates.reloadAsync();
+    }
   });
 
   return (
