@@ -13,7 +13,9 @@ export default function Offers(props: PropsWithChildren<props>) {
         alignItems: "center",
       }}
     >
-      <Text>{JSON.stringify(offers)}</Text>
+      {Object.keys(offers).map((key) => (
+        <Text>{key}</Text>
+      ))}
     </View>
   );
 }

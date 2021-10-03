@@ -4,7 +4,7 @@ import { Appbar } from "react-native-paper";
 interface props {}
 const AppBar = (props: PropsWithChildren<props>) => (
   <Appbar>
-    <Appbar.Content title="Valorant Shop" subtitle={"by vasc"} />
+    <Appbar.Content title="VShop" subtitle={"for Valorant"} />
   </Appbar>
 );
 

@@ -13,13 +13,14 @@ export default function Item(props: PropsWithChildren<props>) {
 
   return (
     <>
-      <Card>
+      <Card style={{ margin: 5 }}>
         <Card.Content>
           <Title>{props.item.displayName}</Title>
-          <Paragraph>{props.item.price} Creds</Paragraph>
+          <Paragraph>{props.item.price} VP</Paragraph>
         </Card.Content>
         <Card.Cover
           resizeMode="contain"
+          style={{ backgroundColor: "#fff" }}
           source={{ uri: props.item.displayIcon }}
         />
         <Card.Actions>

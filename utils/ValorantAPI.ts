@@ -43,7 +43,9 @@ export async function login(
   ).json();
 
   if (response.error === "auth_failure")
-    return { error: "The given credentials are invalid." } as user;
+    return { error: "The given credentials are invalid." };
+  else if (response.error === "rate_limited")
+    return { error: "You have been rate limited, please try again later." };
 
   const uri = response["response"]["parameters"]["uri"];
 

@@ -1,6 +1,12 @@
 import React, { PropsWithChildren, useEffect, useState } from "react";
 import { View } from "react-native";
-import { Button, TextInput, Checkbox } from "react-native-paper";
+import {
+  Button,
+  TextInput,
+  Checkbox,
+  Text,
+  ActivityIndicator,
+} from "react-native-paper";
 import DropDown from "react-native-paper-dropdown";
 import { login } from "../../utils/ValorantAPI";
 import * as SecureStore from "expo-secure-store";
@@ -8,23 +14,23 @@ import * as SecureStore from "expo-secure-store";
 interface props {
   user: user | undefined;
   setUser: Function;
-  setSnackbarVisible: Function;
-  setSnackbarTxt: Function;
+  setSnackbar: Function;
 }
 export default function Login(props: PropsWithChildren<props>) {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [region, setRegion] = useState("eu");
+  const [exisitingUser, setExistingUser] = useState(false);
+  const [loading, setLoading] = useState(true);
   const [savePw, setSavePw] = useState(true);
   const [dropdownShown, setDropdownShown] = useState(false);
 
   const handleLogin = async () => {
-    props.setUser({ loading: true });
+    setLoading(true);
     let user = await login(username, password, region);
     if (user.error) {
-      props.setUser(null);
-      props.setSnackbarTxt(user.error);
-      props.setSnackbarVisible(true);
+      setLoading(false);
+      props.setSnackbar(user.error);
     } else {
       props.setUser(user);
       if (savePw) {
@@ -46,10 +52,25 @@ export default function Login(props: PropsWithChildren<props>) {
         setUsername(userObj.username);
         setPassword(userObj.password);
         setRegion(userObj.region);
+        setExistingUser(true);
       }
+      setLoading(false);
     };
     restoreCredentials();
   }, []);
+
+  if (loading)
+    return (
+      <View
+        style={{
+          flex: 1,
+          justifyContent: "center",
+          alignItems: "center",
+        }}
+      >
+        <ActivityIndicator animating={true} color={"#fa4454"} size="large" />
+      </View>
+    );
 
   return (
     <View
@@ -59,54 +80,60 @@ export default function Login(props: PropsWithChildren<props>) {
         alignItems: "center",
       }}
     >
-      <TextInput
-        style={{ width: 250, height: 50, marginBottom: 10 }}
-        onChangeText={(text) => {
-          setUsername(text);
-        }}
-        value={username}
-        label="Username"
-        autoCompleteType="username"
-      />
-      <TextInput
-        label="Password"
-        onChangeText={(text) => {
-          setPassword(text);
-        }}
-        value={password}
-        style={{ width: 250, height: 50, marginBottom: 10 }}
-        autoCompleteType="password"
-        secureTextEntry={true}
-      />
-      <Checkbox.Item
-        label="Save credentials"
-        status={savePw ? "checked" : "unchecked"}
-        onPress={() => {
-          setSavePw(!savePw);
-        }}
-      />
-      <View style={{ width: 100, marginBottom: 15 }}>
-        <DropDown
-          label={"Region"}
-          mode={"outlined"}
-          visible={dropdownShown}
-          showDropDown={() => setDropdownShown(true)}
-          onDismiss={() => setDropdownShown(false)}
-          value={region}
-          setValue={setRegion}
-          list={[
-            { label: "EU", value: "eu" },
-            { label: "NA", value: "na" },
-            { label: "AP", value: "ap" },
-            { label: "KR", value: "kr" },
-          ]}
-        />
-      </View>
-      <Button
-        onPress={handleLogin}
-        mode="contained"
-        loading={props.user?.loading}
-      >
+      {!exisitingUser ? (
+        <>
+          <TextInput
+            style={{ width: 250, height: 50, marginBottom: 10 }}
+            onChangeText={(text) => {
+              setUsername(text);
+            }}
+            value={username}
+            label="Username"
+            autoCompleteType="username"
+          />
+          <TextInput
+            label="Password"
+            onChangeText={(text) => {
+              setPassword(text);
+            }}
+            value={password}
+            style={{ width: 250, height: 50, marginBottom: 10 }}
+            autoCompleteType="password"
+            secureTextEntry={true}
+          />
+          <Checkbox.Item
+            label="Save credentials"
+            status={savePw ? "checked" : "unchecked"}
+            onPress={() => {
+              setSavePw(!savePw);
+            }}
+          />
+          <View style={{ width: 100, marginBottom: 15 }}>
+            <DropDown
+              label={"Region"}
+              mode={"outlined"}
+              visible={dropdownShown}
+              showDropDown={() => setDropdownShown(true)}
+              onDismiss={() => setDropdownShown(false)}
+              value={region}
+              setValue={setRegion}
+              list={[
+                { label: "EU", value: "eu" },
+                { label: "NA", value: "na" },
+                { label: "AP", value: "ap" },
+                { label: "KR", value: "kr" },
+              ]}
+            />
+          </View>
+        </>
+      ) : (
+        <>
+          <Text style={{ marginBottom: 10, fontSize: 17 }}>
+            Welcome back, {username} 👋
+          </Text>
+        </>
+      )}
+      <Button onPress={handleLogin} disabled={loading} mode="contained">
         Log In
       </Button>
     </View>

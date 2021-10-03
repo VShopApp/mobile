@@ -3,23 +3,23 @@ import { Snackbar } from "react-native-paper";
 
 interface props {
   visible: boolean;
-  setVisible: Function;
-  txt: string;
+  value: string;
+  setValue: Function;
 }
 export default function SnackBar(props: PropsWithChildren<props>) {
   return (
     <>
       <Snackbar
         visible={props.visible}
-        onDismiss={() => props.setVisible(false)}
+        onDismiss={() => props.setValue("")}
         action={{
           label: "Close",
           onPress: () => {
-            props.setVisible(false);
+            props.setValue("");
           },
         }}
       >
-        {props.txt}
+        {props.value}
       </Snackbar>
     </>
   );

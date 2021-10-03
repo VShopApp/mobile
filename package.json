@@ -10,9 +10,11 @@
   "dependencies": {
     "@types/react-native-popup-dialog": "^0.16.3",
     "expo": "~42.0.1",
+    "expo-asset": "~8.3.3",
     "expo-av": "~9.2.3",
     "expo-secure-store": "~10.2.0",
     "expo-status-bar": "~1.0.4",
+    "expo-updates": "~0.8.2",
     "expo-web-browser": "~9.2.0",
     "react": "16.13.1",
     "react-dom": "16.13.1",
