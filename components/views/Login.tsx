@@ -28,26 +28,24 @@ export default function Login(props: PropsWithChildren<props>) {
     } else {
       props.setUser(user);
       if (savePw) {
-        await SecureStore.setItemAsync("username", username);
-        await SecureStore.setItemAsync("pw", password);
-        await SecureStore.setItemAsync("region", region);
+        await SecureStore.setItemAsync(
+          "user",
+          JSON.stringify({ username, password, region })
+        );
       } else {
-        await SecureStore.deleteItemAsync("username");
-        await SecureStore.deleteItemAsync("pw");
-        await SecureStore.deleteItemAsync("region");
+        await SecureStore.deleteItemAsync("user");
       }
     }
   };
 
   useEffect(() => {
     const restoreCredentials = async () => {
-      let username = await SecureStore.getItemAsync("username");
-      let password = await SecureStore.getItemAsync("pw");
-      let region = await SecureStore.getItemAsync("region");
-      if (username && password && region) {
-        setUsername(username);
-        setPassword(password);
-        setRegion(region);
+      let user = await SecureStore.getItemAsync("user");
+      let userObj = user ? JSON.parse(user) : null;
+      if (userObj) {
+        setUsername(userObj.username);
+        setPassword(userObj.password);
+        setRegion(userObj.region);
       }
     };
     restoreCredentials();
