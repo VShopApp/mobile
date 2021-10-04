@@ -1,4 +1,5 @@
 import { Platform } from "react-native";
+import axios from "axios";
 const RCTNetworkingAndroid = require("react-native/Libraries/Network/RCTNetworking.android");
 const RCTNetworkingIOS = require("react-native/Libraries/Network/RCTNetworking.ios");
 
@@ -11,37 +12,37 @@ export async function login(
 ) {
   clearCookies();
 
-  await (
-    await fetch(getUrl("auth"), {
-      method: "POST",
-      body: JSON.stringify({
-        client_id: "play-valorant-web-prod",
-        nonce: "1",
-        redirect_uri: "https://playvalorant.com/opt_in",
-        response_type: "token id_token",
-      }),
-      headers: {
-        "Content-Type": "application/json",
-      },
-      credentials: "include",
-    })
-  ).json();
+  await axios({
+    url: getUrl("auth"),
+    method: "POST",
+    data: {
+      client_id: "play-valorant-web-prod",
+      nonce: "1",
+      redirect_uri: "https://playvalorant.com/opt_in",
+      response_type: "token id_token",
+    },
+    headers: {
+      "Content-Type": "application/json",
+    },
+    withCredentials: true,
+  });
 
   /* LOG IN */
-  let response = await (
-    await fetch(getUrl("auth"), {
+  let response: any = (
+    await axios({
+      url: getUrl("auth"),
       method: "PUT",
-      body: JSON.stringify({
+      data: {
         type: "auth",
         username,
         password,
-      }),
+      },
       headers: {
         "Content-Type": "application/json",
       },
-      credentials: "include",
+      withCredentials: true,
     })
-  ).json();
+  ).data;
 
   if (response.error === "auth_failure")
     return { error: "The given credentials are invalid." };
@@ -59,32 +60,34 @@ export async function login(
 
   /* Entitlements */
   const entitlementsToken = (
-    await (
-      await fetch(getUrl("entitlements"), {
+    (
+      await axios({
+        url: getUrl("entitlements"),
         method: "POST",
-        body: "",
+        data: {},
         headers: {
           "Content-Type": "application/json",
           Authorization: `Bearer ${accessToken}`,
         },
-        credentials: "include",
+        withCredentials: true,
       })
-    ).json()
+    ).data as any
   ).entitlements_token;
 
   /* UserId */
   const userId = (
-    await (
-      await fetch(getUrl("userinfo"), {
+    (
+      await axios({
+        url: getUrl("userinfo"),
         method: "POST",
-        body: "",
+        data: {},
         headers: {
           "Content-Type": "application/json",
           Authorization: `Bearer ${accessToken}`,
         },
-        credentials: "include",
+        withCredentials: true,
       })
-    ).json()
+    ).data as any
   ).sub;
 
   const user: user = {
@@ -113,26 +116,29 @@ export async function clearCookies() {
 }
 
 export async function getShop(user: user) {
-  const shop = await (
-    await fetch(getUrl("storefront", user.region, user.id), {
+  const shop: any = (
+    await axios({
+      url: getUrl("storefront", user.region, user.id),
       method: "GET",
       headers: {
+        "Content-Type": "application/json",
         "X-Riot-Entitlements-JWT": user.entitlementsToken,
         Authorization: `Bearer ${user.accessToken}`,
       },
-      credentials: "include",
+      withCredentials: true,
     })
-  ).json();
+  ).data;
 
   var singleItems = shop.SkinsPanelLayout.SingleItemOffers;
 
   for (var i = 0; i < singleItems.length; i++) {
     singleItems[i] = (
-      await (
-        await fetch(
-          `https://valorant-api.com/v1/weapons/skinlevels/${singleItems[i]}`
-        )
-      ).json()
+      (
+        await axios({
+          url: `https://valorant-api.com/v1/weapons/skinlevels/${singleItems[i]}`,
+          method: "GET",
+        })
+      ).data as any
     ).data;
     singleItems[i].price = offers[singleItems[i].uuid];
   }
@@ -141,16 +147,18 @@ export async function getShop(user: user) {
 }
 
 export async function loadOffers(user: user) {
-  const response = await (
-    await fetch(getUrl("offers", user.region, user.id), {
+  const response: any = (
+    await axios({
+      url: getUrl("offers", user.region, user.id),
       method: "GET",
       headers: {
+        "Content-Type": "application/json",
         "X-Riot-Entitlements-JWT": user.entitlementsToken,
         Authorization: `Bearer ${user.accessToken}`,
       },
-      credentials: "include",
+      withCredentials: true,
     })
-  ).json();
+  ).data;
 
   for (var i = 0; i < response.Offers.length; i++) {
     let offer = response.Offers[i];
