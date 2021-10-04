@@ -1,3 +1,4 @@
+import { Platform } from "react-native";
 const RCTNetworkingAndroid = require("react-native/Libraries/Network/RCTNetworking.android");
 const RCTNetworkingIOS = require("react-native/Libraries/Network/RCTNetworking.ios");
 
@@ -104,8 +105,11 @@ export async function login(
 
 export async function clearCookies() {
   /* CLEAR COOKIES; MAN THIS WAS A PAIN TO FIND OUT */
-  RCTNetworkingAndroid.clearCookies(() => {});
-  RCTNetworkingIOS.clearCookies(() => {});
+  if (Platform.OS === "ios") {
+    RCTNetworkingIOS.clearCookies(() => {});
+  } else {
+    RCTNetworkingAndroid.clearCookies(() => {});
+  }
 }
 
 export async function getShop(user: user) {

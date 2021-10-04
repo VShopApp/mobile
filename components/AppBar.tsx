@@ -2,7 +2,7 @@ import React, { PropsWithChildren } from "react";
 import { Appbar } from "react-native-paper";
 import { Platform } from "react-native";
 import { Menu } from "react-native-paper";
-import * as Linking from "expo-linking";
+import * as WebBrowser from "expo-web-browser";
 
 const MORE_ICON = Platform.OS === "ios" ? "dots-horizontal" : "dots-vertical";
 
@@ -24,13 +24,13 @@ const AppBar = (props: PropsWithChildren<props>) => {
       >
         <Menu.Item
           onPress={() => {
-            Linking.openURL("https://vshop.vasc.dev/changelog");
+            WebBrowser.openBrowserAsync("https://vshop.vasc.dev/changelog");
           }}
           title="Changelog"
         />
         <Menu.Item
           onPress={() => {
-            Linking.openURL("https://vshop.vasc.dev/privacy");
+            WebBrowser.openBrowserAsync("https://vshop.vasc.dev/privacy");
           }}
           title="Privacy Policy"
         />
