@@ -45,7 +45,9 @@ export async function login(
   ).data;
 
   if (response.error === "auth_failure")
-    return { error: "The given credentials are invalid." };
+    return {
+      error: "An auth error occurred, are the given credentials valid?",
+    };
   else if (response.error === "rate_limited")
     return { error: "You have been rate limited, please try again later." };
 
@@ -106,7 +108,7 @@ export async function login(
   return user;
 }
 
-export async function clearCookies() {
+export function clearCookies() {
   /* CLEAR COOKIES; MAN THIS WAS A PAIN TO FIND OUT */
   if (Platform.OS === "ios") {
     RCTNetworkingIOS.clearCookies(() => {});
@@ -147,7 +149,7 @@ export async function getShop(user: user) {
 }
 
 export async function loadOffers(user: user) {
-  const response: any = (
+  let response: any = (
     await axios({
       url: getUrl("offers", user.region, user.id),
       method: "GET",

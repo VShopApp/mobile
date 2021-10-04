@@ -4,7 +4,6 @@ import {
   Button,
   TextInput,
   Checkbox,
-  Text,
   ActivityIndicator,
 } from "react-native-paper";
 import DropDown from "react-native-paper-dropdown";
@@ -25,7 +24,7 @@ export default function Login(props: PropsWithChildren<props>) {
   const [savePw, setSavePw] = useState(true);
   const [dropdownShown, setDropdownShown] = useState(false);
 
-  const handleLogin = async () => {
+  const handleBtnLogin = async () => {
     setLoading(true);
     let user = await login(username, password, region);
     if (user.error) {
@@ -44,17 +43,27 @@ export default function Login(props: PropsWithChildren<props>) {
     }
   };
 
+  const handleDirectLogin = async ({ username, password, region }: any) => {
+    let user = await login(username, password, region);
+    if (user.error) {
+      props.setSnackbar(user.error);
+      setExistingUser(false);
+    } else {
+      props.setUser(user);
+    }
+  };
+
   useEffect(() => {
     const restoreCredentials = async () => {
       let user = await SecureStore.getItemAsync("user");
       let userObj = user ? JSON.parse(user) : null;
       if (userObj) {
-        setUsername(userObj.username);
-        setPassword(userObj.password);
-        setRegion(userObj.region);
         setExistingUser(true);
+
+        await handleDirectLogin(userObj);
+      } else {
+        setLoading(false);
       }
-      setLoading(false);
     };
     restoreCredentials();
   }, []);
@@ -80,7 +89,7 @@ export default function Login(props: PropsWithChildren<props>) {
         alignItems: "center",
       }}
     >
-      {!exisitingUser ? (
+      {!exisitingUser && (
         <>
           <TextInput
             style={{ width: 250, height: 50, marginBottom: 10 }}
@@ -125,17 +134,11 @@ export default function Login(props: PropsWithChildren<props>) {
               ]}
             />
           </View>
-        </>
-      ) : (
-        <>
-          <Text style={{ marginBottom: 10, fontSize: 17 }}>
-            Welcome back, {username} 👋
-          </Text>
+          <Button onPress={handleBtnLogin} disabled={loading} mode="contained">
+            Log In
+          </Button>
         </>
       )}
-      <Button onPress={handleLogin} disabled={loading} mode="contained">
-        Log In
-      </Button>
     </View>
   );
 }
