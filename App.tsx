@@ -5,7 +5,7 @@ import { DefaultTheme, Provider as PaperProvider } from "react-native-paper";
 import AppBar from "./components/AppBar";
 import SnackBar from "./components/SnackBar";
 import Navigation from "./components/Navigation";
-import * as Updates from "expo-updates";
+import Update from "./components/Update";
 
 export default function App() {
   const [user, setUser] = useState<user>();
@@ -21,16 +21,10 @@ export default function App() {
     },
   };
 
-  Updates.addListener(async (event) => {
-    // Reload app once update is downloaded
-    if (event.type === Updates.UpdateEventType.UPDATE_AVAILABLE) {
-      await Updates.reloadAsync();
-    }
-  });
-
   return (
     <PaperProvider theme={theme}>
       <SafeAreaView style={{ width: "100%", height: "100%" }}>
+        <Update />
         <AppBar />
         {!user || user.loading ? (
           <Login user={user} setUser={setUser} setSnackbar={setSnackbar} />
