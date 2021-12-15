@@ -19,6 +19,21 @@ interface singleItem {
   price: number;
 }
 
-interface shopItems {
-  singleItems: singleItem[];
+interface singleNightShopItem extends singleItem {
+  discountPrice: number;
+  discountPercent: number;
+}
+
+interface Bundle {
+  uuid: string;
+  displayName: string;
+  description: string;
+  extraDescription: any;
+  promoDescription: any;
+  useAdditionalContext: boolean;
+  displayIcon: string;
+  displayIcon2: string;
+  verticalPromoImage: string;
+  assetPath: string;
+  price: number;
 }

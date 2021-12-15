@@ -4,6 +4,9 @@ const RCTNetworkingAndroid = require("react-native/Libraries/Network/RCTNetworki
 const RCTNetworkingIOS = require("react-native/Libraries/Network/RCTNetworking.ios");
 
 export var offers: any = {};
+var cachedBundle: Bundle | null;
+var cachedShop: singleItem[] | null;
+var cachedNightShop: singleNightShopItem[] | null;
 
 export async function login(
   username: string,
@@ -118,6 +121,8 @@ export function clearCookies() {
 }
 
 export async function getShop(user: user) {
+  if (cachedShop) return cachedShop;
+
   const shop: any = (
     await axios({
       url: getUrl("storefront", user.region, user.id),
@@ -132,7 +137,6 @@ export async function getShop(user: user) {
   ).data;
 
   var singleItems = shop.SkinsPanelLayout.SingleItemOffers;
-  var nightShop = shop.BonusStore.BonusStoreOffers;
 
   for (var i = 0; i < singleItems.length; i++) {
     singleItems[i] = (
@@ -146,7 +150,83 @@ export async function getShop(user: user) {
     singleItems[i].price = offers[singleItems[i].uuid];
   }
 
-  return { singleItems } as shopItems;
+  cachedShop = singleItems;
+  return singleItems as singleItem[];
+}
+
+export async function getNightShop(user: user) {
+  if (cachedNightShop) return cachedNightShop;
+
+  const shop: any = (
+    await axios({
+      url: getUrl("storefront", user.region, user.id),
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+        "X-Riot-Entitlements-JWT": user.entitlementsToken,
+        Authorization: `Bearer ${user.accessToken}`,
+      },
+      withCredentials: true,
+    })
+  ).data;
+
+  var nightShop = shop.BonusStore.BonusStoreOffers;
+
+  var arr = [];
+  for (var i = 0; i < nightShop.length; i++) {
+    let itemid = nightShop[i].Offer.Rewards[0].ItemID;
+    arr[i] = (
+      (
+        await axios({
+          url: `https://valorant-api.com/v1/weapons/skinlevels/${itemid}`,
+          method: "GET",
+        })
+      ).data as any
+    ).data;
+    arr[i].price =
+      nightShop[i].Offer.Cost["85ad13f7-3d1b-5128-9eb2-7cd8ee0b5741"];
+    arr[i].discountPrice =
+      nightShop[i].DiscountCosts["85ad13f7-3d1b-5128-9eb2-7cd8ee0b5741"];
+    arr[i].discountPercent = nightShop[i].DiscountPercent;
+  }
+
+  cachedNightShop = arr;
+
+  return arr as singleNightShopItem[];
+}
+
+export async function getBundle(user: user) {
+  if (cachedBundle) return cachedBundle;
+
+  const shop: any = (
+    await axios({
+      url: getUrl("storefront", user.region, user.id),
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+        "X-Riot-Entitlements-JWT": user.entitlementsToken,
+        Authorization: `Bearer ${user.accessToken}`,
+      },
+      withCredentials: true,
+    })
+  ).data;
+
+  let bundle: Bundle = (
+    (
+      await axios({
+        url: `https://valorant-api.com/v1/bundles/${shop.FeaturedBundle.Bundle.DataAssetID}`,
+        method: "GET",
+      })
+    ).data as any
+  ).data;
+
+  bundle.price = shop.FeaturedBundle.Bundle.Items.map(
+    (item: any) => item.DiscountedPrice
+  ).reduce((a: any, b: any) => a + b);
+
+  cachedBundle = bundle;
+
+  return bundle;
 }
 
 export async function loadOffers(user: user) {

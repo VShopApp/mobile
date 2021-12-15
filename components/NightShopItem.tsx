@@ -4,9 +4,9 @@ import VideoPopup from "./VideoPopup";
 import VPIcon from "./VPIcon";
 
 interface props {
-  item: singleItem;
+  item: singleNightShopItem;
 }
-export default function ShopItem(props: PropsWithChildren<props>) {
+export default function NightShopItem(props: PropsWithChildren<props>) {
   const [videoShown, setVideoShown] = useState(false);
   const showVideo = () => {
     setVideoShown(true);
@@ -18,7 +18,24 @@ export default function ShopItem(props: PropsWithChildren<props>) {
         <Card.Content>
           <Title>{props.item.displayName}</Title>
           <Paragraph>
-            {props.item.price} <VPIcon color="black" />
+            <Text
+              style={{
+                textDecorationLine: "line-through",
+                textDecorationStyle: "solid",
+                fontSize: 12,
+              }}
+            >
+              {props.item.price}
+            </Text>{" "}
+            {props.item.discountPrice} <VPIcon color="black" /> (
+            <Text
+              style={{
+                color: "green",
+              }}
+            >
+              -{props.item.discountPercent}%
+            </Text>
+            )
           </Paragraph>
         </Card.Content>
         <Card.Cover
