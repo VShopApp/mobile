@@ -2,7 +2,7 @@
   "expo": {
     "name": "VShop",
     "slug": "vshop",
-    "version": "1.0.2",
+    "version": "1.1.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
     "splash": {

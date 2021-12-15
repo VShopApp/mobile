@@ -171,6 +171,7 @@ export async function getNightShop(user: user) {
   ).data;
 
   var nightShop = shop.BonusStore.BonusStoreOffers;
+  if (!nightShop) return []; // Hopefully this works, bc idk what the api returns if there is no night shop
 
   var arr = [];
   for (var i = 0; i < nightShop.length; i++) {
