@@ -132,6 +132,7 @@ export async function getShop(user: user) {
   ).data;
 
   var singleItems = shop.SkinsPanelLayout.SingleItemOffers;
+  var nightShop = shop.BonusStore.BonusStoreOffers;
 
   for (var i = 0; i < singleItems.length; i++) {
     singleItems[i] = (
@@ -174,6 +175,7 @@ function getUrl(name: string, region?: string, userid?: string) {
     entitlements: "https://entitlements.auth.riotgames.com/api/token/v1",
     userinfo: "https://auth.riotgames.com/userinfo",
     storefront: `https://pd.${region}.a.pvp.net/store/v2/storefront/${userid}`,
+    wallet: `https://pd.${region}.a.pvp.net/store/v1/wallet/${userid}`,
     weapons: "https://valorant-api.com/v1/weapons",
     offers: `https://pd.${region}.a.pvp.net/store/v1/offers`,
     playerId: `https://pd.${region}.a.pvp.net/name-service/v2/players`,
