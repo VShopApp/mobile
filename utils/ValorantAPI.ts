@@ -250,6 +250,12 @@ export async function loadOffers(user: user) {
   }
 }
 
+export function resetCache() {
+  cachedShop = null;
+  cachedNightShop = null;
+  cachedBundle = null;
+}
+
 function getUrl(name: string, region?: string, userid?: string) {
   const URLS: any = {
     auth: "https://auth.riotgames.com/api/v1/authorization",

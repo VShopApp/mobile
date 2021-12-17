@@ -1,7 +1,7 @@
 import React, { PropsWithChildren } from "react";
 import { View } from "react-native";
 import { Button, Text } from "react-native-paper";
-import { clearCookies } from "../../utils/ValorantAPI";
+import { clearCookies, resetCache } from "../../utils/ValorantAPI";
 import * as SecureStore from "expo-secure-store";
 
 interface props {
@@ -9,10 +9,12 @@ interface props {
   setUser: Function;
 }
 export default function Settings(props: PropsWithChildren<props>) {
-  const handleLogout = async () => {
-    await SecureStore.deleteItemAsync("user");
-    clearCookies();
-    props.setUser(null);
+  const handleLogout = () => {
+    SecureStore.deleteItemAsync("user").then(() => {
+      clearCookies();
+      resetCache();
+      props.setUser(null);
+    });
   };
 
   return (
@@ -26,6 +28,9 @@ export default function Settings(props: PropsWithChildren<props>) {
       <Text style={{ fontSize: 15 }}>
         Logged in as{" "}
         <Text style={{ fontWeight: "bold" }}>{props.user.name}</Text>
+      </Text>
+      <Text style={{ fontSize: 15 }}>
+        Region: <Text style={{ fontWeight: "bold" }}>{props.user.region}</Text>
       </Text>
       <Button style={{ marginTop: 10 }} onPress={handleLogout} mode="contained">
         Log Out
