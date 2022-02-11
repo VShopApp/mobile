@@ -44,6 +44,12 @@ export async function login(
         "Content-Type": "application/json",
       },
       withCredentials: true,
+    }).catch(() => {
+      return {
+        data: {
+          error: "rate_limited",
+        },
+      };
     })
   ).data;
 
@@ -53,7 +59,44 @@ export async function login(
     };
   else if (response.error === "rate_limited")
     return { error: "You have been rate limited, please try again later." };
+  else if (response.type === "multifactor") {
+    return { mfaRequired: true };
+  } else if (response.type === "response") {
+    return await setupUser(username, response, region);
+  } else {
+    return { error: "Oops, an unkown error occoured." };
+  }
+}
 
+export async function submitMfaCode(
+  username: string,
+  code: string,
+  region: string
+) {
+  let response: any = (
+    await axios({
+      url: getUrl("auth"),
+      method: "PUT",
+      data: {
+        type: "multifactor",
+        code: code,
+        rememberDevice: false,
+      },
+      headers: {
+        "Content-Type": "application/json",
+      },
+      withCredentials: true,
+    })
+  ).data;
+
+  if (response.type === "response") {
+    return await setupUser(username, response, region);
+  } else {
+    return { error: "Oops, an unkown error occoured." };
+  }
+}
+
+async function setupUser(username: string, response: any, region: string) {
   const uri = response["response"]["parameters"]["uri"];
 
   const regexResult = uri.match(

@@ -7,7 +7,7 @@ import {
   ActivityIndicator,
 } from "react-native-paper";
 import DropDown from "react-native-paper-dropdown";
-import { login } from "../../utils/ValorantAPI";
+import { login, submitMfaCode } from "../../utils/ValorantAPI";
 import * as SecureStore from "expo-secure-store";
 
 interface props {
@@ -23,10 +23,37 @@ export default function Login(props: PropsWithChildren<props>) {
   const [loading, setLoading] = useState(true);
   const [savePw, setSavePw] = useState(true);
   const [dropdownShown, setDropdownShown] = useState(false);
+  const [MFAInputEnabled, setMFAInputEnabled] = useState(false);
+  const [mfaCode, setMfaCode] = useState("");
 
   const handleBtnLogin = async () => {
     setLoading(true);
     let user = await login(username, password, region);
+    if (user.error) {
+      setLoading(false);
+      props.setSnackbar(user.error);
+    } else if (user.mfaRequired) {
+      setMFAInputEnabled(true);
+      props.setSnackbar(
+        "Please enter the MFA code that has been sent to your email."
+      );
+    } else {
+      props.setUser(user);
+      if (savePw) {
+        await SecureStore.setItemAsync(
+          "user",
+          JSON.stringify({ username, password, region })
+        );
+      } else {
+        await SecureStore.deleteItemAsync("user");
+      }
+    }
+  };
+
+  const handleMfaCode = async () => {
+    setLoading(true);
+    let user = await submitMfaCode(username, mfaCode, region);
+
     if (user.error) {
       setLoading(false);
       props.setSnackbar(user.error);
@@ -46,8 +73,14 @@ export default function Login(props: PropsWithChildren<props>) {
   const handleDirectLogin = async ({ username, password, region }: any) => {
     let user = await login(username, password, region);
     if (user.error) {
+      setLoading(false);
       props.setSnackbar(user.error);
       setExistingUser(false);
+    } else if (user.mfaRequired) {
+      setMFAInputEnabled(true);
+      props.setSnackbar(
+        "Please enter the MFA code that has been sent to your email."
+      );
     } else {
       props.setUser(user);
     }
@@ -67,6 +100,31 @@ export default function Login(props: PropsWithChildren<props>) {
     };
     restoreCredentials();
   }, []);
+
+  if (MFAInputEnabled) {
+    return (
+      <View
+        style={{
+          flex: 1,
+          justifyContent: "center",
+          alignItems: "center",
+        }}
+      >
+        <TextInput
+          style={{ width: 250, height: 50, marginBottom: 10 }}
+          onChangeText={(text) => {
+            setMfaCode(text);
+          }}
+          value={mfaCode}
+          label="MFA Code"
+          autoCompleteType="password"
+        />
+        <Button onPress={handleMfaCode} mode="contained">
+          Submit
+        </Button>
+      </View>
+    );
+  }
 
   if (loading)
     return (

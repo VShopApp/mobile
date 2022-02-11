@@ -8,6 +8,7 @@ interface user {
   region: string;
   id: string;
   error?: string | undefined;
+  mfaRequired?: boolean | undefined;
 }
 
 interface singleItem {

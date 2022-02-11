@@ -11,10 +11,6 @@ interface props {}
 export default function Update(props: PropsWithChildren<props>) {
   const [visible, setVisible] = useState(false);
 
-  const dismissModal = () => {
-    setVisible(false);
-  };
-
   const reloadApp = async () => {
     await Updates.reloadAsync();
   };
@@ -29,17 +25,16 @@ export default function Update(props: PropsWithChildren<props>) {
   return (
     <>
       <Portal>
-        <PaperDialog visible={visible} onDismiss={dismissModal}>
+        <PaperDialog visible={visible} onDismiss={reloadApp}>
           <PaperDialog.Title>Update available</PaperDialog.Title>
           <PaperDialog.Content>
             <Paragraph>
-              A new update has been downloaded. Do you want to restart to apply
-              the update?
+              A new update has been downloaded. The app needs to be restarted
+              for the changes to take effect.
             </Paragraph>
           </PaperDialog.Content>
           <PaperDialog.Actions>
-            <Button onPress={reloadApp}>Yes</Button>
-            <Button onPress={dismissModal}>No</Button>
+            <Button onPress={reloadApp}>OKAY</Button>
           </PaperDialog.Actions>
         </PaperDialog>
       </Portal>
