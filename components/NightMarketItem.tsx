@@ -4,9 +4,9 @@ import VideoPopup from "./VideoPopup";
 import VPIcon from "./VPIcon";
 
 interface props {
-  item: singleNightShopItem;
+  item: singleNightMarketItem;
 }
-export default function NightShopItem(props: PropsWithChildren<props>) {
+export default function NightMarketItem(props: PropsWithChildren<props>) {
   const [videoShown, setVideoShown] = useState(false);
   const showVideo = () => {
     setVideoShown(true);

@@ -6,7 +6,7 @@ const RCTNetworkingIOS = require("react-native/Libraries/Network/RCTNetworking.i
 export var offers: any = {};
 var cachedBundle: Bundle | null;
 var cachedShop: singleItem[] | null;
-var cachedNightShop: singleNightShopItem[] | null;
+var cachedNightMarket: singleNightMarketItem[] | null;
 
 export async function login(
   username: string,
@@ -60,7 +60,7 @@ export async function login(
   else if (response.error === "rate_limited")
     return { error: "You have been rate limited, please try again later." };
   else if (response.type === "multifactor") {
-    return { mfaRequired: true };
+    return { mfaRequired: true, mfaEmail: response.multifactor.email };
   } else if (response.type === "response") {
     return await setupUser(username, response, region);
   } else {
@@ -91,6 +91,8 @@ export async function submitMfaCode(
 
   if (response.type === "response") {
     return await setupUser(username, response, region);
+  } else if (response.error === "multifactor_attempt_failed") {
+    return { error: "The MFA code is invalid." };
   } else {
     return { error: "Oops, an unkown error occoured." };
   }
@@ -197,8 +199,8 @@ export async function getShop(user: user) {
   return singleItems as singleItem[];
 }
 
-export async function getNightShop(user: user) {
-  if (cachedNightShop) return cachedNightShop;
+export async function getNightMarket(user: user) {
+  if (cachedNightMarket) return cachedNightMarket;
 
   const shop: any = (
     await axios({
@@ -234,9 +236,9 @@ export async function getNightShop(user: user) {
     arr[i].discountPercent = nightShop[i].DiscountPercent;
   }
 
-  cachedNightShop = arr;
+  cachedNightMarket = arr;
 
-  return arr as singleNightShopItem[];
+  return arr as singleNightMarketItem[];
 }
 
 export async function getBundle(user: user) {
@@ -295,7 +297,7 @@ export async function loadOffers(user: user) {
 
 export function resetCache() {
   cachedShop = null;
-  cachedNightShop = null;
+  cachedNightMarket = null;
   cachedBundle = null;
 }
 

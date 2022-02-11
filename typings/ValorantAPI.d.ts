@@ -9,6 +9,7 @@ interface user {
   id: string;
   error?: string | undefined;
   mfaRequired?: boolean | undefined;
+  mfaEmail?: string | undefined;
 }
 
 interface singleItem {
@@ -20,7 +21,7 @@ interface singleItem {
   price: number;
 }
 
-interface singleNightShopItem extends singleItem {
+interface singleNightMarketItem extends singleItem {
   discountPrice: number;
   discountPercent: number;
 }

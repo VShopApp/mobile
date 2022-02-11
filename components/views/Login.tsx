@@ -28,17 +28,18 @@ export default function Login(props: PropsWithChildren<props>) {
 
   const handleBtnLogin = async () => {
     setLoading(true);
-    let user = await login(username, password, region);
-    if (user.error) {
+    let response = await login(username, password, region);
+    if (response.error) {
       setLoading(false);
-      props.setSnackbar(user.error);
-    } else if (user.mfaRequired) {
+      props.setSnackbar(response.error);
+    } else if (response.mfaRequired) {
+      setLoading(false);
       setMFAInputEnabled(true);
       props.setSnackbar(
-        "Please enter the MFA code that has been sent to your email."
+        `The MFA code has been sent to your email (${response.mfaEmail}).`
       );
     } else {
-      props.setUser(user);
+      props.setUser(response);
       if (savePw) {
         await SecureStore.setItemAsync(
           "user",
@@ -52,13 +53,12 @@ export default function Login(props: PropsWithChildren<props>) {
 
   const handleMfaCode = async () => {
     setLoading(true);
-    let user = await submitMfaCode(username, mfaCode, region);
+    let response = await submitMfaCode(username, mfaCode, region);
 
-    if (user.error) {
+    if (response.error) {
       setLoading(false);
-      props.setSnackbar(user.error);
+      props.setSnackbar(response.error);
     } else {
-      props.setUser(user);
       if (savePw) {
         await SecureStore.setItemAsync(
           "user",
@@ -67,22 +67,24 @@ export default function Login(props: PropsWithChildren<props>) {
       } else {
         await SecureStore.deleteItemAsync("user");
       }
+      props.setUser(response);
     }
   };
 
   const handleDirectLogin = async ({ username, password, region }: any) => {
-    let user = await login(username, password, region);
-    if (user.error) {
+    let response = await login(username, password, region);
+    if (response.error) {
       setLoading(false);
-      props.setSnackbar(user.error);
+      props.setSnackbar(response.error);
       setExistingUser(false);
-    } else if (user.mfaRequired) {
+    } else if (response.mfaRequired) {
+      setLoading(false);
       setMFAInputEnabled(true);
       props.setSnackbar(
-        "Please enter the MFA code that has been sent to your email."
+        `The MFA code has been sent to your email (${response.mfaEmail}).`
       );
     } else {
-      props.setUser(user);
+      props.setUser(response);
     }
   };
 
@@ -100,6 +102,19 @@ export default function Login(props: PropsWithChildren<props>) {
     };
     restoreCredentials();
   }, []);
+
+  if (loading)
+    return (
+      <View
+        style={{
+          flex: 1,
+          justifyContent: "center",
+          alignItems: "center",
+        }}
+      >
+        <ActivityIndicator animating={true} color={"#fa4454"} size="large" />
+      </View>
+    );
 
   if (MFAInputEnabled) {
     return (
@@ -125,19 +140,6 @@ export default function Login(props: PropsWithChildren<props>) {
       </View>
     );
   }
-
-  if (loading)
-    return (
-      <View
-        style={{
-          flex: 1,
-          justifyContent: "center",
-          alignItems: "center",
-        }}
-      >
-        <ActivityIndicator animating={true} color={"#fa4454"} size="large" />
-      </View>
-    );
 
   return (
     <View
