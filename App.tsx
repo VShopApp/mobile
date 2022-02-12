@@ -29,9 +29,7 @@ export default function App() {
         {!user || user.loading ? (
           <Login user={user} setUser={setUser} setSnackbar={setSnackbar} />
         ) : (
-          <>
-            <Navigation user={user} setUser={setUser} />
-          </>
+          <Navigation user={user} setUser={setUser} />
         )}
         <SnackBar
           visible={snackbar != ""}
