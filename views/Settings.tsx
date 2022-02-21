@@ -1,7 +1,7 @@
 import React, { PropsWithChildren } from "react";
 import { View } from "react-native";
 import { Button, Text } from "react-native-paper";
-import { clearCookies, resetCache } from "../../utils/ValorantAPI";
+import { clearCookies, resetCache } from "../utils/ValorantAPI";
 import * as SecureStore from "expo-secure-store";
 
 interface props {

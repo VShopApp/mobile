@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { SafeAreaView, StatusBar } from "react-native";
-import Login from "./components/views/Login";
+import Login from "./views/Login";
 import { DefaultTheme, Provider as PaperProvider } from "react-native-paper";
 import AppBar from "./components/AppBar";
 import SnackBar from "./components/SnackBar";

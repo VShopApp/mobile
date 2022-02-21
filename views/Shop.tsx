@@ -2,9 +2,9 @@ import React, { PropsWithChildren } from "react";
 import { useEffect, useState } from "react";
 import { ImageBackground, ScrollView, View } from "react-native";
 import { Text } from "react-native-paper";
-import { getBundle, getShop } from "../../utils/ValorantAPI";
-import ShopItem from "../ShopItem";
-import VPIcon from "../VPIcon";
+import { getBundle, getShop } from "../utils/ValorantAPI";
+import ShopItem from "../components/ShopItem";
+import VPIcon from "../components/VPIcon";
 interface props {
   user: user;
 }

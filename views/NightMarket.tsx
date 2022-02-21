@@ -2,8 +2,8 @@ import React, { PropsWithChildren } from "react";
 import { useEffect, useState } from "react";
 import { ScrollView, View } from "react-native";
 import { Text } from "react-native-paper";
-import { getNightMarket } from "../../utils/ValorantAPI";
-import NightMarketItem from "../NightMarketItem";
+import { getNightMarket } from "../utils/ValorantAPI";
+import NightMarketItem from "../components/NightMarketItem";
 
 interface props {
   user: user;

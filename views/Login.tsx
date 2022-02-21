@@ -7,7 +7,7 @@ import {
   ActivityIndicator,
 } from "react-native-paper";
 import DropDown from "react-native-paper-dropdown";
-import { login, submitMfaCode } from "../../utils/ValorantAPI";
+import { login, submitMfaCode } from "../utils/ValorantAPI";
 import * as SecureStore from "expo-secure-store";
 
 interface props {

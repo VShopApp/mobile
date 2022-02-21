@@ -1,8 +1,8 @@
 import React from "react";
 import { BottomNavigation } from "react-native-paper";
-import Shop from "./views/Shop";
-import Settings from "./views/Settings";
-import NightMarket from "./views/NightMarket";
+import Shop from "../views/Shop";
+import Settings from "../views/Settings";
+import NightMarket from "../views/NightMarket";
 
 interface props {
   user: user;
