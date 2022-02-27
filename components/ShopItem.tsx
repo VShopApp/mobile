@@ -1,5 +1,5 @@
 import React, { PropsWithChildren, useState } from "react";
-import { Card, Title, Paragraph, Button, Text } from "react-native-paper";
+import { Card, Title, Paragraph, Button } from "react-native-paper";
 import VideoPopup from "./VideoPopup";
 import VPIcon from "./VPIcon";
 
@@ -14,16 +14,16 @@ export default function ShopItem(props: PropsWithChildren<props>) {
 
   return (
     <>
-      <Card style={{ margin: 5 }}>
+      <Card style={{ margin: 5, backgroundColor: "#1E1E1E" }}>
         <Card.Content>
           <Title>{props.item.displayName}</Title>
           <Paragraph>
-            {props.item.price} <VPIcon color="black" />
+            {props.item.price} <VPIcon color="white" />
           </Paragraph>
         </Card.Content>
         <Card.Cover
           resizeMode="contain"
-          style={{ backgroundColor: "#fff" }}
+          style={{ backgroundColor: "#1E1E1E" }}
           source={{ uri: props.item.displayIcon }}
         />
         <Card.Actions>

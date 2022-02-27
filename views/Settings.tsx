@@ -1,19 +1,17 @@
 import React, { PropsWithChildren } from "react";
 import { View } from "react-native";
 import { Button, Text } from "react-native-paper";
-import { clearCookies, resetCache } from "../utils/ValorantAPI";
 import * as SecureStore from "expo-secure-store";
+import { reset, sRegion, sUsername } from "../utils/ValorantAPI";
 
 interface props {
-  user: user;
-  setUser: Function;
+  setLoggedIn: Function;
 }
 export default function Settings(props: PropsWithChildren<props>) {
   const handleLogout = () => {
     SecureStore.deleteItemAsync("user").then(() => {
-      clearCookies();
-      resetCache();
-      props.setUser(null);
+      reset();
+      props.setLoggedIn(false);
     });
   };
 
@@ -26,11 +24,10 @@ export default function Settings(props: PropsWithChildren<props>) {
       }}
     >
       <Text style={{ fontSize: 15 }}>
-        Logged in as{" "}
-        <Text style={{ fontWeight: "bold" }}>{props.user.name}</Text>
+        Logged in as <Text style={{ fontWeight: "bold" }}>{sUsername}</Text>
       </Text>
       <Text style={{ fontSize: 15 }}>
-        Region: <Text style={{ fontWeight: "bold" }}>{props.user.region}</Text>
+        Region: <Text style={{ fontWeight: "bold" }}>{sRegion}</Text>
       </Text>
       <Button style={{ marginTop: 10 }} onPress={handleLogout} mode="contained">
         Log Out
