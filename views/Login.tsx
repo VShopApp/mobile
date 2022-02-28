@@ -45,6 +45,7 @@ export default function Login(props: PropsWithChildren<props>) {
           JSON.stringify({
             username,
             password,
+            region,
             accessToken: response?.accessToken,
             entitlementsToken: response?.entitlementsToken,
           })
@@ -71,6 +72,7 @@ export default function Login(props: PropsWithChildren<props>) {
           JSON.stringify({
             username,
             password,
+            region,
             accessToken: response.accessToken,
             entitlementsToken: response.entitlementsToken,
           })

@@ -177,10 +177,7 @@ export function isTokenExpired(token: string) {
 }
 
 function getUrl(name: string) {
-  const baseUrl =
-    process.env.NODE_ENV == "production"
-      ? "https://TOBEREPLACED"
-      : "http://10.0.2.2:3000";
+  const baseUrl = __DEV__ ? "http://10.0.2.2:3000" : "https://api.vshop.one";
 
   const endpoints: any = {
     login: "/login",
