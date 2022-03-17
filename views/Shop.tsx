@@ -1,25 +1,35 @@
-import React, { PropsWithChildren } from "react";
+import React from "react";
 import { useEffect, useState } from "react";
 import { ImageBackground, ScrollView, View } from "react-native";
-import { Text } from "react-native-paper";
-import { getBundle, getShop } from "../utils/ValorantAPI";
+import { ActivityIndicator, Text } from "react-native-paper";
+import { getShop, sRegion } from "../utils/ValorantAPI";
 import ShopItem from "../components/ShopItem";
 import VPIcon from "../components/VPIcon";
-interface props {
-  user: user;
-}
-export default function Shop(props: PropsWithChildren<props>) {
-  const [items, setItems] = useState<singleItem[]>();
+
+export default function Shop() {
+  const [items, setItems] = useState<singleItem[]>([]);
   const [bundle, setBundle] = useState<Bundle>();
 
   useEffect(() => {
-    getShop(props.user).then((items) => {
-      setItems(items);
-    });
-    getBundle(props.user).then((bundle) => {
-      setBundle(bundle);
+    getShop(sRegion).then((res) => {
+      setItems(res.shop);
+      setBundle(res.bundle);
     });
   }, []);
+
+  if (items?.length == 0 || !bundle) {
+    return (
+      <View
+        style={{
+          flex: 1,
+          justifyContent: "center",
+          alignItems: "center",
+        }}
+      >
+        <ActivityIndicator animating={true} color={"#fa4454"} size="large" />
+      </View>
+    );
+  }
 
   return (
     <>

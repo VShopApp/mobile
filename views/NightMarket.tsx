@@ -1,26 +1,37 @@
-import React, { PropsWithChildren } from "react";
+import React from "react";
 import { useEffect, useState } from "react";
 import { ScrollView, View } from "react-native";
-import { Text } from "react-native-paper";
-import { getNightMarket } from "../utils/ValorantAPI";
+import { ActivityIndicator, Text } from "react-native-paper";
+import { getNightMarket, sRegion } from "../utils/ValorantAPI";
 import NightMarketItem from "../components/NightMarketItem";
 
-interface props {
-  user: user;
-}
-export default function NightShop(props: PropsWithChildren<props>) {
-  const [items, setItems] = useState<singleNightMarketItem[]>();
+export default function NightShop() {
+  const [items, setItems] = useState<singleNightMarketItem[]>([]);
   const [noNightMarket, setNoNightMarket] = useState(false);
 
   useEffect(() => {
-    getNightMarket(props.user).then((items) => {
-      if (items.length > 0) {
-        setItems(items);
+    getNightMarket(sRegion).then((res) => {
+      if (res.nightMarket.length > 0) {
+        setItems(res.nightMarket);
       } else {
         setNoNightMarket(true);
       }
     });
   }, []);
+
+  if (items?.length == 0 && !noNightMarket) {
+    return (
+      <View
+        style={{
+          flex: 1,
+          justifyContent: "center",
+          alignItems: "center",
+        }}
+      >
+        <ActivityIndicator animating={true} color={"#fa4454"} size="large" />
+      </View>
+    );
+  }
 
   if (noNightMarket) {
     return (

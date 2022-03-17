@@ -14,7 +14,7 @@ export default function NightMarketItem(props: PropsWithChildren<props>) {
 
   return (
     <>
-      <Card style={{ margin: 5 }}>
+      <Card style={{ margin: 5, backgroundColor: "#1E1E1E" }}>
         <Card.Content>
           <Title>{props.item.displayName}</Title>
           <Paragraph>
@@ -27,7 +27,7 @@ export default function NightMarketItem(props: PropsWithChildren<props>) {
             >
               {props.item.price}
             </Text>{" "}
-            {props.item.discountPrice} <VPIcon color="black" /> (
+            {props.item.discountPrice} <VPIcon color="white" /> (
             <Text
               style={{
                 color: "green",
@@ -40,7 +40,7 @@ export default function NightMarketItem(props: PropsWithChildren<props>) {
         </Card.Content>
         <Card.Cover
           resizeMode="contain"
-          style={{ backgroundColor: "#fff" }}
+          style={{ backgroundColor: "#1E1E1E" }}
           source={{ uri: props.item.displayIcon }}
         />
         <Card.Actions>

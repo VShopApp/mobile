@@ -5,14 +5,14 @@ import {
   TextInput,
   Checkbox,
   ActivityIndicator,
+  Text,
 } from "react-native-paper";
 import DropDown from "react-native-paper-dropdown";
-import { login, submitMfaCode } from "../utils/ValorantAPI";
+import { login, setSRegion, submitMfaCode } from "../utils/ValorantAPI";
 import * as SecureStore from "expo-secure-store";
 
 interface props {
-  user: user | undefined;
-  setUser: Function;
+  setLoggedIn: Function;
   setSnackbar: Function;
 }
 export default function Login(props: PropsWithChildren<props>) {
@@ -27,32 +27,40 @@ export default function Login(props: PropsWithChildren<props>) {
 
   const handleBtnLogin = async () => {
     setLoading(true);
-    let response = await login(username, password, region);
-    if (response.error) {
+    let response = await login(username, password);
+
+    if (response?.error) {
       setLoading(false);
       props.setSnackbar(response.error);
-    } else if (response.mfaRequired) {
+    } else if (response?.mfaRequired) {
       setLoading(false);
       setMFAInputEnabled(true);
       props.setSnackbar(
         `The MFA code has been sent to your email (${response.mfaEmail}).`
       );
     } else {
-      props.setUser(response);
       if (savePw) {
         await SecureStore.setItemAsync(
           "user",
-          JSON.stringify({ username, password, region })
+          JSON.stringify({
+            username,
+            password,
+            region,
+            accessToken: response?.accessToken,
+            entitlementsToken: response?.entitlementsToken,
+          })
         );
       } else {
         await SecureStore.deleteItemAsync("user");
       }
+      setSRegion(region);
+      props.setLoggedIn(true);
     }
   };
 
   const handleMfaCode = async () => {
     setLoading(true);
-    let response = await submitMfaCode(username, mfaCode, region);
+    let response = await submitMfaCode(mfaCode);
 
     if (response.error) {
       setLoading(false);
@@ -61,28 +69,45 @@ export default function Login(props: PropsWithChildren<props>) {
       if (savePw) {
         await SecureStore.setItemAsync(
           "user",
-          JSON.stringify({ username, password, region })
+          JSON.stringify({
+            username,
+            password,
+            region,
+            accessToken: response.accessToken,
+            entitlementsToken: response.entitlementsToken,
+          })
         );
       } else {
         await SecureStore.deleteItemAsync("user");
       }
-      props.setUser(response);
+      setSRegion(region);
+      props.setLoggedIn(true);
     }
   };
 
-  const handleDirectLogin = async ({ username, password, region }: any) => {
-    let response = await login(username, password, region);
-    if (response.error) {
+  const handleDirectLogin = async ({
+    username,
+    password,
+    accessToken,
+    entitlementsToken,
+  }: any) => {
+    let response = await login(
+      username,
+      password,
+      accessToken,
+      entitlementsToken
+    );
+    if (response?.error) {
       setLoading(false);
       props.setSnackbar(response.error);
-    } else if (response.mfaRequired) {
+    } else if (response?.mfaRequired) {
       setLoading(false);
       setMFAInputEnabled(true);
       props.setSnackbar(
         `The MFA code has been sent to your email (${response.mfaEmail}).`
       );
     } else {
-      props.setUser(response);
+      props.setLoggedIn(true);
     }
   };
 
@@ -111,6 +136,7 @@ export default function Login(props: PropsWithChildren<props>) {
           flex: 1,
           justifyContent: "center",
           alignItems: "center",
+          backgroundColor: "#121212",
         }}
       >
         <ActivityIndicator animating={true} color={"#fa4454"} size="large" />
@@ -124,6 +150,7 @@ export default function Login(props: PropsWithChildren<props>) {
           flex: 1,
           justifyContent: "center",
           alignItems: "center",
+          backgroundColor: "#121212",
         }}
       >
         <TextInput
@@ -148,11 +175,16 @@ export default function Login(props: PropsWithChildren<props>) {
         flex: 1,
         justifyContent: "center",
         alignItems: "center",
+        backgroundColor: "#121212",
       }}
     >
       <>
+        <Text style={{ fontSize: 30, fontWeight: "bold" }}>Welcome</Text>
+        <Text style={{ fontSize: 14, marginBottom: 18 }}>
+          Please log in to continue
+        </Text>
         <TextInput
-          style={{ width: 250, height: 50, marginBottom: 10 }}
+          style={{ width: 250, height: 50, marginBottom: 8 }}
           onChangeText={(text) => {
             setUsername(text);
           }}
@@ -166,18 +198,11 @@ export default function Login(props: PropsWithChildren<props>) {
             setPassword(text);
           }}
           value={password}
-          style={{ width: 250, height: 50, marginBottom: 10 }}
+          style={{ width: 250, height: 50, marginBottom: 8 }}
           autoCompleteType="password"
           secureTextEntry={true}
         />
-        <Checkbox.Item
-          label="Save credentials"
-          status={savePw ? "checked" : "unchecked"}
-          onPress={() => {
-            setSavePw(!savePw);
-          }}
-        />
-        <View style={{ width: 100, marginBottom: 15 }}>
+        <View style={{ width: 250, marginBottom: 4 }}>
           <DropDown
             label={"Region"}
             mode={"outlined"}
@@ -187,14 +212,26 @@ export default function Login(props: PropsWithChildren<props>) {
             value={region}
             setValue={setRegion}
             list={[
-              { label: "EU", value: "eu" },
-              { label: "NA", value: "na" },
-              { label: "AP", value: "ap" },
-              { label: "KR", value: "kr" },
+              { label: "Europe", value: "eu" },
+              { label: "North America", value: "na" },
+              { label: "Asia-Pacific", value: "ap" },
+              { label: "Korea", value: "kr" },
             ]}
           />
         </View>
-        <Button onPress={handleBtnLogin} disabled={loading} mode="contained">
+        <Checkbox.Item
+          label="Save credentials"
+          status={savePw ? "checked" : "unchecked"}
+          onPress={() => {
+            setSavePw(!savePw);
+          }}
+        />
+        <Button
+          onPress={handleBtnLogin}
+          disabled={loading}
+          mode="contained"
+          style={{ marginTop: 4 }}
+        >
           Log In
         </Button>
       </>

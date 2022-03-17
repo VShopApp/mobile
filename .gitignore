@@ -6,6 +6,9 @@ web-build
 # Node
 node_modules
 npm-debug.log
+
+# Yarn
+.yarn/*
 yarn-error.log
 yarn-debug.log
 
