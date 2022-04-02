@@ -161,6 +161,8 @@ export default function Login(props: PropsWithChildren<props>) {
           value={mfaCode}
           label="MFA Code"
           autoCompleteType="password"
+          textContentType="oneTimeCode"
+          keyboardType="numeric"
         />
         <Button onPress={handleMfaCode} mode="contained">
           Submit
@@ -191,6 +193,8 @@ export default function Login(props: PropsWithChildren<props>) {
           value={username}
           label="Username"
           autoCompleteType="username"
+          textContentType="username"
+          autoCapitalize="none"
         />
         <TextInput
           label="Password"
@@ -201,6 +205,8 @@ export default function Login(props: PropsWithChildren<props>) {
           style={{ width: 250, height: 50, marginBottom: 8 }}
           autoCompleteType="password"
           secureTextEntry={true}
+          textContentType="password"
+          autoCapitalize="none"
         />
         <View style={{ width: 250, marginBottom: 4 }}>
           <DropDown
