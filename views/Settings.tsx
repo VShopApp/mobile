@@ -3,6 +3,8 @@ import { View } from "react-native";
 import { Button, Text } from "react-native-paper";
 import * as SecureStore from "expo-secure-store";
 import { reset, sRegion, sUsername } from "../utils/ValorantAPI";
+import Constants from "expo-constants";
+import * as Updates from "expo-updates";
 
 interface props {
   setLoggedIn: Function;
@@ -32,6 +34,21 @@ export default function Settings(props: PropsWithChildren<props>) {
       <Button style={{ marginTop: 10 }} onPress={handleLogout} mode="contained">
         Log Out
       </Button>
+      <Text
+        style={{
+          color: "#9ca3af",
+          position: "absolute",
+          bottom: 0,
+          right: 0,
+          padding: 5,
+          textAlign: "right",
+          fontSize: 10,
+        }}
+      >
+        v{Constants.manifest?.version}
+        {"\n"}
+        {Updates.releaseChannel}
+      </Text>
     </View>
   );
 }

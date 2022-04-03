@@ -177,7 +177,7 @@ export function isTokenExpired(token: string) {
 }
 
 function getUrl(name: string) {
-  const baseUrl = __DEV__ ? "http://10.0.2.2:3000" : "https://api.vshop.one";
+  const baseUrl = !__DEV__ ? "http://10.0.2.2:3000" : "https://api.vshop.one";
 
   const endpoints: any = {
     login: "/login",
