@@ -24,13 +24,7 @@ const AppBar = (props: PropsWithChildren<props>) => {
       >
         <Menu.Item
           onPress={() => {
-            WebBrowser.openBrowserAsync("https://vshop.vasc.dev/changelog");
-          }}
-          title="Changelog"
-        />
-        <Menu.Item
-          onPress={() => {
-            WebBrowser.openBrowserAsync("https://vshop.vasc.dev/privacy");
+            WebBrowser.openBrowserAsync("https://vshop.one/privacy");
           }}
           title="Privacy Policy"
         />
