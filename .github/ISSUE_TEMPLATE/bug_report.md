@@ -21,7 +21,7 @@ Steps to reproduce the behavior:
 A clear and concise description of what you expected to happen.
 
 **Screenshots/Video**
-If applicable, add screenshots/video to help explain your problem.
+If applicable, add screenshots/a video to help explain your problem.
 
 **Smartphone (please complete the following information):**
  - Device: [e.g. iPhone6]
