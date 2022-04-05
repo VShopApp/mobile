@@ -90,6 +90,7 @@ export default function Login(props: PropsWithChildren<props>) {
     password,
     accessToken,
     entitlementsToken,
+    region,
   }: any) => {
     let response = await login(
       username,
@@ -97,6 +98,7 @@ export default function Login(props: PropsWithChildren<props>) {
       accessToken,
       entitlementsToken
     );
+    setSRegion(region);
     if (response?.error) {
       setLoading(false);
       props.setSnackbar(response.error);
