@@ -54,6 +54,13 @@ export async function login(
         error: "Your username or password is incorrect",
       };
     } else if (json.error === "rate_limited") {
+      // This error comes directly from riot games
+      return {
+        success: false,
+        error: "Too many people are using VShop right now. Try again later.",
+      };
+    } else if (res.status === 429) {
+      // This status code comes from our servers
       return {
         success: false,
         error: "Thats a little to fast, please try again later.",

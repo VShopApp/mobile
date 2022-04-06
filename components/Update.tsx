@@ -1,10 +1,5 @@
-import React, { PropsWithChildren, useEffect, useState } from "react";
-import {
-  Dialog as PaperDialog,
-  Portal,
-  Paragraph,
-  Button,
-} from "react-native-paper";
+import React, { PropsWithChildren, useState } from "react";
+import { Dialog as PaperDialog, Portal, Paragraph } from "react-native-paper";
 import * as Updates from "expo-updates";
 
 interface props {}

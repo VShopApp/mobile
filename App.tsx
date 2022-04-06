@@ -10,6 +10,7 @@ import AppBar from "./components/AppBar";
 import SnackBar from "./components/SnackBar";
 import Navigation from "./components/Navigation";
 import Update from "./components/Update";
+import Info from "./components/Info";
 
 export default function App() {
   const [loggedIn, setLoggedIn] = useState<user>();
@@ -29,6 +30,7 @@ export default function App() {
   return (
     <PaperProvider theme={theme}>
       <SafeAreaView style={{ width: "100%", height: "100%" }}>
+        <Info />
         <Update />
         <AppBar />
         {!loggedIn ? (
