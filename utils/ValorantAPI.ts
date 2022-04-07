@@ -29,38 +29,47 @@ export async function login(
       }),
     });
 
-    const json = await res.json();
+    if (res.status == 200) {
+      const json = await res.json();
 
-    if (json.success) {
-      sUsername = username;
-      sAccessToken = json.accessToken;
-      sEntitlementsToken = json.entitlementsToken;
+      if (json.success) {
+        sUsername = username;
+        sAccessToken = json.accessToken;
+        sEntitlementsToken = json.entitlementsToken;
 
-      return {
-        success: true,
-        accessToken: json.accessToken,
-        entitlementsToken: json.entitlementsToken,
-      };
-    } else if (json.mfaRequired) {
-      mfaCookie = json.cookie;
-      sUsername = username;
-      return {
-        mfaRequired: true,
-        mfaEmail: json.mfaEmail,
-      };
-    } else if (json.error === "auth_failure") {
-      return {
-        success: false,
-        error: "Your username or password is incorrect",
-      };
-    } else if (json.error === "rate_limited") {
-      // This error comes directly from riot games
-      return {
-        success: false,
-        error: "Too many people are using VShop right now. Try again later.",
-      };
+        return {
+          success: true,
+          accessToken: json.accessToken,
+          entitlementsToken: json.entitlementsToken,
+        };
+      } else if (json.mfaRequired) {
+        mfaCookie = json.cookie;
+        sUsername = username;
+        return {
+          mfaRequired: true,
+          mfaEmail: json.mfaEmail,
+        };
+      }
+    } else if (res.status == 400) {
+      const json = await res.json();
+      if (json.error === "auth_failure") {
+        return {
+          success: false,
+          error: "Your username or password is incorrect",
+        };
+      } else if (json.error === "rate_limited") {
+        // This error comes directly from riot games
+        return {
+          success: false,
+          error: "Too many people are using VShop right now. Try again later.",
+        };
+      } else {
+        return {
+          success: false,
+          error: "An unknown error occured",
+        };
+      }
     } else if (res.status === 429) {
-      // This status code comes from our servers
       return {
         success: false,
         error: "Thats a little to fast, please try again later.",
@@ -68,7 +77,8 @@ export async function login(
     } else {
       return {
         success: false,
-        error: "An unknown error occured",
+        error:
+          "There seems to be a problem with the VShop backend, please try again later.",
       };
     }
   } else if (accessToken && entitlementsToken) {
