@@ -1,8 +1,18 @@
 import axios from "axios";
 import { Platform } from "react-native";
-import { VCurrencies } from "./misc";
+import { atob, VCurrencies } from "./misc";
 const RCTNetworkingAndroid = require("react-native/Libraries/Network/RCTNetworking.android");
 const RCTNetworkingIOS = require("react-native/Libraries/Network/RCTNetworking.ios");
+
+axios.interceptors.request.use(
+  function (config) {
+    console.log(`${config.method?.toUpperCase()} ${config.url}`);
+    return config;
+  },
+  function (error) {
+    return Promise.reject(error);
+  }
+);
 
 export let sUsername: string = "";
 export let sAccessToken: string = "";
@@ -10,9 +20,9 @@ export let sEntitlementsToken: string = "";
 export let sUserId: string = "";
 export let sRegion: string = "eu";
 
-let mfaCookie: any = "";
+export let offers: any = {};
 
-axios.defaults.withCredentials = true;
+let mfaCookie: any = "";
 
 export async function login(
   username: string,
@@ -71,7 +81,7 @@ export async function login(
         mfaEmail: res2.data.multifactor.email,
       };
     } else if (res2.data.type === "response") {
-      accessToken = res2.data.response.parameters.uri.match(
+      sAccessToken = res2.data.response.parameters.uri.match(
         /access_token=((?:[a-zA-Z]|\d|\.|-|_)*).*id_token=((?:[a-zA-Z]|\d|\.|-|_)*).*expires_in=(\d*)/
       )[1];
 
@@ -80,31 +90,44 @@ export async function login(
         method: "POST",
         headers: {
           "Content-Type": "application/json",
-          Authorization: `Bearer ${accessToken}`,
+          Authorization: `Bearer ${sAccessToken}`,
         },
         data: {},
       });
-      entitlementsToken = res3.data.entitlements_token;
+      sEntitlementsToken = res3.data.entitlements_token;
 
       const res4 = await axios({
         url: getUrl("userinfo"),
         method: "GET",
         headers: {
           "Content-Type": "application/json",
-          Authorization: `Bearer ${accessToken}`,
+          Authorization: `Bearer ${sAccessToken}`,
         },
       });
 
       sUserId = res4.data.sub;
+
+      await loadOffers();
 
       return {
         success: true,
       };
     }
   } else if (accessToken && entitlementsToken) {
-    sUserId = username;
+    const res = await axios({
+      url: getUrl("userinfo"),
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${accessToken}`,
+      },
+    });
+    sUserId = res.data.sub;
+
     sAccessToken = accessToken;
     sEntitlementsToken = entitlementsToken;
+
+    await loadOffers();
 
     return {
       success: true,
@@ -113,36 +136,37 @@ export async function login(
 }
 
 export async function submitMfaCode(mfaCode: string) {
-  var response = await axios({
+  const res1 = await axios({
     url: getUrl("auth"),
     method: "PUT",
     headers: {
       "Content-Type": "application/json",
     },
-    data: JSON.stringify({
+    data: {
       type: "multifactor",
       code: mfaCode,
       rememberDevice: false,
-    }),
+    },
     withCredentials: true,
   });
 
-  if (response.data.type === "response") {
-    sAccessToken = response.data.response.parameters.uri.match(
+  if (res1.data.type === "response") {
+    sAccessToken = res1.data.response.parameters.uri.match(
       /access_token=((?:[a-zA-Z]|\d|\.|-|_)*).*id_token=((?:[a-zA-Z]|\d|\.|-|_)*).*expires_in=(\d*)/
     )[1];
 
-    response = await axios({
+    let res2 = await axios({
       url: getUrl("entitlements"),
       method: "POST",
       headers: {
         "Content-Type": "application/json",
         Authorization: `Bearer ${sAccessToken}`,
       },
+      data: {},
     });
-    sEntitlementsToken = response.data.entitlements_token;
+    sEntitlementsToken = res2.data.entitlements_token;
 
-    response = await axios({
+    const res3 = await axios({
       url: getUrl("userinfo"),
       method: "GET",
       headers: {
@@ -151,20 +175,37 @@ export async function submitMfaCode(mfaCode: string) {
       },
     });
 
-    sUserId = response.data.sub;
+    sUserId = res3.data.sub;
+
+    await loadOffers();
 
     return {
       success: true,
     };
-  } else if (response.data.type) {
-    return { success: false, error: response.data.type };
+  } else if (res1.data.type) {
+    return { success: false, error: res1.data.type };
   } else {
     return { success: false, error: "unknown" };
   }
 }
 
+export async function loadOffers() {
+  const res = await axios({
+    url: getUrl("offers", sRegion),
+    method: "GET",
+    headers: {
+      "X-Riot-Entitlements-JWT": sEntitlementsToken,
+      Authorization: `Bearer ${sAccessToken}`,
+    },
+  });
+
+  for (var i = 0; i < res.data.Offers.length; i++) {
+    let offer = res.data.Offers[i];
+    offers[offer.OfferID] = offer.Cost["85ad13f7-3d1b-5128-9eb2-7cd8ee0b5741"];
+  }
+}
+
 export async function getShop() {
-  console.log(getUrl("storefront", sRegion, sUserId));
   const res = await axios({
     url: getUrl("storefront", sRegion, sUserId),
     method: "GET",
@@ -174,22 +215,6 @@ export async function getShop() {
       Authorization: `Bearer ${sAccessToken}`,
     },
   });
-
-  const res2 = await axios({
-    url: getUrl("storefront", sRegion, sUserId),
-    method: "GET",
-    headers: {
-      "Content-Type": "application/json",
-      "X-Riot-Entitlements-JWT": sEntitlementsToken,
-      Authorization: `Bearer ${sAccessToken}`,
-    },
-  });
-
-  let offers: { [offerId: string]: number } = {};
-  for (var i = 0; i < res2.data.Offers.length; i++) {
-    const offer = res2.data.Offers[i];
-    offers[offer.OfferID] = offer.Cost[VCurrencies.VP];
-  }
 
   let singleItemOffers = res.data.SkinsPanelLayout.SingleItemOffers;
   let shop: singleItem[] = [];
@@ -299,9 +324,9 @@ function getUrl(name: string, region?: string, userId?: string) {
     auth: "https://auth.riotgames.com/api/v1/authorization/",
     entitlements: "https://entitlements.auth.riotgames.com/api/token/v1/",
     userinfo: "https://auth.riotgames.com/userinfo/",
-    storefront: `https://pd.${region}.a.pvp.net/store/v2/storefront/${userId}`,
-    wallet: `https://pd.${region}.a.pvp.net/store/v1/wallet/${userId}`,
-    playerxp: `https://pd.${region}.a.pvp.net/account-xp/v1/players/${userId}`,
+    storefront: `https://pd.${region}.a.pvp.net/store/v2/storefront/${userId}/`,
+    wallet: `https://pd.${region}.a.pvp.net/store/v1/wallet/${userId}/`,
+    playerxp: `https://pd.${region}.a.pvp.net/account-xp/v1/players/${userId}/`,
     weapons: "https://valorant-api.com/v1/weapons/",
     offers: `https://pd.${region}.a.pvp.net/store/v1/offers/`,
     playerId: `https://pd.${region}.a.pvp.net/name-service/v2/players/`,
