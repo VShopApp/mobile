@@ -9,7 +9,7 @@ import {
 
 interface props {}
 export default function Info(props: PropsWithChildren<props>) {
-  const [open, setOpen] = useState(true);
+  const [open, setOpen] = useState(false);
 
   return (
     <>

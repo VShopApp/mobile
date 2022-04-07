@@ -8,6 +8,7 @@
     "eject": "expo eject"
   },
   "dependencies": {
+    "axios": "^0.26.1",
     "expo": "^44.0.6",
     "expo-av": "^10.2.1",
     "expo-secure-store": "^11.1.1",

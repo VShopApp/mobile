@@ -8,7 +8,12 @@ import {
   Text,
 } from "react-native-paper";
 import DropDown from "react-native-paper-dropdown";
-import { login, setSRegion, submitMfaCode } from "../utils/ValorantAPI";
+import {
+  sAccessToken,
+  sEntitlementsToken,
+  login,
+  submitMfaCode,
+} from "../utils/ValorantAPI";
 import * as SecureStore from "expo-secure-store";
 
 interface props {
@@ -27,7 +32,7 @@ export default function Login(props: PropsWithChildren<props>) {
 
   const handleBtnLogin = async () => {
     setLoading(true);
-    let response = await login(username, password);
+    let response = await login(username, password, region);
 
     if (response?.error) {
       setLoading(false);
@@ -46,14 +51,13 @@ export default function Login(props: PropsWithChildren<props>) {
             username,
             password,
             region,
-            accessToken: response?.accessToken,
-            entitlementsToken: response?.entitlementsToken,
+            accessToken: sAccessToken,
+            entitlementsToken: sEntitlementsToken,
           })
         );
       } else {
         await SecureStore.deleteItemAsync("user");
       }
-      setSRegion(region);
       props.setLoggedIn(true);
     }
   };
@@ -73,14 +77,13 @@ export default function Login(props: PropsWithChildren<props>) {
             username,
             password,
             region,
-            accessToken: response.accessToken,
-            entitlementsToken: response.entitlementsToken,
+            accessToken: sAccessToken,
+            entitlementsToken: sEntitlementsToken,
           })
         );
       } else {
         await SecureStore.deleteItemAsync("user");
       }
-      setSRegion(region);
       props.setLoggedIn(true);
     }
   };
@@ -95,10 +98,11 @@ export default function Login(props: PropsWithChildren<props>) {
     let response = await login(
       username,
       password,
+      region,
       accessToken,
       entitlementsToken
     );
-    setSRegion(region);
+
     if (response?.error) {
       setLoading(false);
       props.setSnackbar(response.error);

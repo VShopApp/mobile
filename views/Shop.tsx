@@ -2,16 +2,16 @@ import React from "react";
 import { useEffect, useState } from "react";
 import { ImageBackground, ScrollView, View } from "react-native";
 import { ActivityIndicator, Text } from "react-native-paper";
-import { getShop, sRegion } from "../utils/ValorantAPI";
 import ShopItem from "../components/ShopItem";
 import VPIcon from "../components/VPIcon";
+import { getShop } from "../utils/ValorantAPI";
 
 export default function Shop() {
   const [items, setItems] = useState<singleItem[]>([]);
   const [bundle, setBundle] = useState<Bundle>();
 
   useEffect(() => {
-    getShop(sRegion).then((res) => {
+    getShop().then((res) => {
       setItems(res.shop);
       setBundle(res.bundle);
     });

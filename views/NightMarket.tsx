@@ -2,17 +2,17 @@ import React from "react";
 import { useEffect, useState } from "react";
 import { ScrollView, View } from "react-native";
 import { ActivityIndicator, Text } from "react-native-paper";
-import { getNightMarket, sRegion } from "../utils/ValorantAPI";
 import NightMarketItem from "../components/NightMarketItem";
+import { getNightMarket } from "../utils/ValorantAPI";
 
 export default function NightShop() {
   const [items, setItems] = useState<singleNightMarketItem[]>([]);
   const [noNightMarket, setNoNightMarket] = useState(false);
 
   useEffect(() => {
-    getNightMarket(sRegion).then((res) => {
-      if (res.nightMarket.length > 0) {
-        setItems(res.nightMarket);
+    getNightMarket().then((res) => {
+      if (res.length > 0) {
+        setItems(res);
       } else {
         setNoNightMarket(true);
       }

@@ -2,9 +2,9 @@ import React, { PropsWithChildren } from "react";
 import { View } from "react-native";
 import { Button, Text } from "react-native-paper";
 import * as SecureStore from "expo-secure-store";
-import { reset, sRegion, sUsername } from "../utils/ValorantAPI";
 import Constants from "expo-constants";
 import * as Updates from "expo-updates";
+import { sRegion, reset, sUsername } from "../utils/ValorantAPI";
 
 interface props {
   setLoggedIn: Function;
