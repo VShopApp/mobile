@@ -9,17 +9,17 @@ import {
 
 interface props {}
 export default function Info(props: PropsWithChildren<props>) {
-  const [open, setOpen] = useState(false);
+  const [open, setOpen] = useState(true);
 
   return (
     <>
       <Portal>
-        <PaperDialog visible={open} dismissable={true}>
+        <PaperDialog visible={open}>
           <PaperDialog.Content>
             <Paragraph>
-              VShop is currently up and running again, but don't get your hopes
-              up, because it might break again in the future. To get the latest
-              infos join our Discord Server.
+              VShop is now fully working again! I'm really sorry for the
+              problems we had. We now have a new Discord Server, feel free to
+              join.
             </Paragraph>
           </PaperDialog.Content>
           <PaperDialog.Actions>
