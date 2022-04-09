@@ -1,39 +1,11 @@
 import React from "react";
-import { useEffect, useState } from "react";
 import { ScrollView, View } from "react-native";
-import { ActivityIndicator, Text } from "react-native-paper";
+import { Text } from "react-native-paper";
 import NightMarketItem from "../components/NightMarketItem";
-import { getNightMarket } from "../utils/ValorantAPI";
+import { sNightMarket } from "../utils/ValorantAPI";
 
 export default function NightShop() {
-  const [items, setItems] = useState<singleNightMarketItem[]>([]);
-  const [noNightMarket, setNoNightMarket] = useState(false);
-
-  useEffect(() => {
-    getNightMarket().then((res) => {
-      if (res.length > 0) {
-        setItems(res);
-      } else {
-        setNoNightMarket(true);
-      }
-    });
-  }, []);
-
-  if (items?.length == 0 && !noNightMarket) {
-    return (
-      <View
-        style={{
-          flex: 1,
-          justifyContent: "center",
-          alignItems: "center",
-        }}
-      >
-        <ActivityIndicator animating={true} color={"#fa4454"} size="large" />
-      </View>
-    );
-  }
-
-  if (noNightMarket) {
+  if (sNightMarket?.length == 0) {
     return (
       <View
         style={{
@@ -52,7 +24,7 @@ export default function NightShop() {
   return (
     <>
       <ScrollView>
-        {items?.map((item) => (
+        {sNightMarket?.map((item) => (
           <NightMarketItem item={item} key={item.uuid} />
         ))}
       </ScrollView>

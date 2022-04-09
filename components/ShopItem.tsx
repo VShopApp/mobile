@@ -1,10 +1,10 @@
 import React, { PropsWithChildren, useState } from "react";
 import { Card, Title, Paragraph, Button } from "react-native-paper";
+import CurrencyIcon from "./CurrencyIcon";
 import VideoPopup from "./VideoPopup";
-import VPIcon from "./VPIcon";
 
 interface props {
-  item: singleItem;
+  item: shopItem;
 }
 export default function ShopItem(props: PropsWithChildren<props>) {
   const [videoShown, setVideoShown] = useState(false);
@@ -18,7 +18,7 @@ export default function ShopItem(props: PropsWithChildren<props>) {
         <Card.Content>
           <Title>{props.item.displayName}</Title>
           <Paragraph>
-            {props.item.price} <VPIcon color="white" />
+            {props.item.price} <CurrencyIcon icon="vp" />
           </Paragraph>
         </Card.Content>
         <Card.Cover

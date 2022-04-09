@@ -32,7 +32,7 @@ export default function App() {
       <SafeAreaView style={{ width: "100%", height: "100%" }}>
         <Info />
         <Update />
-        <AppBar />
+        <AppBar loggedIn={loggedIn !== undefined} />
         {!loggedIn ? (
           <Login setLoggedIn={setLoggedIn} setSnackbar={setSnackbar} />
         ) : (

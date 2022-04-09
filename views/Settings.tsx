@@ -1,10 +1,13 @@
 import React, { PropsWithChildren } from "react";
-import { View } from "react-native";
-import { Button, Text } from "react-native-paper";
+import { TouchableOpacity, View } from "react-native";
+import { Button, Divider } from "react-native-paper";
 import * as SecureStore from "expo-secure-store";
 import Constants from "expo-constants";
 import * as Updates from "expo-updates";
 import { sRegion, reset, sUsername } from "../utils/ValorantAPI";
+import { List } from "react-native-paper";
+import { regions } from "../utils/misc";
+import * as WebBrowser from "expo-web-browser";
 
 interface props {
   setLoggedIn: Function;
@@ -18,37 +21,63 @@ export default function Settings(props: PropsWithChildren<props>) {
   };
 
   return (
-    <View
-      style={{
-        flex: 1,
-        justifyContent: "center",
-        alignItems: "center",
-      }}
-    >
-      <Text style={{ fontSize: 15 }}>
-        Logged in as <Text style={{ fontWeight: "bold" }}>{sUsername}</Text>
-      </Text>
-      <Text style={{ fontSize: 15 }}>
-        Region: <Text style={{ fontWeight: "bold" }}>{sRegion}</Text>
-      </Text>
-      <Button style={{ marginTop: 10 }} onPress={handleLogout} mode="contained">
-        Log Out
-      </Button>
-      <Text
-        style={{
-          color: "#9ca3af",
-          position: "absolute",
-          bottom: 0,
-          right: 0,
-          padding: 5,
-          textAlign: "right",
-          fontSize: 10,
+    <>
+      <List.Item
+        title="Logged in as"
+        description={sUsername}
+        left={(props) => <List.Icon {...props} icon="account" />}
+        right={(props) => (
+          <TouchableOpacity onPress={handleLogout}>
+            <List.Icon {...props} icon="logout" color="#fa4454" />
+          </TouchableOpacity>
+        )}
+      />
+      <Divider />
+      <List.Item
+        title="Region"
+        description={regions[sRegion]}
+        left={(props) => <List.Icon {...props} icon="earth" />}
+      />
+      <Divider />
+      <List.Item
+        title="Version"
+        description={`${Constants.manifest?.version} - ${Updates.releaseChannel}`}
+        left={(props) => <List.Icon {...props} icon="cellphone-information" />}
+      />
+      <Divider />
+      <Button
+        icon="reload"
+        mode="contained"
+        onPress={() => {
+          Updates.reloadAsync();
         }}
+        style={{ marginHorizontal: 10, marginVertical: 10 }}
       >
-        v{Constants.manifest?.version}
-        {"\n"}
-        {Updates.releaseChannel}
-      </Text>
-    </View>
+        Refresh
+      </Button>
+      <Divider />
+      <View>
+        <Button
+          icon="information"
+          mode="contained"
+          onPress={() =>
+            WebBrowser.openBrowserAsync("https://vshop.one/privacy")
+          }
+          style={{ marginHorizontal: 10, marginVertical: 5, marginTop: 10 }}
+        >
+          Privacy Policy
+        </Button>
+        <Button
+          icon="discord"
+          mode="contained"
+          onPress={() =>
+            WebBrowser.openBrowserAsync("https://vshop.one/discord")
+          }
+          style={{ marginHorizontal: 10, marginVertical: 5 }}
+        >
+          Discord Server
+        </Button>
+      </View>
+    </>
   );
 }

@@ -31,3 +31,10 @@ export const VCurrencies = {
   RAD: "e59aa87c-4cbf-517a-5983-6e81511be9b7", // Radianite Points
   FAG: "f08d4ae3-939c-4576-ab26-09ce1f23bb37", // Free Agents
 };
+
+export const regions: { [key: string]: string } = {
+  eu: "Europe",
+  na: "North America",
+  ap: "Asia-Pacific",
+  kr: "Korea",
+};

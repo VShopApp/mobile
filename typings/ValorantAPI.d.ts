@@ -12,7 +12,7 @@ interface user {
   mfaEmail?: string | undefined;
 }
 
-interface singleItem {
+interface shopItem {
   uuid: string;
   displayName: string;
   displayIcon: string;
@@ -21,7 +21,7 @@ interface singleItem {
   price: number;
 }
 
-interface singleNightMarketItem extends singleItem {
+interface nightMarketItem extends shopItem {
   discountPrice: number;
   discountPercent: number;
 }
@@ -38,4 +38,15 @@ interface Bundle {
   verticalPromoImage: string;
   assetPath: string;
   price: number;
+}
+
+interface Balance {
+  vp: number;
+  rad: number;
+  fag: number;
+}
+
+interface Progress {
+  level: number;
+  xp: number;
 }

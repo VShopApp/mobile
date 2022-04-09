@@ -1,10 +1,10 @@
 import React, { PropsWithChildren, useState } from "react";
 import { Card, Title, Paragraph, Button, Text } from "react-native-paper";
+import CurrencyIcon from "./CurrencyIcon";
 import VideoPopup from "./VideoPopup";
-import VPIcon from "./VPIcon";
 
 interface props {
-  item: singleNightMarketItem;
+  item: nightMarketItem;
 }
 export default function NightMarketItem(props: PropsWithChildren<props>) {
   const [videoShown, setVideoShown] = useState(false);
@@ -27,7 +27,7 @@ export default function NightMarketItem(props: PropsWithChildren<props>) {
             >
               {props.item.price}
             </Text>{" "}
-            {props.item.discountPrice} <VPIcon color="white" /> (
+            {props.item.discountPrice} <CurrencyIcon icon="vp" /> (
             <Text
               style={{
                 color: "green",

@@ -1,4 +1,5 @@
 import axios from "axios";
+import { useState } from "react";
 import { Platform } from "react-native";
 import { atob, VCurrencies } from "./misc";
 const RCTNetworkingAndroid = require("react-native/Libraries/Network/RCTNetworking.android");
@@ -23,6 +24,12 @@ export let sRegion: string = "eu";
 export let offers: any = {};
 
 let mfaCookie: any = "";
+
+export let sShop: shopItem[] = [];
+export let sBundle: Bundle;
+export let sNightMarket: nightMarketItem[] = [];
+export let sBalance: Balance;
+export let sProgress: Progress;
 
 export async function login(
   username: string,
@@ -69,6 +76,13 @@ export async function login(
     });
 
     if (res2.data.error) {
+      if (res2.data.error === "auth_failure") {
+        return {
+          success: false,
+          error: "Wrong username or password.",
+        };
+      }
+
       return {
         success: false,
         error: res2.data.error,
@@ -108,6 +122,9 @@ export async function login(
       sUserId = res4.data.sub;
 
       await loadOffers();
+      await loadShops();
+      await loadBalance();
+      await loadProgress();
 
       return {
         success: true,
@@ -128,6 +145,9 @@ export async function login(
     sEntitlementsToken = entitlementsToken;
 
     await loadOffers();
+    await loadShops();
+    await loadBalance();
+    await loadProgress();
 
     return {
       success: true,
@@ -178,6 +198,9 @@ export async function submitMfaCode(mfaCode: string) {
     sUserId = res3.data.sub;
 
     await loadOffers();
+    await loadShops();
+    await loadBalance();
+    await loadProgress();
 
     return {
       success: true,
@@ -191,7 +214,7 @@ export async function submitMfaCode(mfaCode: string) {
 
 export async function loadOffers() {
   const res = await axios({
-    url: getUrl("offers", sRegion),
+    url: getUrl("offers"),
     method: "GET",
     headers: {
       "X-Riot-Entitlements-JWT": sEntitlementsToken,
@@ -205,19 +228,19 @@ export async function loadOffers() {
   }
 }
 
-export async function getShop() {
+async function loadShops() {
   const res = await axios({
-    url: getUrl("storefront", sRegion, sUserId),
+    url: getUrl("storefront"),
     method: "GET",
     headers: {
-      "Content-Type": "application/json",
       "X-Riot-Entitlements-JWT": sEntitlementsToken,
       Authorization: `Bearer ${sAccessToken}`,
     },
   });
 
+  /* NORMAL SHOP */
   let singleItemOffers = res.data.SkinsPanelLayout.SingleItemOffers;
-  let shop: singleItem[] = [];
+  let shop: shopItem[] = [];
   for (var i = 0; i < singleItemOffers.length; i++) {
     shop[i] = (
       await axios(
@@ -229,7 +252,9 @@ export async function getShop() {
     ).data.data;
     shop[i].price = offers[shop[i].uuid];
   }
+  sShop = shop;
 
+  /* BUNDLE */
   let bundle: Bundle = (
     await axios({
       url: `https://valorant-api.com/v1/bundles/${res.data.FeaturedBundle.Bundle.DataAssetID}`,
@@ -241,61 +266,46 @@ export async function getShop() {
     (item: any) => item.DiscountedPrice
   ).reduce((a: any, b: any) => a + b);
 
-  return { shop, bundle };
-}
+  sBundle = bundle;
 
-export async function getNightMarket() {
-  const res = await axios({
-    url: getUrl("storefront", sRegion, sUserId),
-    method: "GET",
-    headers: {
-      "Content-Type": "application/json",
-      "X-Riot-Entitlements-JWT": sEntitlementsToken,
-      Authorization: `Bearer ${sAccessToken}`,
-    },
-  });
-
-  if (!res.data.BonusStore) return [];
-  var nightShop = res.data.BonusStore.BonusStoreOffers;
-
-  var arr = [];
-  for (var i = 0; i < nightShop.length; i++) {
-    let itemid = nightShop[i].Offer.Rewards[0].ItemID;
-    arr[i] = (
+  /* NIGHT MARKET */
+  var bonusStore = res.data.BonusStore.BonusStoreOffers;
+  var nightMarket: nightMarketItem[] = [];
+  for (var i = 0; i < bonusStore.length; i++) {
+    let itemid = bonusStore[i].Offer.Rewards[0].ItemID;
+    nightMarket[i] = (
       await axios({
         url: `https://valorant-api.com/v1/weapons/skinlevels/${itemid}`,
         method: "GET",
       })
     ).data.data;
-    arr[i].price = nightShop[i].Offer.Cost[VCurrencies.VP];
-    arr[i].discountPrice = nightShop[i].DiscountCosts[VCurrencies.VP];
-    arr[i].discountPercent = nightShop[i].DiscountPercent;
+    nightMarket[i].price = bonusStore[i].Offer.Cost[VCurrencies.VP];
+    nightMarket[i].discountPrice = bonusStore[i].DiscountCosts[VCurrencies.VP];
+    nightMarket[i].discountPercent = bonusStore[i].DiscountPercent;
   }
-
-  return arr as singleNightMarketItem[];
+  sNightMarket = nightMarket;
 }
 
-export async function getWallet() {
+export async function loadBalance() {
   const res = await axios({
-    url: getUrl("wallet", sRegion, sUserId),
+    url: getUrl("wallet"),
     method: "GET",
     headers: {
-      "Content-Type": "application/json",
       "X-Riot-Entitlements-JWT": sEntitlementsToken,
       Authorization: `Bearer ${sAccessToken}`,
     },
   });
 
-  return {
+  sBalance = {
     vp: res.data.Balances[VCurrencies.VP],
     rad: res.data.Balances[VCurrencies.RAD],
     fag: res.data.Balances[VCurrencies.FAG],
   };
 }
 
-export async function getProgress() {
+export async function loadProgress() {
   const res = await axios({
-    url: getUrl("playerxp", sRegion, sUserId),
+    url: getUrl("playerxp"),
     method: "GET",
     headers: {
       "Content-Type": "application/json",
@@ -304,7 +314,7 @@ export async function getProgress() {
     },
   });
 
-  return {
+  sProgress = {
     level: res.data.Progress.Level,
     xp: res.data.Progress.XP,
   };
@@ -319,17 +329,17 @@ export function reset() {
   mfaCookie = null;
 }
 
-function getUrl(name: string, region?: string, userId?: string) {
+function getUrl(name: string) {
   const URLS: any = {
     auth: "https://auth.riotgames.com/api/v1/authorization/",
     entitlements: "https://entitlements.auth.riotgames.com/api/token/v1/",
     userinfo: "https://auth.riotgames.com/userinfo/",
-    storefront: `https://pd.${region}.a.pvp.net/store/v2/storefront/${userId}/`,
-    wallet: `https://pd.${region}.a.pvp.net/store/v1/wallet/${userId}/`,
-    playerxp: `https://pd.${region}.a.pvp.net/account-xp/v1/players/${userId}/`,
+    storefront: `https://pd.${sRegion}.a.pvp.net/store/v2/storefront/${sUserId}/`,
+    wallet: `https://pd.${sRegion}.a.pvp.net/store/v1/wallet/${sUserId}/`,
+    playerxp: `https://pd.${sRegion}.a.pvp.net/account-xp/v1/players/${sUserId}/`,
     weapons: "https://valorant-api.com/v1/weapons/",
-    offers: `https://pd.${region}.a.pvp.net/store/v1/offers/`,
-    playerId: `https://pd.${region}.a.pvp.net/name-service/v2/players/`,
+    offers: `https://pd.${sRegion}.a.pvp.net/store/v1/offers/`,
+    playerId: `https://pd.${sRegion}.a.pvp.net/name-service/v2/players/`,
   };
 
   return URLS[name];
