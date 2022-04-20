@@ -269,21 +269,24 @@ async function loadShops() {
   sBundle = bundle;
 
   /* NIGHT MARKET */
-  var bonusStore = res.data.BonusStore.BonusStoreOffers;
-  var nightMarket: nightMarketItem[] = [];
-  for (var i = 0; i < bonusStore.length; i++) {
-    let itemid = bonusStore[i].Offer.Rewards[0].ItemID;
-    nightMarket[i] = (
-      await axios({
-        url: `https://valorant-api.com/v1/weapons/skinlevels/${itemid}`,
-        method: "GET",
-      })
-    ).data.data;
-    nightMarket[i].price = bonusStore[i].Offer.Cost[VCurrencies.VP];
-    nightMarket[i].discountPrice = bonusStore[i].DiscountCosts[VCurrencies.VP];
-    nightMarket[i].discountPercent = bonusStore[i].DiscountPercent;
+  if (res.data.BonusStore) {
+    var bonusStore = res.data.BonusStore.BonusStoreOffers;
+    var nightMarket: nightMarketItem[] = [];
+    for (var i = 0; i < bonusStore.length; i++) {
+      let itemid = bonusStore[i].Offer.Rewards[0].ItemID;
+      nightMarket[i] = (
+        await axios({
+          url: `https://valorant-api.com/v1/weapons/skinlevels/${itemid}`,
+          method: "GET",
+        })
+      ).data.data;
+      nightMarket[i].price = bonusStore[i].Offer.Cost[VCurrencies.VP];
+      nightMarket[i].discountPrice =
+        bonusStore[i].DiscountCosts[VCurrencies.VP];
+      nightMarket[i].discountPercent = bonusStore[i].DiscountPercent;
+    }
+    sNightMarket = nightMarket;
   }
-  sNightMarket = nightMarket;
 }
 
 export async function loadBalance() {
