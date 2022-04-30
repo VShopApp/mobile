@@ -7,14 +7,13 @@ import {
   DarkTheme,
 } from "react-native-paper";
 import AppBar from "./components/AppBar";
-import SnackBar from "./components/SnackBar";
 import Navigation from "./components/Navigation";
 import Update from "./components/Update";
 import Info from "./components/Info";
+import { registerRootComponent } from "expo";
 
-export default function App() {
+function App() {
   const [loggedIn, setLoggedIn] = useState<user>();
-  const [snackbar, setSnackbar] = useState("");
 
   const theme = {
     ...DefaultTheme,
@@ -34,17 +33,14 @@ export default function App() {
         <Update />
         <AppBar loggedIn={loggedIn !== undefined} />
         {!loggedIn ? (
-          <Login setLoggedIn={setLoggedIn} setSnackbar={setSnackbar} />
+          <Login setLoggedIn={setLoggedIn} />
         ) : (
           <Navigation setLoggedIn={setLoggedIn} />
         )}
-        <SnackBar
-          visible={snackbar != ""}
-          value={snackbar}
-          setValue={setSnackbar}
-        />
         <StatusBar barStyle="default" />
       </SafeAreaView>
     </PaperProvider>
   );
 }
+
+registerRootComponent(App);
