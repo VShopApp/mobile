@@ -1,6 +1,7 @@
 import axios from "axios";
 import jwtDecode from "jwt-decode";
 import { clearRTCCookies, VCurrencies } from "./misc";
+import * as SecureStore from "expo-secure-store";
 
 axios.interceptors.request.use(
   function (config) {
@@ -26,14 +27,11 @@ export let sNightMarket: nightMarketItem[] = [];
 export let sBalance: Balance;
 export let sProgress: Progress;
 
-export async function setup(
-  accessToken: string,
-  username: string,
-  region: string
-) {
+export async function setup(accessToken: string, region: string) {
   sAccessToken = accessToken;
-  sUsername = username;
+
   sRegion = region;
+  await SecureStore.setItemAsync("region", region);
 
   loadUserId();
   await loadEntitlementsToken();
