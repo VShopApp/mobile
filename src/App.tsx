@@ -9,11 +9,10 @@ import {
 import AppBar from "./components/AppBar";
 import Navigation from "./components/Navigation";
 import Update from "./components/Update";
-import Info from "./components/Info";
 import { registerRootComponent } from "expo";
 
 function App() {
-  const [loggedIn, setLoggedIn] = useState<user>();
+  const [loggedIn, setLoggedIn] = useState(false);
 
   const theme = {
     ...DefaultTheme,
@@ -29,7 +28,6 @@ function App() {
   return (
     <PaperProvider theme={theme}>
       <SafeAreaView style={{ width: "100%", height: "100%" }}>
-        <Info />
         <Update />
         <AppBar loggedIn={loggedIn !== undefined} />
         {!loggedIn ? (
