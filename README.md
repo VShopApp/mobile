@@ -1,20 +1,16 @@
 <h1><img src="./assets/logo-t-100.png" style="float:left;margin-right:10px;" height="40px" />VShop for Valorant</h1>
+<a href="https://github.com/VShopApp/mobile/releases/latest/download/VShop.apk">
+  <img alt="GitHub release (latest by date and asset)" src="https://img.shields.io/github/downloads/VShopApp/mobile/latest/VShop.apk?label=APK&color=%23fa4454&logo=android&logoColor=white">
+</a>
+<a href="https://apps.apple.com/app/vshop-for-valorant/id1636765187">
+  <img alt="Apple App Store" src="https://img.shields.io/static/v1?label=App%20Store&logo=apple&logoColor=white&message=download&color=%23fa4454">
+</a>
 
 <img src="./assets/mockup.png" align="right" height="500px" />
 VShop allows you to check your Valorant Store, Night Market, Profile and more. It runs entirely on your device and securely transmits your credentials to the official Riot Games servers (more information in our <a href="https://docs.vshop.one/security">docs</a>).
-<br/>
-<br/>
-<div style="display: flex;align-items: center;">
-  <a href="https://github.com/VShopApp/mobile/releases/latest/download/VShop.apk">
-    <img src="https://vshop.one/img/google-play-badge.png" height="50px">
-  </a>
-  <a href="https://apps.apple.com/app/vshop-for-valorant/id1636765187">
-    <img src="https://vshop.one/img/app-store-badge.png" height="50px" style="margin-left:10px;">
-  </a>
-</div>
 
 ## Translations
-VShop is available in 16 different languages. The translations files are available in [VShopApp/translations](https://github.com/VShopApp/translations), which is synced with [weblate](https://weblate.vasc.cloud).
+VShop is available in 16 different languages. The translation files are available in [VShopApp/translations](https://github.com/VShopApp/translations), which is synced with [weblate](https://weblate.vasc.cloud).
 
 ## Credits
 This app would not have been possible without the following projects:
