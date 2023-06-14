@@ -6,7 +6,6 @@
   <img alt="Apple App Store" src="https://img.shields.io/static/v1?label=App%20Store&logo=apple&logoColor=white&message=download&color=%23fa4454">
 </a>
 
-<img src="./assets/mockup.png" align="right" height="500px" />
 VShop allows you to check your Valorant Store, Night Market, Profile and more. It runs entirely on your device and securely transmits your credentials to the official Riot Games servers (more information in our <a href="https://docs.vshop.one/security">docs</a>).
 
 ## Translations
