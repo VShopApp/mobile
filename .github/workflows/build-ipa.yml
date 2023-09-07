@@ -1,5 +1,5 @@
 name: Build IPA
-on: [push, workflow_dispatch]
+on: workflow_dispatch
 jobs:
   build-ipa:
     runs-on: macos-12
