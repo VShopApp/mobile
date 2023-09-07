@@ -1,4 +1,4 @@
 export const STRIPE_PUBLIC_KEY =
-  "";
+  "pk_live_51N8k4dERo9gspuNWUViIEV4NRhs94iZnLVcMyIUuGAemtecVVVLe5j2WoSGfPoLma0E1Qv62SEMLZbynFMcjNxyA00HaLspTeV";
 export const STRIPE_PUBLIC_KEY_TEST =
-  "";
+  "pk_test_51N8k4dERo9gspuNWLGAXGJGFDaerMEy6z2nzu2hOA0nlx2TjcCDu6ZuIKh8VBevnqxjtMlK2idHas8uxzJoOeNXw00PlLXteze";

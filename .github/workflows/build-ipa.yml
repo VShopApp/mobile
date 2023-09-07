@@ -1,0 +1,31 @@
+name: Build IPA
+on: workflow_dispatch
+jobs:
+  build-ipa:
+    runs-on: macos-11
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v1
+      - name: Install node modules
+        run: yarn
+      - name: Install Pods
+        run: |
+          cd ios
+          pod install
+      - name: Create GoogleService-Info.plist
+        run: |
+          cd ios
+          echo "${{ secrets.GOOGLE_SERVICE_INFO }}" > GoogleService-Info.plist
+      - name: Build Archive
+        run: |
+          cd ios
+          xcodebuild archive -workspace vshop_mobile.xcworkspace -scheme vshop_mobile -archivePath output.xcarchive -configuration Release CODE_SIGN_IDENTITY="" CODE_SIGNING_REQUIRED=NO CODE_SIGNING_ALLOWED=NO | xcpretty && exit ${PIPESTATUS[0]}
+      - name: Create IPA from Archive
+        run: |
+          cp -r ios/output.xcarchive/Products/Applications/ Payload/
+          zip -r vshop.ipa Payload/
+      - uses: actions/upload-artifact@v3
+        name: Upload IPA
+        with:
+          name: vshop_ipa
+          path: vshop.ipa
