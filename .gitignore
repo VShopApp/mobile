@@ -61,6 +61,7 @@ yarn-error.log
 
 # Keystore infos
 key.properties
+release.jks
 
 # Firebase
 google-services.json

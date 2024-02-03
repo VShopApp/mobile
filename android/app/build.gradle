@@ -118,7 +118,7 @@ android {
         applicationId "dev.vasc.vshop2"
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
-        versionCode 52
+        versionCode 53
         versionName npmVersion
     }
 

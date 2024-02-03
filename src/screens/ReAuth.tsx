@@ -28,7 +28,7 @@ import { useFeatureStore } from "../stores/features";
 import { checkDonator } from "../utils/VShopAPI";
 
 const LOGIN_URL =
-  "https://auth.riotgames.com/login#client_id=play-valorant-web-prod&nonce=1&redirect_uri=https%3A%2F%2Fplayvalorant.com%2Fopt_in&response_type=token%20id_token&scope=openid%20account";
+  "https://auth.riotgames.com/authorize?redirect_uri=https%3A%2F%2Fplayvalorant.com%2Fopt_in&client_id=play-valorant-web-prod&response_type=token%20id_token&nonce=1&scope=account%20openid";
 
 export default function ReAuthScreen() {
   const { t } = useTranslation();

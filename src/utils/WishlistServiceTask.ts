@@ -11,7 +11,6 @@ import PushNotification from "react-native-push-notification";
 import axios from "axios";
 import i18n from "./localization";
 import { useWishlistStore } from "../stores/wishlistNotification";
-import messaging from "@react-native-firebase/messaging";
 import { checkDonator } from "./VShopAPI";
 
 export default async function () {

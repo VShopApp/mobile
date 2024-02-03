@@ -44,7 +44,7 @@ export let offers: any = {};
 export let skins: ISkin[] = [];
 
 const extraHeaders = {
-  "X-Riot-ClientVersion": "",
+  "X-Riot-ClientVersion": "43.0.1.4195386.4190634",
   "X-Riot-ClientPlatform": btoa(
     JSON.stringify({
       platformType: "PC",
@@ -116,7 +116,7 @@ export async function getUsername(
     data: [userId],
   });
 
-  return res.data[0].GameName != "" ? res.data[0].GameName : "?";
+  return res.data[0].GameName !== "" ? res.data[0].GameName : "?";
 }
 
 export async function loadOffers(
@@ -197,7 +197,7 @@ export async function parseShop(shop: IStorefrontV2) {
         (item: any) => item.Item.ItemTypeID === VItemTypes.SkinLevel,
       ).map((item: any) => {
         const skin = skins.find(
-          (skin) => skin.levels[0].uuid == item.Item.ItemID,
+          (skin) => skin.levels[0].uuid === item.Item.ItemID,
         ) as ISkin;
 
         return {
@@ -214,7 +214,9 @@ export async function parseShop(shop: IStorefrontV2) {
     var bonusStore = shop.BonusStore.BonusStoreOffers;
     for (var i = 0; i < bonusStore.length; i++) {
       let itemid = bonusStore[i].Offer.Rewards[0].ItemID;
-      const skin = skins.find((skin) => skin.levels[0].uuid == itemid) as ISkin;
+      const skin = skins.find(
+        (skin) => skin.levels[0].uuid === itemid,
+      ) as ISkin;
 
       nightMarket[i] = {
         ...skin,
@@ -295,7 +297,7 @@ export const reAuth = () =>
     },
     data: {
       client_id: "play-valorant-web-prod",
-      nonce: 1,
+      nonce: "1",
       redirect_uri: "https://playvalorant.com/opt_in",
       response_type: "token id_token",
       response_mode: "query",
