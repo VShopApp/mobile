@@ -101,7 +101,7 @@
   },
   "purchase": {
     "restore": "Restore Purchases",
-    "success": "Your order is processing. An app restart is required to see your perks.",
+    "success": "Your order is processing. An app restart may be required to see your perks.",
     "error": "An error occurred"
   },
   "disclaimer": "VShop is not endorsed by Riot Games in any way.\nRiot Games, Valorant, and all associated properties are trademarks or registered trademarks of Riot Games, Inc.",

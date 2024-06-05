@@ -13,12 +13,17 @@ import {
 import { Linking, ToastAndroid, View } from "react-native";
 import { create } from "zustand";
 import Icon from "react-native-vector-icons/MaterialCommunityIcons";
-import { getBackendUrl, getCurrencies } from "../../utils/VShopAPI";
+import {
+  checkDonator,
+  getBackendUrl,
+  getCurrencies,
+} from "../../utils/VShopAPI";
 import { useStripe } from "@stripe/stripe-react-native";
 import axios from "axios";
 import { useUserStore } from "../../stores/user";
 import TextInputMask from "react-native-text-input-mask";
 import { getCurrencies as getUserCurrencies } from "react-native-localize";
+import { useFeatureStore } from "../../stores/features";
 
 interface IStore {
   visible: boolean;
@@ -41,6 +46,7 @@ export default function DonatePopup() {
     : false;
   const { user } = useUserStore();
   const { initPaymentSheet, presentPaymentSheet } = useStripe();
+  const { enableDonator } = useFeatureStore();
 
   const initializePaymentSheet = async () => {
     const response = await axios(`${getBackendUrl()}/stripe/payment-sheet`, {
@@ -78,6 +84,10 @@ export default function DonatePopup() {
       } else {
         ToastAndroid.show(t("purchase.success"), ToastAndroid.LONG);
         hideDonatePopup();
+        setTimeout(async () => {
+          const isDonator = await checkDonator(user.id);
+          if (isDonator) enableDonator();
+        }, 2500);
       }
     }
   };
