@@ -46,7 +46,7 @@ export default function ReAuthScreen() {
   }) => {
     if (!newNavState.url) return;
 
-    if (newNavState.url.startsWith("https://playvalorant.com/opt_in")) {
+    if (newNavState.url.includes("access_token=")) {
       const accessToken = getAccessTokenFromUri(newNavState.url);
       try {
         const region =

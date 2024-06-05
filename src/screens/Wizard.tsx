@@ -53,7 +53,7 @@ export default function WizardScreen() {
   }) => {
     if (!newNavState.url) return;
 
-    if (newNavState.url.startsWith("https://playvalorant.com/opt_in")) {
+    if (newNavState.url.includes("access_token=")) {
       const accessToken = getAccessTokenFromUri(newNavState.url);
       try {
         setLoading(t("fetching.version"));
