@@ -55,9 +55,7 @@ export default async function () {
           const wishlist = useWishlistStore.getState().skinIds;
           var hit = false;
           for (let i = 0; i < wishlist.length; i++) {
-            if (
-              shop.data.SkinsPanelLayout.SingleItemOffers.includes(wishlist[i])
-            ) {
+            if (shop.SkinsPanelLayout.SingleItemOffers.includes(wishlist[i])) {
               const skinData = await axios.get<{
                 status: number;
                 data: ISkinLevel;
