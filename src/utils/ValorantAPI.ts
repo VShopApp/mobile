@@ -2,7 +2,7 @@ import axios from "axios";
 import jwtDecode from "jwt-decode";
 import { getVAPILang, VCurrencies, VItemTypes } from "./misc";
 import { btoa } from "react-native-quick-base64";
-import { IStorefrontV2 } from "../typings/StorefrontV2";
+import { IStorefrontV3 } from "../typings/StorefrontV3";
 import https from "https-browserify";
 
 axios.interceptors.request.use(
@@ -146,22 +146,22 @@ export async function getShop(
   region: string,
   userId: string,
 ) {
-  const res = await axios.get<IStorefrontV2>(
-    getUrl("storefront", region, userId),
-    {
-      method: "GET",
-      headers: {
-        Authorization: `Bearer ${accessToken}`,
-        "X-Riot-Entitlements-JWT": entitlementsToken,
-        ...extraHeaders,
-      },
+  const res = await axios.request<IStorefrontV3>({
+    url: getUrl("storefront", region, userId),
+    method: "POST",
+    headers: {
+      ...extraHeaders,
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${accessToken}`,
+      "X-Riot-Entitlements-JWT": entitlementsToken,
     },
-  );
+    data: {},
+  });
 
-  return res;
+  return res.data;
 }
 
-export async function parseShop(shop: IStorefrontV2) {
+export async function parseShop(shop: IStorefrontV3) {
   /* NORMAL SHOP */
   let singleItemOffers = shop.SkinsPanelLayout.SingleItemOffers;
   let main: IShopItem[] = [];
@@ -321,7 +321,7 @@ function getUrl(name: string, region?: string, userId?: string) {
     auth: "https://auth.riotgames.com/api/v1/authorization/",
     entitlements: "https://entitlements.auth.riotgames.com/api/token/v1/",
     userinfo: "https://auth.riotgames.com/userinfo/",
-    storefront: `https://pd.${region}.a.pvp.net/store/v2/storefront/${userId}`,
+    storefront: `https://pd.${region}.a.pvp.net/store/v3/storefront/${userId}`,
     wallet: `https://pd.${region}.a.pvp.net/store/v1/wallet/${userId}`,
     playerxp: `https://pd.${region}.a.pvp.net/account-xp/v1/players/${userId}`,
     weapons: "https://valorant-api.com/v1/weapons/",

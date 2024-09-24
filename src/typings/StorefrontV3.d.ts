@@ -1,6 +1,6 @@
 import type { VCurrencies } from "../utils/misc";
 
-export interface IStorefrontV2 {
+export interface IStorefrontV3 {
   FeaturedBundle: FeaturedBundle;
   SkinsPanelLayout: SkinsPanelLayout;
   BonusStore?: BonusStore;

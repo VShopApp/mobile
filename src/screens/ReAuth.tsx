@@ -82,7 +82,7 @@ export default function ReAuthScreen() {
           region,
           userId,
         );
-        const shops = await parseShop(shop.data);
+        const shops = await parseShop(shop);
 
         setLoading(t("fetching.progress"));
         const progress = await getProgress(
