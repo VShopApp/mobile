@@ -19,7 +19,7 @@ export default function UpdatePopup() {
 
   React.useEffect(() => {
     const checkUpdate = async () => {
-      const res = await axios({
+      const res = await axios.request({
         url: "https://api.github.com/repos/vshopapp/mobile/releases/latest",
         method: "GET",
       });

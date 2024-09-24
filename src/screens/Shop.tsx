@@ -5,7 +5,7 @@ import Countdown from "../components/Countdown";
 import { useUserStore } from "../stores/user";
 
 export default function ShopScreen() {
-  const user = useUserStore(({ user }) => user);
+  const user = useUserStore((state) => state.user);
   const timestamp = new Date().getTime() + user.shops.remainingSecs.main * 1000;
 
   return (

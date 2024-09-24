@@ -1,5 +1,3 @@
-import type { VCurrencies } from "../utils/misc";
-
 export interface IStorefrontV3 {
   FeaturedBundle: FeaturedBundle;
   SkinsPanelLayout: SkinsPanelLayout;

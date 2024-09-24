@@ -57,7 +57,7 @@ const extraHeaders = {
 
 export async function loadVersion() {
   try {
-    const res = await axios({
+    const res = await axios.request({
       url: "https://valorant-api.com/v1/version",
       method: "GET",
     });
@@ -69,7 +69,7 @@ export async function loadVersion() {
 }
 
 export async function loadSkins() {
-  const res2 = await axios({
+  const res2 = await axios.request({
     url: `https://valorant-api.com/v1/weapons/skins?language=${getVAPILang()}`,
     method: "GET",
   });
@@ -78,7 +78,7 @@ export async function loadSkins() {
 }
 
 export async function getEntitlementsToken(accessToken: string) {
-  const res = await axios({
+  const res = await axios.request({
     url: getUrl("entitlements"),
     method: "POST",
     headers: {
@@ -104,7 +104,7 @@ export async function getUsername(
   userId: string,
   region: string,
 ) {
-  const res = await axios({
+  const res = await axios.request({
     url: getUrl("name", region),
     method: "PUT",
     headers: {
@@ -124,7 +124,7 @@ export async function loadOffers(
   entitlementsToken: string,
   region: string,
 ) {
-  const res = await axios({
+  const res = await axios.request({
     url: getUrl("offers", region),
     method: "GET",
     headers: {
@@ -167,7 +167,7 @@ export async function parseShop(shop: IStorefrontV3) {
   let main: IShopItem[] = [];
   for (var i = 0; i < singleItemOffers.length; i++) {
     const skin = skins.find(
-      (skin) => skin.levels[0].uuid == singleItemOffers[i],
+      (_skin) => _skin.levels[0].uuid == singleItemOffers[i],
     ) as ISkin;
 
     main[i] = {
@@ -183,7 +183,7 @@ export async function parseShop(shop: IStorefrontV3) {
 
     bundles[i] = {
       ...(
-        await axios({
+        await axios.request({
           url: `https://valorant-api.com/v1/bundles/${
             bundle.DataAssetID
           }?language=${getVAPILang()}`,
@@ -197,7 +197,7 @@ export async function parseShop(shop: IStorefrontV3) {
         (item: any) => item.Item.ItemTypeID === VItemTypes.SkinLevel,
       ).map((item: any) => {
         const skin = skins.find(
-          (skin) => skin.levels[0].uuid === item.Item.ItemID,
+          (_skin) => _skin.levels[0].uuid === item.Item.ItemID,
         ) as ISkin;
 
         return {
@@ -215,7 +215,7 @@ export async function parseShop(shop: IStorefrontV3) {
     for (var i = 0; i < bonusStore.length; i++) {
       let itemid = bonusStore[i].Offer.Rewards[0].ItemID;
       const skin = skins.find(
-        (skin) => skin.levels[0].uuid === itemid,
+        (_skin) => _skin.levels[0].uuid === itemid,
       ) as ISkin;
 
       nightMarket[i] = {
@@ -248,7 +248,7 @@ export async function getBalances(
   region: string,
   userId: string,
 ) {
-  const res = await axios({
+  const res = await axios.request({
     url: getUrl("wallet", region, userId),
     method: "GET",
     headers: {
@@ -271,7 +271,7 @@ export async function getProgress(
   region: string,
   userId: string,
 ) {
-  const res = await axios({
+  const res = await axios.request({
     url: getUrl("playerxp", region, userId),
     method: "GET",
     headers: {
@@ -288,7 +288,7 @@ export async function getProgress(
 }
 
 export const reAuth = () =>
-  axios({
+  axios.request({
     url: "https://auth.riotgames.com/api/v1/authorization",
     method: "POST",
     headers: {

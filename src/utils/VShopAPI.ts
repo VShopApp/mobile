@@ -7,7 +7,7 @@ export const getBackendUrl = () => {
 
 export const checkDonator = async (riotId: string) => {
   try {
-    const res = await axios({
+    const res = await axios.request({
       url: `${getBackendUrl()}/user/${riotId}`,
       method: "GET",
       timeout: 5 * 1000,
@@ -21,7 +21,7 @@ export const checkDonator = async (riotId: string) => {
 };
 
 export const getCurrencies = async () => {
-  const res = await axios({
+  const res = await axios.request({
     url: `${getBackendUrl()}/stripe/currencies`,
     method: "GET",
   });

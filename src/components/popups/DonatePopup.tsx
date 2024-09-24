@@ -49,7 +49,8 @@ export default function DonatePopup() {
   const { enableDonator } = useFeatureStore();
 
   const initializePaymentSheet = async () => {
-    const response = await axios(`${getBackendUrl()}/stripe/payment-sheet`, {
+    const response = await axios.request({
+      url: `${getBackendUrl()}/stripe/payment-sheet`,
       method: "POST",
       data: {
         amount: Number.parseFloat(amount),
