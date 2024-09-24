@@ -1,6 +1,6 @@
 {
   "name": "vshop_mobile",
-  "version": "2.7.4",
+  "version": "2.7.5",
   "private": true,
   "scripts": {
     "android": "react-native run-android",
@@ -116,5 +116,6 @@
     "http": "@tradle/react-native-http",
     "https": "https-browserify",
     "stream": "stream-browserify"
-  }
+  },
+  "packageManager": "yarn@1.22.19+sha1.4ba7fc5c6e704fce2066ecbfb0b0d8976fe62447"
 }
