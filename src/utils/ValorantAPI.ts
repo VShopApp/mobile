@@ -146,20 +146,19 @@ export async function getShop(
   region: string,
   userId: string,
 ) {
-  const res = await axios.get<IStorefrontV3>(
-    getUrl("storefront", region, userId),
-    {
-      method: "POST",
-      headers: {
-        Authorization: `Bearer ${accessToken}`,
-        "X-Riot-Entitlements-JWT": entitlementsToken,
-        ...extraHeaders,
-      },
-      data: {},
+  const res = await axios.request<IStorefrontV3>({
+    url: getUrl("storefront", region, userId),
+    method: "POST",
+    headers: {
+      ...extraHeaders,
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${accessToken}`,
+      "X-Riot-Entitlements-JWT": entitlementsToken,
     },
-  );
+    data: {},
+  });
 
-  return res;
+  return res.data;
 }
 
 export async function parseShop(shop: IStorefrontV3) {
