@@ -220,7 +220,7 @@ export async function parseShop(shop: IStorefrontV3) {
 
       nightMarket[i] = {
         ...skin,
-        price: offers[singleItemOffers[i]],
+        price: bonusStore[i].Offer.Cost[VCurrencies.VP],
         discountedPrice: bonusStore[i].DiscountCosts[VCurrencies.VP],
         discountPercent: bonusStore[i].DiscountPercent,
       };
