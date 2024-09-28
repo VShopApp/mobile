@@ -8,8 +8,7 @@
     "start": "react-native start",
     "test": "jest",
     "lint": "eslint . --ext .js,.jsx,.ts,.tsx",
-    "bump": "npx react-native bump-version --skip-semver-for android",
-    "postinstall": "patch-package && rn-nodeify --install 'process,http,https,url,stream,util' --hack --yarn"
+    "bump": "npx react-native bump-version --skip-semver-for android"
   },
   "dependencies": {
     "@react-native-async-storage/async-storage": "^1.18.1",
@@ -35,7 +34,7 @@
     "i18next-http-backend": "^1.4.1",
     "i18next-resources-to-backend": "^1.0.0",
     "jwt-decode": "^3.1.2",
-    "patch-package": "^7.0.0",
+    "node-libs-react-native": "^1.2.1",
     "postinstall-postinstall": "^2.1.0",
     "process": "0.11.0",
     "react": "18.2.0",
@@ -50,14 +49,12 @@
     "react-native-reanimated": "^3.1.0",
     "react-native-safe-area-context": "^4.4.1",
     "react-native-screens": "^3.20.0",
-    "react-native-text-input-mask": "^3.1.4",
+    "react-native-text-input-mask": "3.1.5",
     "react-native-vector-icons": "^9.2.0",
     "react-native-video": "6.0.0-alpha.4",
     "react-native-webview": "^12.1.0",
     "readable-stream": "1.0.33",
     "recyclerlistview": "^4.2.0",
-    "stream-browserify": "1.0.0",
-    "stream-http": "^3.2.0",
     "url": "^0.11.0",
     "util": "~0.10.3",
     "zustand": "^4.3.6"
@@ -83,7 +80,6 @@
     "prettier": "^2.4.1",
     "react-native-cli-bump-version": "^1.5.0",
     "react-test-renderer": "18.2.0",
-    "rn-nodeify": "^10.3.0",
     "typescript": "4.8.4"
   },
   "jest": {
@@ -96,26 +92,6 @@
       "json",
       "node"
     ]
-  },
-  "react-native": {
-    "http": "@tradle/react-native-http",
-    "https": "https-browserify",
-    "_stream_transform": "readable-stream/transform",
-    "_stream_readable": "readable-stream/readable",
-    "_stream_writable": "readable-stream/writable",
-    "_stream_duplex": "readable-stream/duplex",
-    "_stream_passthrough": "readable-stream/passthrough",
-    "stream": "stream-browserify"
-  },
-  "browser": {
-    "_stream_duplex": "readable-stream/duplex",
-    "_stream_passthrough": "readable-stream/passthrough",
-    "_stream_readable": "readable-stream/readable",
-    "_stream_transform": "readable-stream/transform",
-    "_stream_writable": "readable-stream/writable",
-    "http": "@tradle/react-native-http",
-    "https": "https-browserify",
-    "stream": "stream-browserify"
   },
   "packageManager": "yarn@1.22.19+sha1.4ba7fc5c6e704fce2066ecbfb0b0d8976fe62447"
 }

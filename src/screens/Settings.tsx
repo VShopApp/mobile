@@ -15,6 +15,7 @@ import { requestNotifications, RESULTS } from "react-native-permissions";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import Clipboard from "@react-native-clipboard/clipboard";
 import { Platform } from "react-native";
+import WishlistServiceTask from "../utils/WishlistServiceTask";
 
 export default function SettingsScreen() {
   const { t } = useTranslation();
@@ -127,20 +128,6 @@ export default function SettingsScreen() {
             </TouchableRipple>
           </>
         )}
-        <TouchableRipple disabled={isDonator} onPress={toggleScreenshotMode}>
-          <List.Item
-            title={t("screenshot_mode")}
-            left={(props) => (
-              <List.Icon {...props} icon="cellphone-screenshot" />
-            )}
-            right={() => (
-              <Checkbox
-                status={screenshotModeEnabled ? "checked" : "unchecked"}
-                onPress={toggleScreenshotMode}
-              />
-            )}
-          />
-        </TouchableRipple>
       </List.Section>
       <List.Section title={t("links")}>
         <TouchableRipple
@@ -199,6 +186,33 @@ export default function SettingsScreen() {
           />
         </TouchableRipple>
       </List.Section>
+      {__DEV__ && (
+        <List.Section title="Development">
+          <TouchableRipple onPress={toggleScreenshotMode}>
+            <List.Item
+              title={t("screenshot_mode")}
+              left={(props) => (
+                <List.Icon {...props} icon="cellphone-screenshot" />
+              )}
+              right={() => (
+                <Checkbox
+                  status={screenshotModeEnabled ? "checked" : "unchecked"}
+                  onPress={toggleScreenshotMode}
+                />
+              )}
+            />
+          </TouchableRipple>
+          <TouchableRipple onPress={() => WishlistServiceTask({ force: true })}>
+            <List.Item
+              title="Test Wishlist Notification"
+              left={(props) => (
+                <List.Icon {...props} icon="cellphone-message" />
+              )}
+            />
+          </TouchableRipple>
+        </List.Section>
+      )}
+
       <Text
         style={{
           textAlign: "center",
