@@ -23,7 +23,6 @@ import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { useUserStore } from "./stores/user";
 import MediaPopup from "./components/popups/MediaPopup";
 import { StripeProvider } from "@stripe/stripe-react-native";
-import { STRIPE_PUBLIC_KEY, STRIPE_PUBLIC_KEY_TEST } from "./utils/constants";
 import UpdatePopup from "./components/popups/UpdatePopup";
 import { GestureHandlerRootView } from "react-native-gesture-handler";
 // import messaging from "@react-native-firebase/messaging";
@@ -39,6 +38,7 @@ import SplashScreen from "./screens/Splash";
 import ReAuthScreen from "./screens/ReAuth";
 import DonatePopup from "./components/popups/DonatePopup";
 import GalleryScreen from "./screens/Gallery";
+import { STRIPE_PUBLIC_KEY } from "@env";
 
 export const CombinedDarkTheme = {
   ...merge(PaperDarkTheme, NavigationDarkTheme),
@@ -82,10 +82,7 @@ function CustomDrawerContent(props: any) {
 }
 
 function AppScreen() {
-  const { user, setUser } = useUserStore(({ user, setUser }) => ({
-    user,
-    setUser,
-  }));
+  const { user, setUser } = useUserStore();
   const { t } = useTranslation();
 
   return (
@@ -187,8 +184,7 @@ function Navigation() {
         style={{ backgroundColor: CombinedDarkTheme.colors.primary }}
       />
       <PaperProvider theme={CombinedDarkTheme}>
-        <StripeProvider
-          publishableKey={__DEV__ ? STRIPE_PUBLIC_KEY_TEST : STRIPE_PUBLIC_KEY}>
+        <StripeProvider publishableKey={STRIPE_PUBLIC_KEY}>
           <NavigationContainer theme={CombinedDarkTheme}>
             <Stack.Navigator
               screenOptions={{

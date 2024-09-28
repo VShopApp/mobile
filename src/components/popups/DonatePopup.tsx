@@ -13,17 +13,14 @@ import {
 import { Linking, ToastAndroid, View } from "react-native";
 import { create } from "zustand";
 import Icon from "react-native-vector-icons/MaterialCommunityIcons";
-import {
-  checkDonator,
-  getBackendUrl,
-  getCurrencies,
-} from "../../utils/VShopAPI";
+import { checkDonator, getCurrencies } from "../../utils/VShopAPI";
 import { useStripe } from "@stripe/stripe-react-native";
 import axios from "axios";
 import { useUserStore } from "../../stores/user";
 import TextInputMask from "react-native-text-input-mask";
 import { getCurrencies as getUserCurrencies } from "react-native-localize";
 import { useFeatureStore } from "../../stores/features";
+import { API_URL } from "@env";
 
 interface IStore {
   visible: boolean;
@@ -50,7 +47,7 @@ export default function DonatePopup() {
 
   const initializePaymentSheet = async () => {
     const response = await axios.request({
-      url: `${getBackendUrl()}/stripe/payment-sheet`,
+      url: `${API_URL}/stripe/payment-sheet`,
       method: "POST",
       data: {
         amount: Number.parseFloat(amount),
@@ -82,6 +79,7 @@ export default function DonatePopup() {
 
       if (error) {
         ToastAndroid.show(t("purchase.error"), ToastAndroid.LONG);
+        console.log(error);
       } else {
         ToastAndroid.show(t("purchase.success"), ToastAndroid.LONG);
         hideDonatePopup();
@@ -96,8 +94,8 @@ export default function DonatePopup() {
   React.useEffect(() => {
     getCurrencies().then((currencies) => {
       const userCurrency = currencies.find(
-        (currency) =>
-          currency.code.toLowerCase() ==
+        (_currency) =>
+          _currency.code.toLowerCase() ==
           getUserCurrencies()[0].toLocaleLowerCase(),
       );
       if (userCurrency) setCurrency(userCurrency);

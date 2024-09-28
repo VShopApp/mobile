@@ -1,14 +1,10 @@
+import { API_URL } from "@env";
 import axios from "axios";
-
-export const getBackendUrl = () => {
-  if (__DEV__) return "http://10.0.2.2:8000";
-  return "https://api.vshop.one";
-};
 
 export const checkDonator = async (riotId: string) => {
   try {
     const res = await axios.request({
-      url: `${getBackendUrl()}/user/${riotId}`,
+      url: `${API_URL}/user/${riotId}`,
       method: "GET",
       timeout: 5 * 1000,
     });
@@ -22,7 +18,7 @@ export const checkDonator = async (riotId: string) => {
 
 export const getCurrencies = async () => {
   const res = await axios.request({
-    url: `${getBackendUrl()}/stripe/currencies`,
+    url: `${API_URL}/stripe/currencies`,
     method: "GET",
   });
 
