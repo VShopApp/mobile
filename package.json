@@ -1,6 +1,6 @@
 {
   "name": "vshop_mobile",
-  "version": "2.7.6-beta.1",
+  "version": "2.7.6",
   "private": true,
   "scripts": {
     "android": "react-native run-android",
