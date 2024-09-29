@@ -15,7 +15,6 @@ import { requestNotifications, RESULTS } from "react-native-permissions";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import Clipboard from "@react-native-clipboard/clipboard";
 import { Platform } from "react-native";
-import WishlistServiceTask from "../utils/WishlistServiceTask";
 
 export default function SettingsScreen() {
   const { t } = useTranslation();
@@ -199,14 +198,6 @@ export default function SettingsScreen() {
                   status={screenshotModeEnabled ? "checked" : "unchecked"}
                   onPress={toggleScreenshotMode}
                 />
-              )}
-            />
-          </TouchableRipple>
-          <TouchableRipple onPress={() => WishlistServiceTask({ force: true })}>
-            <List.Item
-              title="Test Wishlist Notification"
-              left={(props) => (
-                <List.Icon {...props} icon="cellphone-message" />
               )}
             />
           </TouchableRipple>

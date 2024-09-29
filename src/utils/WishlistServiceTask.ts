@@ -13,13 +13,13 @@ import i18n from "./localization";
 import { useWishlistStore } from "../stores/wishlistNotification";
 import { checkDonator } from "./VShopAPI";
 
-export default async function ({ force = false }: { force: boolean }) {
+export default async function () {
   try {
     const lastWishlistCheck = Number.parseInt(
       (await AsyncStorage.getItem("lastWishlistCheck")) || "0",
     );
     const lastCheckedMs = new Date().getTime() - lastWishlistCheck;
-    if (60 * 1000 < lastCheckedMs || lastWishlistCheck === 0 || force) {
+    if (60 * 1000 < lastCheckedMs || lastWishlistCheck === 0) {
       await AsyncStorage.setItem(
         "lastWishlistCheck",
         new Date().getTime().toString(),
