@@ -130,12 +130,12 @@ export async function checkShop(wishlist: string[]) {
 export async function initBackgroundFetch() {
   await BackgroundFetch.configure(
     {
-      minimumFetchInterval: 15,
+      minimumFetchInterval: 60,
       stopOnTerminate: false,
       enableHeadless: true,
       startOnBoot: true,
       // Android options
-      forceAlarmManager: false,
+      forceAlarmManager: true,
       requiredNetworkType: BackgroundFetch.NETWORK_TYPE_ANY,
       requiresCharging: false,
       requiresDeviceIdle: false,
@@ -151,4 +151,8 @@ export async function initBackgroundFetch() {
       BackgroundFetch.finish(taskId);
     }
   );
+}
+
+export async function stopBackgroundFetch() {
+  await BackgroundFetch.stop();
 }

@@ -25,8 +25,11 @@ function Settings() {
   const notificationEnabled = useWishlistStore(
     (state) => state.notificationEnabled
   );
-  const setNotificationEnabled = useWishlistStore(
-    (state) => state.setNotificationEnabled
+  const enableNotification = useWishlistStore(
+    (state) => state.enableNotification
+  );
+  const disableNotification = useWishlistStore(
+    (state) => state.disableNotification
   );
   const wishlistedSkins = useWishlistStore((state) => state.skinIds);
   const { showDonatePopup } = useDonatePopupStore();
@@ -45,7 +48,7 @@ function Settings() {
       if (!notificationEnabled) {
         const permission = await Notifications.requestPermissionsAsync();
         if (permission.granted) {
-          setNotificationEnabled(true);
+          enableNotification();
           ToastAndroid.show(
             t("wishlist.notification.enabled"),
             ToastAndroid.LONG
@@ -57,7 +60,7 @@ function Settings() {
           );
         }
       } else {
-        setNotificationEnabled(false);
+        disableNotification();
         ToastAndroid.show(
           t("wishlist.notification.disabled"),
           ToastAndroid.LONG
