@@ -19,6 +19,10 @@
   "donate_msg": "",
   "donate_unlocked": "",
   "fag": "免費契約者",
+  "fetching": {
+    "donator": "",
+    "skins": ""
+  },
   "fetching.balances": "正在獲取餘額…",
   "fetching.entitlements_token": "正在獲取權限令牌…",
   "fetching.offers": "獲取優惠…",
@@ -69,6 +73,7 @@
   "promotional": "在任何時間任何地點查看你的瓦羅蘭特商店.",
   "purchase": {
     "error": "",
+    "restore": "",
     "success": ""
   },
   "rad": "輻能點數",
