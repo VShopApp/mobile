@@ -19,6 +19,9 @@
   "donate_msg": "개발자에게 후원하고 찜 목록 안내를 받아보세요<3",
   "donate_unlocked": "후원 특전이 해금 되었습니다.",
   "fag": "무료 요원",
+  "fetching": {
+    "donator": ""
+  },
   "fetching.balances": "잔액 불러오는 중…",
   "fetching.entitlements_token": "자격 토큰 불러오는 중…",
   "fetching.offers": "주문 불러오는 중…",
