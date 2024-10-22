@@ -19,6 +19,9 @@
   "donate_msg": "Vous pouvez soutenir le développement en cours en devenant donateur, et obtenez l'accès aux Notifications de Wishlist. Merci beaucoup <3",
   "donate_unlocked": "Vous avez obtenu les avantages du donateur.",
   "fag": "Agents gratuits",
+  "fetching": {
+    "donator": ""
+  },
   "fetching.balances": "Récupération des soldes…",
   "fetching.entitlements_token": "Récupération du jeton de droits…",
   "fetching.offers": "Récupération des offres…",
