@@ -19,6 +19,10 @@
   "donate_msg": "",
   "donate_unlocked": "",
   "fag": "เอเจ็นฟรี",
+  "fetching": {
+    "donator": "",
+    "skins": ""
+  },
   "fetching.balances": "โหลดยอดที่เหลือ…",
   "fetching.entitlements_token": "โหลด ยอดโทเค็นที่เหลือ…",
   "fetching.offers": "โหลด ของ…",
@@ -69,6 +73,7 @@
   "promotional": "เห็น valorant shop ได้ทุกที่ทุกเวลา",
   "purchase": {
     "error": "",
+    "restore": "",
     "success": ""
   },
   "rad": "Radianite Points",
