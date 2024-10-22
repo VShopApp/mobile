@@ -20,6 +20,7 @@
   "donate_unlocked": "Hai sbloccato i vantaggi da donatore.",
   "fag": "Agenti Gratis",
   "fetching": {
+    "donator": "",
     "skins": "Recuperando le skin…"
   },
   "fetching.balances": "Recupero saldi…",
@@ -72,6 +73,7 @@
   "promotional": "Controlla il tuo negozio del gioco Valorant sempre e ovunque.",
   "purchase": {
     "error": "Un errore è apparso",
+    "restore": "",
     "success": "Grazie per aver supportato VShop.Goditi i vantaggi."
   },
   "rad": "Punti Radianite",
