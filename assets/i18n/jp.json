@@ -19,6 +19,10 @@
   "donate_msg": "",
   "donate_unlocked": "",
   "fag": "自由契約選手",
+  "fetching": {
+    "donator": "",
+    "skins": ""
+  },
   "fetching.balances": "残高を取得しています…",
   "fetching.entitlements_token": "資格トークンを取得しています…",
   "fetching.offers": "クーポンを取得しています…",
@@ -69,6 +73,7 @@
   "promotional": "いつでもどこでも ヴァロラント ショップをご覧ください。",
   "purchase": {
     "error": "",
+    "restore": "",
     "success": ""
   },
   "rad": "ラディアナイト ポイント",
