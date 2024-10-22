@@ -19,6 +19,9 @@
   "donate_msg": "Apoya al desarrollo de la aplicación y podrás tener acceso a las notificaciones de la lista de deseos rondando cualquier cantidad. Muchas gracias <3",
   "donate_unlocked": "Has desbloqueado las funciones de donador.",
   "fag": "Agentes gratis",
+  "fetching": {
+    "donator": ""
+  },
   "fetching.balances": "Adquiriendo balances…",
   "fetching.entitlements_token": "Adquiriendo token de titulamientos…",
   "fetching.offers": "Buscando ofertas…",
