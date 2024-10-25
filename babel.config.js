@@ -1,17 +1,7 @@
-module.exports = {
-  presets: ["module:metro-react-native-babel-preset"],
-  plugins: [
-    "react-native-reanimated/plugin",
-    [
-      "module:react-native-dotenv",
-      {
-        allowUndefined: false,
-      },
-    ],
-  ],
-  env: {
-    production: {
-      plugins: ["react-native-paper/babel"],
-    },
-  },
+module.exports = function (api) {
+  api.cache(true);
+  return {
+    presets: ["babel-preset-expo"],
+    plugins: ["react-native-paper/babel", "react-native-reanimated/plugin"], // reanimated has to be last!
+  };
 };
