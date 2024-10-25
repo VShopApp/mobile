@@ -1,4 +1,4 @@
-<h1><img src="./assets/images/icon.png" style="float:left;margin-right:10px;border-radius:8px;" height="40px" />VShop</h1>
+# VShop
 <a href="https://github.com/VShopApp/mobile/releases/latest/download/VShop.apk">
   <img alt="GitHub release (latest by date and asset)" src="https://img.shields.io/github/downloads/VShopApp/mobile/latest/VShop.apk?label=APK&color=%23fa4454&logo=android&logoColor=white">
 </a>
