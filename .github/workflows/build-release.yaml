@@ -1,5 +1,4 @@
 on:
-  workflow_dispatch:
   push:
     tags:
       - "v*"
@@ -9,8 +8,8 @@ jobs:
   build-apk:
     runs-on: ubuntu-latest
     steps:
-      - name: 🏗 Setup repo
-        uses: actions/checkout@v3
+      - name: 🏗 Checkout Repository
+        uses: actions/checkout@v4
 
       - name: 🏗 Setup pnpm
         uses: pnpm/action-setup@v4
@@ -18,7 +17,7 @@ jobs:
           run_install: false
 
       - name: 🏗 Setup Node
-        uses: actions/setup-node@v3
+        uses: actions/setup-node@v4
         with:
           node-version: 20.x
           cache: pnpm
@@ -48,7 +47,7 @@ jobs:
           EXPO_PUBLIC_POSTHOG_API_KEY: ${{ secrets.POSTHOG_API_KEY }}
 
       - name: Upload Artifact GitHub Action
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: vshop_apk
           path: build-*.apk
@@ -56,8 +55,8 @@ jobs:
   build-ipa:
     runs-on: macos-14
     steps:
-      - name: 🏗 Setup repo
-        uses: actions/checkout@v3
+      - name: 🏗 Checkout Repository
+        uses: actions/checkout@v4
 
       - name: 🏗 Setup pnpm
         uses: pnpm/action-setup@v4
@@ -65,7 +64,7 @@ jobs:
           run_install: false
 
       - name: 🏗 Setup Node
-        uses: actions/setup-node@v3
+        uses: actions/setup-node@v4
         with:
           node-version: 20.x
           cache: pnpm
@@ -99,8 +98,39 @@ jobs:
           cp -r ios/output.xcarchive/Products/Applications/ Payload/
           zip -r vshop.ipa Payload/
 
-      - uses: actions/upload-artifact@v3
+      - uses: actions/upload-artifact@v4
         name: Upload IPA
         with:
           name: vshop_ipa
           path: vshop.ipa
+
+  create-release:
+    needs: [build-apk, build-ipa]
+    permissions: write-all
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: 🏗 Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: ⏬ Download Artifact Outputs - iOS
+        uses: actions/download-artifact@v4
+        with:
+          name: vshop_ipa
+          path: vshop_ipa
+
+      - name: ⏬ Download Artifact Outputs - Android
+        uses: actions/download-artifact@v4
+        with:
+          name: vshop_apk
+          path: vshop_apk
+
+      - name: 📃 Create GitHub Release
+        id: create_release
+        uses: marvinpinto/action-automatic-releases@latest
+        with:
+          repo_token: ${{ secrets.GITHUB_TOKEN }}
+          draft: true
+          files: |
+            vshop_ipa/**
+            vshop_apk/**
