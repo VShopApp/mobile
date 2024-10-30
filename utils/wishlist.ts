@@ -31,8 +31,6 @@ export async function wishlistBgTask() {
 
   if (!wishlistStore.notificationEnabled) return;
 
-  posthog.capture("wishlist_check");
-
   const lastWishlistCheckTs = Number.parseInt(
     (await AsyncStorage.getItem("lastWishlistCheck")) || "0"
   );
@@ -43,10 +41,11 @@ export async function wishlistBgTask() {
   );
 
   if (!isSameDayUTC(lastWishlistCheck, now) || lastWishlistCheckTs === 0) {
-    await AsyncStorage.setItem("lastWishlistCheck", now.getTime().toString());
+    posthog.capture("wishlist_check");
 
     console.log("New day, checking shop in the background");
     await checkShop(wishlistStore.skinIds);
+    await AsyncStorage.setItem("lastWishlistCheck", now.getTime().toString());
   }
 
   console.log("No wishlist check needed");
