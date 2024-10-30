@@ -22,6 +22,9 @@
         "foregroundImage": "./assets/images/adaptive-icon.png",
         "backgroundColor": "#fa4454"
       },
+      "permissions": [
+        "android.permission.REQUEST_IGNORE_BATTERY_OPTIMIZATIONS"
+      ],
       "package": "dev.vasc.vshop2",
       "versionCode": 69
     },

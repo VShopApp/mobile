@@ -19,6 +19,7 @@ import {
 import * as Notifications from "expo-notifications";
 import { usePostHog } from "posthog-react-native";
 import { useWishlistStore } from "~/hooks/useWishlistStore";
+import BatteryOptimizationWarning from "~/components/BatteryOptimizationWarning";
 
 function Settings() {
   const { t } = useTranslation();
@@ -95,6 +96,7 @@ function Settings() {
 
   return (
     <ScrollView>
+      <BatteryOptimizationWarning />
       <List.Section title={t("general")}>
         <TouchableRipple
           onPress={() => {

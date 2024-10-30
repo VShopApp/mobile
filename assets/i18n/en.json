@@ -116,5 +116,9 @@
     },
     "remove": "Remove from wishlist"
   },
-  "xp": "XP"
+  "xp": "XP",
+  "battery_optimization_warning": {
+    "description": "Battery optimization is enabled for VShop. This may prevent wishlist notifications from working properly.",
+    "action": "Disable battery optimization"
+  }
 }
