@@ -4,7 +4,7 @@
   "back": "Önceki",
   "balances": "Miktarlar",
   "battery_optimization_warning": {
-    "action": "Batarya optimizasyonunu devre dışı bırak",
+    "action": "Pil optimizasyonunu devre dışı bırak",
     "description": "VShop için pil optimizasyonu etkinleştirildi. Bu, istek listesi bildirimlerinin düzgün çalışmasını engelleyebilir."
   },
   "bundles": "Paketler",
@@ -57,7 +57,7 @@
   "languages.zh-Hans": "Çince (Basitleştirilmiş)",
   "languages.zh-Hant": "Çince (Geleneksel)",
   "level": "Seviye",
-  "levels": "Leveller",
+  "levels": "Seviyeler",
   "links": "Bağlantılar",
   "login": "Giriş yap",
   "logout": "Çıkış yap",
@@ -84,7 +84,7 @@
   "regions.kr": "Kore",
   "regions.na": "Kuzey Amerika",
   "screenshot_mode": "Ekran görüntüsü modu",
-  "separate": "ayrı",
+  "separate": "ayrı olarak",
   "settings": "Ayarlar",
   "shop": "Mağaza",
   "signin": "Riot ID ile giriş yap",
