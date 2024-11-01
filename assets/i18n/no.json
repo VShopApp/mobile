@@ -3,6 +3,10 @@
   "amount": "Beløp",
   "back": "Tilbake",
   "balances": "Kontobalanser",
+  "battery_optimization_warning": {
+    "action": "",
+    "description": ""
+  },
   "bundles": "Samlepakker",
   "chromas": "Farger",
   "copy_riot_id": "Kopier Riot-konto-ID",
@@ -41,11 +45,13 @@
     "it": "Italiensk",
     "jp": "Japansk",
     "ko": "Koreansk",
+    "no": "",
     "pl": "Polsk",
     "pt": "Portugisisk",
     "ru": "Russisk",
     "th": "Thai",
     "tr": "Tyrkisk",
+    "uk": "",
     "vi": "Vietnamesisk",
     "zh-Hans": "Forenklet kinesisk",
     "zh-Hant": "Tradisjonell kinesisk"
