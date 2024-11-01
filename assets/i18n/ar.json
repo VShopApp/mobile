@@ -19,6 +19,10 @@
   "donate_msg": "",
   "donate_unlocked": "",
   "fag": "عملاء مجانيون",
+  "fetching": {
+    "donator": "",
+    "skins": ""
+  },
   "fetching.balances": "جاري جلب الأرصدة…",
   "fetching.entitlements_token": "جار جلب الرمز…",
   "fetching.offers": "جار جلب العروض…",
@@ -69,6 +73,7 @@
   "promotional": "تَحَقَّقْ مِنْ مَتْجَرِكَ فِي أَيِّ مَكَانٍ، و فِي أَيِّ زَمَانٍ.",
   "purchase": {
     "error": "",
+    "restore": "",
     "success": ""
   },
   "rad": "نقاط راديانيت",
