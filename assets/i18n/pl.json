@@ -3,6 +3,10 @@
   "amount": "Kwota",
   "back": "powrót",
   "balances": "Balansy",
+  "battery_optimization_warning": {
+    "action": "",
+    "description": ""
+  },
   "bundles": "Pakiety",
   "chromas": "Malowania",
   "copy_riot_id": "Skopiuj identyfikator konta Riot",
@@ -33,7 +37,9 @@
   "invalid_amount": "Minimalna kwota to {{amount}}.",
   "language": "Języki",
   "languages": {
-    "es": "Hiszpański"
+    "es": "Hiszpański",
+    "no": "",
+    "uk": ""
   },
   "languages.ar": "Arabski",
   "languages.de": "Niemiecki",
