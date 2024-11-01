@@ -1,14 +1,23 @@
 {
   "account": "賬戶",
+  "amount": "",
   "back": "返回",
   "balances": "餘額",
+  "battery_optimization_warning": {
+    "action": "",
+    "description": ""
+  },
   "bundles": "套裝",
+  "chromas": "",
+  "copy_riot_id": "",
   "credits": "製作組",
   "credits_techchrism": "Valorant API 文檔",
   "credits_valorantapi": "非官方Valorant API",
   "delete_account": "刪除帳戶",
   "discord_server": "Discord 服務器",
   "donate": "捐助",
+  "donate_msg": "",
+  "donate_unlocked": "",
   "fag": "免費契約者",
   "fetching.balances": "正在獲取餘額…",
   "fetching.entitlements_token": "正在獲取權限令牌…",
@@ -18,9 +27,16 @@
   "fetching.user_id": "獲取ID用戶名…",
   "fetching.username": "獲取用戶名…",
   "fetching.version": "獲取版本…",
+  "gallery": "",
   "general": "通用",
   "info": "關於",
+  "invalid_amount": "",
   "language": "語言",
+  "languages": {
+    "es": "",
+    "no": "",
+    "uk": ""
+  },
   "languages.ar": "阿拉伯語",
   "languages.de": "德語",
   "languages.en": "英語",
@@ -36,17 +52,25 @@
   "languages.vi": "越南語",
   "languages.zh-Hans": "簡體中文",
   "languages.zh-Hant": "繁體中文",
+  "level": "",
+  "levels": "",
   "links": "鏈接",
   "login": "登錄",
   "logout": "退出",
+  "never_show_again": "",
   "next": "下一個",
   "nightmarket": "夜市",
+  "no": "",
   "no_nightmarket": "夜市會很快回來.",
   "okay": "好的",
   "privacy_policy": "隱私政策",
   "profile": "個人信息",
   "progress": "等級",
   "promotional": "在任何時間任何地點查看你的瓦羅蘭特商店.",
+  "purchase": {
+    "error": "",
+    "success": ""
+  },
   "rad": "輻能點數",
   "region": "地區",
   "region_info": "請確保你選擇正確的地區，否則您可能進入錯誤的商店。",
@@ -54,16 +78,39 @@
   "regions.eu": "歐洲",
   "regions.kr": "韓國",
   "regions.na": "北美洲",
+  "screenshot_mode": "",
   "separate": "單價",
   "settings": "設置",
   "shop": "商店",
   "signin": "使用Riot帳號登錄",
   "signin_info": "您的登錄詳細信息將直接發送至 Riot Games。",
   "translators": "翻譯者",
+  "update": {
+    "available": {
+      "description": "",
+      "title": ""
+    },
+    "download_github": ""
+  },
   "videos": "視頻",
   "vp": "特務幣",
   "welcome": "歡迎來到VShop",
   "welcome_back": "歡迎回來",
   "welcome_back_info": "請稍等，我們會讓您重新登錄。",
+  "wishlist": {
+    "add": "",
+    "name": "",
+    "notification": {
+      "disabled": "",
+      "enabled": "",
+      "error": "",
+      "hit": "",
+      "info": "",
+      "name": "",
+      "no_hit": "",
+      "no_permission": ""
+    },
+    "remove": ""
+  },
   "xp": "XP"
 }
