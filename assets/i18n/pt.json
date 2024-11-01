@@ -19,6 +19,10 @@
   "donate_msg": "",
   "donate_unlocked": "",
   "fag": "Agentes livres",
+  "fetching": {
+    "donator": "",
+    "skins": ""
+  },
   "fetching.balances": "Buscando equilíbrios…",
   "fetching.entitlements_token": "Ficha de direitos de busca…",
   "fetching.offers": "Ofertas interessantes…",
@@ -69,6 +73,7 @@
   "promotional": "Veja sua loja Valorant em qualquer lugar, a qualquer hora.",
   "purchase": {
     "error": "",
+    "restore": "",
     "success": ""
   },
   "rad": "Pontos de Radianite",
