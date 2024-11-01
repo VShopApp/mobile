@@ -3,6 +3,10 @@
   "amount": "Miktar",
   "back": "Önceki",
   "balances": "Miktarlar",
+  "battery_optimization_warning": {
+    "action": "Batarya optimizasyonunu devre dışı bırak",
+    "description": "VShop için pil optimizasyonu etkinleştirildi. Bu, istek listesi bildirimlerinin düzgün çalışmasını engelleyebilir."
+  },
   "bundles": "Paketler",
   "chromas": "Renkler",
   "copy_riot_id": "Riot hesap kimliğini kopyala",
@@ -12,7 +16,7 @@
   "delete_account": "Hesabı sil",
   "discord_server": "Discord sunucusu",
   "donate": "Bağış",
-  "donate_msg": "Herhangi bir miktarda bağış yaparak istek listesi bildirimi özelliğine sahip olabilirsiniz. Teşekkür ederiz <3",
+  "donate_msg": "Herhangi bir miktarda bağış yaparak istek listesi bildirimi özelliğine sahip olabilirsiniz. Çok teşekkür ederiz <3",
   "donate_unlocked": "Bağışcı özellikleri aktif edildi.",
   "fag": "Bedava Ajanlar",
   "fetching": {
@@ -33,7 +37,9 @@
   "invalid_amount": "Minimum miktar {{amount}}.",
   "language": "Dil",
   "languages": {
-    "es": "İspanyolca"
+    "es": "İspanyolca",
+    "no": "Norveççe",
+    "uk": "Ukraynaca"
   },
   "languages.ar": "Arapça",
   "languages.de": "Almanca",
