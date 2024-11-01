@@ -1,45 +1,45 @@
 {
   "account": "Cuenta",
-  "amount": "",
+  "amount": "Importe",
   "back": "Atrás",
   "balances": "Balances",
   "battery_optimization_warning": {
-    "action": "",
-    "description": ""
+    "action": "Desactivar la optimización de la batería",
+    "description": "La optimización de la batería está activada para VShop. Esto puede impedir que las notificaciones de la lista de deseos funcionen correctamente."
   },
   "bundles": "Paquetes",
   "chromas": "Colores y estilos",
-  "copy_riot_id": "",
+  "copy_riot_id": "Copiar el ID de cuenta de Riot",
   "credits": "Créditos",
   "credits_techchrism": "Documentación de la API de Valorant",
   "credits_valorantapi": "API no oficial de Valorant",
   "delete_account": "Eliminar Cuenta",
   "discord_server": "Servidor de Discord",
-  "donate": "Apoya al desarollo",
-  "donate_msg": "Apoya al desarrollo de la aplicación y podrás tener acceso a las notificaciones de la lista de deseos rondando cualquier cantidad. Muchas gracias <3",
-  "donate_unlocked": "Has desbloqueado las funciones de donador.",
+  "donate": "Donar",
+  "donate_msg": "Apoya el desarrollo y obtén acceso a las Notificaciones de la Lista de Deseos donando cualquier cantidad. Muchas gracias <3",
+  "donate_unlocked": "Has desbloqueado ventajas de donante.",
   "fag": "Agentes gratis",
   "fetching": {
-    "donator": ""
+    "donator": "Buscando estado del donante…"
   },
   "fetching.balances": "Adquiriendo balances…",
-  "fetching.entitlements_token": "Adquiriendo token de titulamientos…",
+  "fetching.entitlements_token": "Buscando el token de derechos…",
   "fetching.offers": "Buscando ofertas…",
   "fetching.progress": "Buscando progreso…",
   "fetching.skins": "Buscando skins…",
   "fetching.storefront": "Adquiriendo escaparate…",
   "fetching.user_id": "Adquiriendo ID de usuario…",
-  "fetching.username": "Adquiriendo Nombre de Usuario…",
-  "fetching.version": "Adquiriendo version…",
+  "fetching.username": "Obteniendo nombre de usuario…",
+  "fetching.version": "Obteniendo versión…",
   "gallery": "Galería",
   "general": "General",
   "info": "Información",
-  "invalid_amount": "",
+  "invalid_amount": "El importe mínimo es {{amount}}.",
   "language": "Idioma",
   "languages": {
-    "es": "",
-    "no": "",
-    "uk": ""
+    "es": "Español",
+    "no": "Noruego",
+    "uk": "Ucraniano"
   },
   "languages.ar": "Árabe",
   "languages.de": "Alemán",
@@ -58,16 +58,16 @@
   "languages.zh-Hant": "Chino Tradicional",
   "level": "Nivel",
   "levels": "Niveles",
-  "links": "Links",
+  "links": "Enlaces",
   "login": "Iniciar sesión",
   "logout": "Cerrar sesión",
   "never_show_again": "No mostrar de nuevo",
   "next": "Siguiente",
-  "nightmarket": "Mercado Nocturno",
-  "no": "No, Gracias",
-  "no_nightmarket": "El Mercado Nocturno volverá pronto.",
+  "nightmarket": "Mercado nocturno",
+  "no": "No, gracias",
+  "no_nightmarket": "El Mercado nocturno volverá pronto.",
   "okay": "Entendido",
-  "privacy_policy": "Política de Privacidad",
+  "privacy_policy": "Política de privacidad",
   "profile": "Perfil",
   "progress": "Progreso",
   "promotional": "Mira tu tienda de Valorant donde quieras, cuando quieras.",
@@ -81,9 +81,9 @@
   "region_info": "Por favor, asegurate de seleccionar la región correcta, de lo contrario tu tienda no será precisa.",
   "regions.ap": "Asia-Pacífico",
   "regions.eu": "Europa",
-  "regions.kr": "Korea",
+  "regions.kr": "Corea",
   "regions.na": "América del Norte",
-  "screenshot_mode": "",
+  "screenshot_mode": "Modo de captura de pantalla",
   "separate": "separado",
   "settings": "Ajustes",
   "shop": "Tienda",
@@ -92,10 +92,10 @@
   "translators": "Traductores",
   "update": {
     "available": {
-      "description": "",
-      "title": ""
+      "description": "Se puede descargar una nueva versión de VShop",
+      "title": "Actualización disponible"
     },
-    "download_github": ""
+    "download_github": "Descargar en GitHub"
   },
   "videos": "Videos",
   "vp": "Puntos de Valorant",
@@ -113,7 +113,7 @@
       "info": "Recibe una notificación cuando un elemento esté en la tienda.",
       "name": "Notificación de la lista de deseos",
       "no_hit": "No has tenido suerte hoy: Ningún elemento de la lista de deseos está en la tienda.",
-      "no_permission": ""
+      "no_permission": "¡No tenemos permiso para enviarte notificaciones!"
     },
     "remove": "Eliminar de la lista de deseos"
   },
