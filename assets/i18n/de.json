@@ -91,13 +91,13 @@
       "description": "Eine neuere Version von VShop steht zum Download bereit",
       "title": "Update verfügbar"
     },
-    "download_github": "Herunterladen von GitHub"
+    "download_github": "Auf GitHub herunterladen"
   },
   "videos": "Videos",
   "vp": "Valorant Punkte",
   "welcome": "Willkommen bei VShop",
   "welcome_back": "Willkommen zurück",
-  "welcome_back_info": "Setze dich bequem hin, während wir dich wieder einloggen.",
+  "welcome_back_info": "Bleibe dran, während wir dich wieder anmelden.",
   "wishlist": {
     "add": "Zur Wunschliste hinzufügen",
     "name": "Wunschliste",
@@ -106,7 +106,7 @@
       "enabled": "Benachrichtigungen aktiviert",
       "error": "Bei der Überprüfung deines Shops ist ein Fehler aufgetreten",
       "hit": "{{displayname}} ist in deinem Shop!",
-      "info": "Erhalte eine Benachrichtigung, wenn dein Wunschlistenartikel im Shop ist.",
+      "info": "Erhalte eine Benachrichtigung, wenn dein Wunschartikel im Shop ist.",
       "name": "Wunschliste Benachrichtigung",
       "no_hit": "Heute kein Glück: Kein Skin auf der Wunschliste ist in deinem Shop.",
       "no_permission": "Wir haben nicht die Erlaubnis, dir Benachrichtigungen zu schicken!"
