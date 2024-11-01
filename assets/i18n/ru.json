@@ -3,6 +3,10 @@
   "amount": "Количество",
   "back": "назад",
   "balances": "Баланс",
+  "battery_optimization_warning": {
+    "action": "",
+    "description": ""
+  },
   "bundles": "Коллекции",
   "chromas": "Расцветки",
   "copy_riot_id": "Скопировать ID аккаунта Riot",
@@ -33,7 +37,9 @@
   "invalid_amount": "Минимальное количество: {{amount}}.",
   "language": "Язык",
   "languages": {
-    "es": "Испанский"
+    "es": "Испанский",
+    "no": "",
+    "uk": ""
   },
   "languages.ar": "Арабский",
   "languages.de": "Немецкий",
