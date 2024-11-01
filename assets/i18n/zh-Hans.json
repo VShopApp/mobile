@@ -1,14 +1,23 @@
 {
   "account": "账户",
+  "amount": "",
   "back": "返回",
   "balances": "余额",
+  "battery_optimization_warning": {
+    "action": "",
+    "description": ""
+  },
   "bundles": "套装",
+  "chromas": "",
+  "copy_riot_id": "",
   "credits": "制作组",
   "credits_techchrism": "Valorant API 文档",
   "credits_valorantapi": "非官方Valorant API",
   "delete_account": "删除帐户",
   "discord_server": "Discord 服务器",
   "donate": "捐助",
+  "donate_msg": "",
+  "donate_unlocked": "",
   "fag": "免费契约者",
   "fetching.balances": "正在获取余额…",
   "fetching.entitlements_token": "正在获取权限令牌…",
@@ -18,9 +27,16 @@
   "fetching.user_id": "获取ID用户名…",
   "fetching.username": "获取ID用户名…",
   "fetching.version": "获取版本…",
+  "gallery": "",
   "general": "通用",
   "info": "关于",
+  "invalid_amount": "",
   "language": "语言",
+  "languages": {
+    "es": "",
+    "no": "",
+    "uk": ""
+  },
   "languages.ar": "阿拉伯语",
   "languages.de": "德语",
   "languages.en": "英语",
@@ -41,6 +57,7 @@
   "links": "链接",
   "login": "登录",
   "logout": "退出",
+  "never_show_again": "",
   "next": "下一个",
   "nightmarket": "夜市",
   "no": "不要",
@@ -50,6 +67,10 @@
   "profile": "个人信息",
   "progress": "等级",
   "promotional": "在任何时间任何地点查看你的瓦罗兰特商店.",
+  "purchase": {
+    "error": "",
+    "success": ""
+  },
   "rad": "辐能点数",
   "region": "地区",
   "region_info": "请确保你选择正确的地区，否则您可能进入错误的商店。",
@@ -57,16 +78,39 @@
   "regions.eu": "欧洲",
   "regions.kr": "韩国",
   "regions.na": "北美洲",
+  "screenshot_mode": "",
   "separate": "单价",
   "settings": "设置",
   "shop": "商店",
   "signin": "使用Riot帐号登录",
   "signin_info": "您的登录详细信息将直接发送至 Riot Games。",
   "translators": "翻译者",
+  "update": {
+    "available": {
+      "description": "",
+      "title": ""
+    },
+    "download_github": ""
+  },
   "videos": "视频",
   "vp": "特务币",
   "welcome": "欢迎来到VShop",
   "welcome_back": "欢迎回来",
   "welcome_back_info": "请稍等，我们会让您重新登录。",
+  "wishlist": {
+    "add": "",
+    "name": "",
+    "notification": {
+      "disabled": "",
+      "enabled": "",
+      "error": "",
+      "hit": "",
+      "info": "",
+      "name": "",
+      "no_hit": "",
+      "no_permission": ""
+    },
+    "remove": ""
+  },
   "xp": "XP"
 }
