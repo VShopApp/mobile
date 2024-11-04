@@ -1,7 +1,7 @@
 {
   "account": "Cuenta",
   "amount": "Importe",
-  "back": "Atrás",
+  "back": "atrás",
   "balances": "Balances",
   "battery_optimization_warning": {
     "action": "Desactivar la optimización de la batería",
