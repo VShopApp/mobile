@@ -1,28 +1,14 @@
 {
   "account": "アカウント",
-  "amount": "",
-  "back": "",
   "balances": "残高",
-  "battery_optimization_warning": {
-    "action": "",
-    "description": ""
-  },
   "bundles": "バンドル",
-  "chromas": "",
-  "copy_riot_id": "",
   "credits": "クレジット",
   "credits_techchrism": "ヴァロラント アピ ドキュメント",
   "credits_valorantapi": "非公式の Valorant API",
   "delete_account": "アカウントを削除する",
   "discord_server": "不和サーバー",
   "donate": "寄付",
-  "donate_msg": "",
-  "donate_unlocked": "",
   "fag": "自由契約選手",
-  "fetching": {
-    "donator": "",
-    "skins": ""
-  },
   "fetching.balances": "残高を取得しています…",
   "fetching.entitlements_token": "資格トークンを取得しています…",
   "fetching.offers": "クーポンを取得しています…",
@@ -31,16 +17,8 @@
   "fetching.user_id": "ユーザー ID を取得しています…",
   "fetching.username": "ユーザー名を取得しています…",
   "fetching.version": "バージョンを取得しています…",
-  "gallery": "",
-  "general": "",
   "info": "情報",
-  "invalid_amount": "",
   "language": "言語",
-  "languages": {
-    "es": "",
-    "no": "",
-    "uk": ""
-  },
   "languages.ar": "アラビア語",
   "languages.de": "ドイツ人",
   "languages.en": "英語",
@@ -56,66 +34,27 @@
   "languages.vi": "ベトナム語",
   "languages.zh-Hans": "中国語（簡体字",
   "languages.zh-Hant": "中国の伝統的な",
-  "level": "",
-  "levels": "",
   "links": "リンク",
   "login": "ログイン",
   "logout": "ログアウト",
-  "never_show_again": "",
-  "next": "",
   "nightmarket": "夜市",
-  "no": "",
   "no_nightmarket": "ナイトマーケットはすぐに戻ってきます。",
-  "okay": "",
   "privacy_policy": "プライバシーポリシー",
-  "profile": "",
   "progress": "進捗",
   "promotional": "いつでもどこでも ヴァロラント ショップをご覧ください。",
-  "purchase": {
-    "error": "",
-    "restore": "",
-    "success": ""
-  },
   "rad": "ラディアナイト ポイント",
   "region": "領域",
-  "region_info": "",
   "regions.ap": "アジア太平洋地域",
   "regions.eu": "ヨーロッパ",
   "regions.kr": "韓国",
   "regions.na": "北米",
-  "screenshot_mode": "",
   "separate": "分ける",
   "settings": "設定",
   "shop": "店",
   "signin": "ライアットIDでサインイン",
-  "signin_info": "",
   "translators": "翻訳者",
-  "update": {
-    "available": {
-      "description": "",
-      "title": ""
-    },
-    "download_github": ""
-  },
   "videos": "動画",
   "vp": "バロラントポイント",
   "welcome": "Vショップへようこそ",
-  "welcome_back": "",
-  "welcome_back_info": "",
-  "wishlist": {
-    "add": "",
-    "name": "",
-    "notification": {
-      "disabled": "",
-      "enabled": "",
-      "error": "",
-      "hit": "",
-      "info": "",
-      "name": "",
-      "no_hit": "",
-      "no_permission": ""
-    },
-    "remove": ""
-  },
   "xp": "xp"
 }

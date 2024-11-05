@@ -3,10 +3,6 @@
   "amount": "Số lượng",
   "back": "Quay lại",
   "balances": "Số dư",
-  "battery_optimization_warning": {
-    "action": "",
-    "description": ""
-  },
   "bundles": "Bộ",
   "chromas": "Màu",
   "copy_riot_id": "Sao chép ID Tài khoản Riot",
@@ -37,9 +33,7 @@
   "invalid_amount": "Số lượng tối thiểu là {{amount}}.",
   "language": "Ngôn ngữ",
   "languages": {
-    "es": "Tiếng Tây Ban Nha",
-    "no": "",
-    "uk": ""
+    "es": "Tiếng Tây Ban Nha"
   },
   "languages.ar": "Tiếng Ả Rập",
   "languages.de": "Tiếng Đức",

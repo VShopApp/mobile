@@ -1,15 +1,9 @@
 {
   "account": "Compte",
-  "amount": "",
   "back": "Retournez",
   "balances": "Soldes",
-  "battery_optimization_warning": {
-    "action": "",
-    "description": ""
-  },
   "bundles": "Paquets",
   "chromas": "Couleurs",
-  "copy_riot_id": "",
   "credits": "Crédits",
   "credits_techchrism": "Documentation d'API de Valorant",
   "credits_valorantapi": "API inofficielle de Valorant",
@@ -19,9 +13,6 @@
   "donate_msg": "Vous pouvez soutenir le développement en cours en devenant donateur, et obtenez l'accès aux Notifications de Wishlist. Merci beaucoup <3",
   "donate_unlocked": "Vous avez obtenu les avantages du donateur.",
   "fag": "Agents gratuits",
-  "fetching": {
-    "donator": ""
-  },
   "fetching.balances": "Récupération des soldes…",
   "fetching.entitlements_token": "Récupération du jeton de droits…",
   "fetching.offers": "Récupération des offres…",
@@ -34,13 +25,7 @@
   "gallery": "Galerie",
   "general": "Général",
   "info": "Info",
-  "invalid_amount": "",
   "language": "Langue",
-  "languages": {
-    "es": "",
-    "no": "",
-    "uk": ""
-  },
   "languages.ar": "Arabe",
   "languages.de": "Allemand",
   "languages.en": "Anglais",
@@ -80,23 +65,14 @@
   "region": "Région",
   "region_info": "Veuillez assurer que vous avez choisi la bonne région, sinon votre boutique sera incorrecte.",
   "regions.ap": "Asie-pacifique",
-  "regions.eu": "",
   "regions.kr": "Corée",
   "regions.na": "Amérique du Nord",
-  "screenshot_mode": "",
   "separate": "séparé",
   "settings": "Paramètres",
   "shop": "Boutique",
   "signin": "Se connecter avec Riot ID",
   "signin_info": "Vos détails de connexion seront envoyés directement au Riot Games.",
   "translators": "Traducteurs",
-  "update": {
-    "available": {
-      "description": "",
-      "title": ""
-    },
-    "download_github": ""
-  },
   "videos": "Vidéos",
   "vp": "Points de Valorant",
   "welcome": "Bienvenue à VShop",
@@ -112,8 +88,7 @@
       "hit": "Le {{displayname}} est dans votre boutique !",
       "info": "Recevoir une notification lorsque les articles de votre Wishlist sont dans votre boutique.",
       "name": "Les notifications de Wishlist",
-      "no_hit": "Pas de chance aujourd'hui : Aucun skin de Wishlist est dans votre boutique.",
-      "no_permission": ""
+      "no_hit": "Pas de chance aujourd'hui : Aucun skin de Wishlist est dans votre boutique."
     },
     "remove": "Supprimer de Wishlist"
   },
