@@ -78,7 +78,7 @@
   },
   "rad": "Radianita",
   "region": "Región",
-  "region_info": "Por favor, asegúrate de seleccionar la región correcta, de lo contrario st tienda será inexacta.",
+  "region_info": "Por favor, asegúrate de seleccionar la región correcta, de lo contrario tu tienda será inexacta.",
   "regions.ap": "Asia Pacífico",
   "regions.eu": "Europa",
   "regions.kr": "Corea",
@@ -87,12 +87,12 @@
   "separate": "separado",
   "settings": "Ajustes",
   "shop": "Tienda",
-  "signin": "Inicia sesión con Riot ID",
+  "signin": "Inicia sesión con el ID de Riot",
   "signin_info": "Tus datos de acceso se enviarán directamente a Riot Games.",
   "translators": "Traductores",
   "update": {
     "available": {
-      "description": "Se puede descargar una nueva versión de VShop",
+      "description": "Está disponible para descargar una versión más nueva de VShop",
       "title": "Actualización disponible"
     },
     "download_github": "Descargar en GitHub"
