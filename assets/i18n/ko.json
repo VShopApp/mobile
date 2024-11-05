@@ -1,15 +1,15 @@
 {
   "account": "계정",
-  "amount": "",
+  "amount": "요금",
   "back": "돌아가기",
   "balances": "잔액",
   "battery_optimization_warning": {
-    "action": "",
-    "description": ""
+    "action": "배터리 설정 비활성화",
+    "description": "배터리 설정이 활성화 되어있습니다.이 설정은 찜 목록 알림이 작동하는데 문제가 생길수 있습니다."
   },
   "bundles": "세트",
   "chromas": "변형",
-  "copy_riot_id": "",
+  "copy_riot_id": "라이엇 아이디 복사",
   "credits": "크레딧",
   "credits_techchrism": "발로란트 API 문서",
   "credits_valorantapi": "비공식 발로란트 API",
@@ -20,7 +20,7 @@
   "donate_unlocked": "후원 특전이 해금 되었습니다.",
   "fag": "무료 요원",
   "fetching": {
-    "donator": ""
+    "donator": "후원자 상태 불러오는중…"
   },
   "fetching.balances": "잔액 불러오는 중…",
   "fetching.entitlements_token": "자격 토큰 불러오는 중…",
@@ -34,12 +34,12 @@
   "gallery": "갤러리",
   "general": "일반",
   "info": "정보",
-  "invalid_amount": "",
+  "invalid_amount": "최소 요금은 {{amount}}입니다.",
   "language": "언어",
   "languages": {
     "es": "스페인어",
-    "no": "",
-    "uk": ""
+    "no": "노르웨이어",
+    "uk": "우크라이나어"
   },
   "languages.ar": "아랍어",
   "languages.de": "독일어",
@@ -73,7 +73,7 @@
   "promotional": "언제, 어디서든 발로란트 상점을 확인하세요.",
   "purchase": {
     "error": "오류가 발생했습니다",
-    "restore": "환불하기",
+    "restore": "구매 복구하기",
     "success": "VShop을 지원해주셔서 감사합니다."
   },
   "rad": "레디어나이트 포인트",
@@ -83,7 +83,7 @@
   "regions.eu": "유럽",
   "regions.kr": "한국",
   "regions.na": "북아메리카",
-  "screenshot_mode": "",
+  "screenshot_mode": "스크린샷 모드",
   "separate": "단품 구매시 가격",
   "settings": "설정",
   "shop": "오늘의 상점",
@@ -92,10 +92,10 @@
   "translators": "번역가",
   "update": {
     "available": {
-      "description": "",
-      "title": ""
+      "description": "새로운 버전의 Vshop을 다운로드 할 수 있습니다",
+      "title": "업데이트 가능"
     },
-    "download_github": ""
+    "download_github": "GitHub에서 다운로드"
   },
   "videos": "동영상",
   "vp": "발로란트 포인트",
