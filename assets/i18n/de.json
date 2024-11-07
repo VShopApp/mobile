@@ -3,6 +3,10 @@
   "amount": "Betrag",
   "back": "zurück",
   "balances": "Guthaben",
+  "battery_optimization_warning": {
+    "action": "Deaktivieren der Batterieoptimierung",
+    "description": "Die Batterieoptimierung ist für VShop aktiviert. Dies kann dazu führen, dass Benachrichtigungen nicht ordnungsgemäß funktionieren."
+  },
   "bundles": "Bündel",
   "chromas": "Chromas",
   "copy_riot_id": "Riot-Konto-ID kopieren",
