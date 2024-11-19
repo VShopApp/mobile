@@ -39,7 +39,6 @@ export let defaultUser = {
   },
 };
 
-export let offers: { [skinId: string]: number } = {};
 export let skins: ISkin[] = [];
 
 const extraHeaders = {
@@ -112,28 +111,6 @@ export async function getUsername(
   return res.data[0].GameName !== "" ? res.data[0].GameName : "?";
 }
 
-export async function loadOffers(
-  accessToken: string,
-  entitlementsToken: string,
-  region: string
-) {
-  const res = await axios.request<PricesResponse>({
-    url: getUrl("offers", region),
-    method: "GET",
-    headers: {
-      Authorization: `Bearer ${accessToken}`,
-      "X-Riot-Entitlements-JWT": entitlementsToken,
-      ...extraHeaders,
-    },
-    validateStatus: (status) => true,
-  });
-
-  for (var i = 0; i < res.data.Offers.length; i++) {
-    let offer = res.data.Offers[i];
-    offers[offer.OfferID] = offer.Cost[VCurrencies.VP];
-  }
-}
-
 export async function getShop(
   accessToken: string,
   entitlementsToken: string,
@@ -157,17 +134,19 @@ export async function getShop(
 
 export async function parseShop(shop: StorefrontResponse) {
   /* NORMAL SHOP */
-  let singleItemOffers = shop.SkinsPanelLayout.SingleItemOffers;
+  let singleItemStoreOffers = shop.SkinsPanelLayout.SingleItemStoreOffers;
   let main: IShopItem[] = [];
-  for (var i = 0; i < singleItemOffers.length; i++) {
-    const skin = skins.find(
-      (_skin) => _skin.levels[0].uuid === singleItemOffers[i]
-    ) as ISkin;
+  for (var i = 0; i < singleItemStoreOffers.length; i++) {
+    const offer = singleItemStoreOffers[i];
 
-    main[i] = {
-      ...skin,
-      price: offers[singleItemOffers[i]],
-    };
+    const skin = skins.find((_skin) => _skin.levels[0].uuid === offer.OfferID);
+
+    if (skin) {
+      main[i] = {
+        ...skin,
+        price: offer.Cost[VCurrencies.VP],
+      };
+    }
   }
 
   /* BUNDLES */

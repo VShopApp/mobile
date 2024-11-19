@@ -47,7 +47,7 @@ interface IShopItem extends ISkin {
   price: number;
 }
 
-interface IGalleryItem extends IShopItem {
+interface IGalleryItem extends ISkin {
   onWishlist: boolean;
 }
 

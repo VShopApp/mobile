@@ -8,7 +8,7 @@ import {
 import { Dimensions } from "react-native";
 import { useWishlistStore } from "~/hooks/useWishlistStore";
 import GalleryItem from "~/components/GalleryItem";
-import { offers, skins } from "~/utils/valorant-api";
+import { skins } from "~/utils/valorant-api";
 
 function useDebounceValue(value: string, delay: number) {
   const [debouncedValue, setDebouncedValue] = React.useState(value);
@@ -47,7 +47,6 @@ function Gallery() {
         )
         .map((item) => ({
           ...item,
-          price: offers[item.levels[0].uuid],
           onWishlist: skinIds.includes(item.levels[0].uuid),
         }))
         .sort((a, b) =>

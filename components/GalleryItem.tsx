@@ -1,6 +1,5 @@
 import { useTranslation } from "react-i18next";
-import { List, Text, IconButton, Menu, Divider } from "react-native-paper";
-import CurrencyIcon from "./CurrencyIcon";
+import { List, IconButton, Menu, Divider } from "react-native-paper";
 import { Image } from "react-native";
 import { useMediaPopupStore } from "./popups/MediaPopup";
 import { useFeatureStore } from "~/hooks/useFeatureStore";
@@ -20,16 +19,6 @@ export default function GalleryItem(props: React.PropsWithChildren<props>) {
   return (
     <List.Item
       title={`${props.item.onWishlist ? "⭐ " : ""}${props.item.displayName}`}
-      description={
-        props.item.price
-          ? () => (
-              <Text>
-                {props.item.price.toString()}
-                <CurrencyIcon icon="vp" />
-              </Text>
-            )
-          : undefined
-      }
       left={(_props) => (
         <Image
           {..._props}

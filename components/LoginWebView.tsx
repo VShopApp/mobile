@@ -14,7 +14,6 @@ import {
   getShop,
   getUserId,
   getUsername,
-  loadOffers,
   loadSkins,
   loadVersion,
   parseShop,
@@ -70,9 +69,6 @@ export default function LoginWebView() {
           userId,
           region
         );
-
-        setLoading(t("fetching.offers"));
-        await loadOffers(accessToken, entitlementsToken, region);
 
         setLoading(t("fetching.storefront"));
         const shop = await getShop(
