@@ -1,7 +1,6 @@
 import axios from "axios";
 import { jwtDecode } from "jwt-decode";
 import { VCurrencies, VItemTypes } from "./misc";
-import { IStorefrontV3 } from "../types/StorefrontV3";
 import https from "https-browserify";
 import { getVAPILang } from "./localization";
 
@@ -40,7 +39,7 @@ export let defaultUser = {
   },
 };
 
-export let offers: any = {};
+export let offers: { [skinId: string]: number } = {};
 export let skins: ISkin[] = [];
 
 const extraHeaders = {
@@ -72,7 +71,7 @@ export async function loadSkins() {
 }
 
 export async function getEntitlementsToken(accessToken: string) {
-  const res = await axios.request({
+  const res = await axios.request<EntitlementResponse>({
     url: getUrl("entitlements"),
     method: "POST",
     headers: {
@@ -98,7 +97,7 @@ export async function getUsername(
   userId: string,
   region: string
 ) {
-  const res = await axios.request({
+  const res = await axios.request<NameServiceResponse>({
     url: getUrl("name", region),
     method: "PUT",
     headers: {
@@ -118,7 +117,7 @@ export async function loadOffers(
   entitlementsToken: string,
   region: string
 ) {
-  const res = await axios.request({
+  const res = await axios.request<PricesResponse>({
     url: getUrl("offers", region),
     method: "GET",
     headers: {
@@ -126,6 +125,7 @@ export async function loadOffers(
       "X-Riot-Entitlements-JWT": entitlementsToken,
       ...extraHeaders,
     },
+    validateStatus: (status) => true,
   });
 
   for (var i = 0; i < res.data.Offers.length; i++) {
@@ -140,7 +140,7 @@ export async function getShop(
   region: string,
   userId: string
 ) {
-  const res = await axios.request<IStorefrontV3>({
+  const res = await axios.request<StorefrontResponse>({
     url: getUrl("storefront", region, userId),
     method: "POST",
     headers: {
@@ -155,7 +155,7 @@ export async function getShop(
   return res.data;
 }
 
-export async function parseShop(shop: IStorefrontV3) {
+export async function parseShop(shop: StorefrontResponse) {
   /* NORMAL SHOP */
   let singleItemOffers = shop.SkinsPanelLayout.SingleItemOffers;
   let main: IShopItem[] = [];
@@ -243,7 +243,7 @@ export async function getBalances(
   region: string,
   userId: string
 ) {
-  const res = await axios.request({
+  const res = await axios.request<WalletResponse>({
     url: getUrl("wallet", region, userId),
     method: "GET",
     headers: {
@@ -266,7 +266,7 @@ export async function getProgress(
   region: string,
   userId: string
 ) {
-  const res = await axios.request({
+  const res = await axios.request<AccountXPResponse>({
     url: getUrl("playerxp", region, userId),
     method: "GET",
     headers: {
@@ -315,7 +315,6 @@ function getUrl(name: string, region?: string, userId?: string) {
   const URLS: any = {
     auth: "https://auth.riotgames.com/api/v1/authorization/",
     entitlements: "https://entitlements.auth.riotgames.com/api/token/v1/",
-    userinfo: "https://auth.riotgames.com/userinfo/",
     storefront: `https://pd.${region}.a.pvp.net/store/v3/storefront/${userId}`,
     wallet: `https://pd.${region}.a.pvp.net/store/v1/wallet/${userId}`,
     playerxp: `https://pd.${region}.a.pvp.net/account-xp/v1/players/${userId}`,
