@@ -13,7 +13,7 @@ import {
   getProgress,
   getShop,
   getUserId,
-  getUsername,
+  getUsername, loadAccessories,
   loadSkins,
   loadVersion,
   parseShop,
@@ -55,6 +55,9 @@ export default function LoginWebView() {
 
         setLoading(t("fetching.skins"));
         await loadSkins();
+
+        setLoading(t("fetching.accessories"))
+        await loadAccessories();
 
         setLoading(t("fetching.entitlements_token"));
         const entitlementsToken = await getEntitlementsToken(accessToken);
@@ -112,7 +115,7 @@ export default function LoginWebView() {
         router.replace("/shop");
       } catch (e) {
         console.log(e);
-        await CookieManager.clearAll(true);
+        //await CookieManager.clearAll(true); // TODO uncomment
         router.replace("/setup"); // Fallback to setup, so user doesn't get stuck
       }
     }

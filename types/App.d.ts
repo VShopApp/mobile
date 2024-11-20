@@ -10,6 +10,69 @@ interface ISkin {
   levels: ISkinLevel[];
 }
 
+interface IAccessoryBuddy {
+  uuid: string;
+  displayName: string;
+  isHiddenIfNotOwned: boolean;
+  themeUuid: string;
+  displayIcon?: string;
+  assetPath: string;
+  levels: IAccessoryBuddyLevel[];
+}
+
+interface IAccessoryTitle {
+  uuid: string;
+  displayName: string;
+  isHiddenIfNotOwned: boolean;
+  titleText: string;
+  assetPath: string;
+}
+
+interface IAccessoryCard {
+  uuid: string;
+  displayName: string;
+  isHiddenIfNotOwned: boolean;
+  themeUuid: string;
+  displayIcon: string;
+  smallArt: string;
+  wideArt: string;
+  largeArt: string;
+  assetPath: string;
+}
+
+interface IAccessorySpray {
+  uuid: string;
+  displayName: string;
+  category: string;
+  themeUuid: string;
+  isNullSpray: boolean;
+  hideIfNotOwned: boolean;
+  displayIcon: string;
+  fullIcon: string;
+  fullTransparentIcon: string;
+  animationPng: string;
+  animationGif: string;
+  assetPath: string;
+  levels: IAccessorySprayLevel[];
+}
+
+interface IAccessoryBuddyLevel {
+  uuid: string;
+  charmLevel: number;
+  hideIfNotOwned: boolean;
+  displayName: string;
+  displayIcon: string;
+  assetPath: string;
+}
+
+interface IAccessorySprayLevel {
+    uuid: string;
+    sprayLevel: number;
+    displayName: string;
+    displayIcon: string;
+    assetPath: string;
+}
+
 interface IBundle {
   uuid: string;
   displayName: string;
@@ -44,6 +107,10 @@ interface ISkinLevel {
 }
 
 interface IShopItem extends ISkin {
+  price: number;
+}
+
+interface IShopItem2 extends IAccessoryTitle {
   price: number;
 }
 
