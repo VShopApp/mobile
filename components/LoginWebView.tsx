@@ -115,7 +115,7 @@ export default function LoginWebView() {
         router.replace("/shop");
       } catch (e) {
         console.log(e);
-        //await CookieManager.clearAll(true); // TODO uncomment
+        await CookieManager.clearAll(true);
         router.replace("/setup"); // Fallback to setup, so user doesn't get stuck
       }
     }
