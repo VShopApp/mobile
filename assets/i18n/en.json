@@ -16,6 +16,7 @@
   "donate_unlocked": "You've unlocked donator perks.",
   "fag": "Free Agents",
   "fetching": {
+    "accessories": "Fetching accessories…",
     "balances": "Fetching balances…",
     "donator": "Fetching donator status…",
     "entitlements_token": "Fetching entitlements token…",
@@ -120,5 +121,7 @@
   "battery_optimization_warning": {
     "description": "Battery optimization is enabled for VShop. This may prevent wishlist notifications from working properly.",
     "action": "Disable battery optimization"
-  }
+  },
+  "accessories": "Accessory Shop",
+  "kc": "Kingdom Credits"
 }
