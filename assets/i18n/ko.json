@@ -1,6 +1,6 @@
 {
   "account": "계정",
-  "amount": "요금",
+  "amount": "후원",
   "back": "돌아가기",
   "balances": "잔액",
   "battery_optimization_warning": {
@@ -34,7 +34,7 @@
   "gallery": "갤러리",
   "general": "일반",
   "info": "정보",
-  "invalid_amount": "최소 요금은 {{amount}}입니다.",
+  "invalid_amount": "최소 후원금은 {{amount}}입니다.",
   "language": "언어",
   "languages": {
     "es": "스페인어",
