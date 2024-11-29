@@ -18,9 +18,9 @@ import { useEffect } from "react";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { SplashScreen } from "expo-router";
 import { useTranslation } from "react-i18next";
-import { SharedPostHogProvider } from "~/components/Posthog";
 import { initBackgroundFetch, stopBackgroundFetch } from "~/utils/wishlist";
 import { useWishlistStore } from "~/hooks/useWishlistStore";
+import PlausibleProvider from "~/components/PlausibleProvider";
 
 export const CombinedDarkTheme = {
   ...merge(PaperDarkTheme, NavigationDarkTheme),
@@ -59,7 +59,7 @@ function RootLayout() {
 
   return (
     <GestureHandlerRootView style={{ flex: 1 }}>
-      <SharedPostHogProvider>
+      <PlausibleProvider>
         <SafeAreaView
           style={{ backgroundColor: CombinedDarkTheme.colors.primary }}
         />
@@ -103,7 +103,7 @@ function RootLayout() {
             </ThemeProvider>
           </StripeProvider>
         </PaperProvider>
-      </SharedPostHogProvider>
+      </PlausibleProvider>
     </GestureHandlerRootView>
   );
 }

@@ -12,7 +12,7 @@ import { checkDonator } from "./vshop-api";
 import { useWishlistStore } from "~/hooks/useWishlistStore";
 import * as Notifications from "expo-notifications";
 import BackgroundFetch from "react-native-background-fetch";
-import { posthog } from "~/components/Posthog";
+import * as plausible from "./plausible";
 import { fetchVersion } from "./valorant-assets";
 
 Notifications.setNotificationHandler({
@@ -41,7 +41,7 @@ export async function wishlistBgTask() {
   );
 
   if (!isSameDayUTC(lastWishlistCheck, now) || lastWishlistCheckTs === 0) {
-    posthog.capture("wishlist_check");
+    plausible.capture("wishlist_check");
 
     console.log("New day, checking shop in the background");
     await checkShop(wishlistStore.skinIds);

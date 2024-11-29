@@ -20,7 +20,6 @@ import { checkDonator } from "~/utils/vshop-api";
 import Loading from "./Loading";
 import { View } from "react-native";
 import WebView from "react-native-webview";
-import { usePostHog } from "posthog-react-native";
 import { loadAssets } from "~/utils/valorant-assets";
 
 const LOGIN_URL =
@@ -32,7 +31,6 @@ export default function LoginWebView() {
   const { enableDonator, disableDonator } = useFeatureStore();
   const [loading, setLoading] = useState<string | null>(null);
   const { t } = useTranslation();
-  const posthog = usePostHog();
 
   const handleWebViewChange = async (newNavState: {
     url?: string;
@@ -96,7 +94,6 @@ export default function LoginWebView() {
         if (isDonator) enableDonator();
         else disableDonator();
 
-        posthog.identify(userId);
         setUser({
           id: userId,
           name: username,

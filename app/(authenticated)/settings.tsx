@@ -17,7 +17,6 @@ import {
   stopBackgroundFetch,
 } from "~/utils/wishlist";
 import * as Notifications from "expo-notifications";
-import { usePostHog } from "posthog-react-native";
 import { useWishlistStore } from "~/hooks/useWishlistStore";
 import BatteryOptimizationWarning from "~/components/BatteryOptimizationWarning";
 
@@ -35,7 +34,6 @@ function Settings() {
   );
   const wishlistedSkins = useWishlistStore((state) => state.skinIds);
   const { showDonatePopup } = useDonatePopupStore();
-  const posthog = usePostHog();
 
   const handleLogout = async () => {
     await CookieManager.clearAll(true);
@@ -43,7 +41,6 @@ function Settings() {
     setUser(defaultUser);
     stopBackgroundFetch();
     setNotificationEnabled(false);
-    posthog.reset();
     router.replace("/setup");
   };
 
