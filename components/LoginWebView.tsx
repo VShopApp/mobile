@@ -13,7 +13,7 @@ import {
   getProgress,
   getShop,
   getUserId,
-  getUsername,
+  getUsername, loadAccessories,
   loadSkins,
   loadVersion,
   parseShop,
@@ -55,6 +55,9 @@ export default function LoginWebView() {
 
         setLoading(t("fetching.skins"));
         await loadSkins();
+
+        setLoading(t("fetching.accessories"))
+        await loadAccessories();
 
         setLoading(t("fetching.entitlements_token"));
         const entitlementsToken = await getEntitlementsToken(accessToken);

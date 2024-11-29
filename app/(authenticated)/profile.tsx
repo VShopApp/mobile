@@ -57,6 +57,12 @@ function Profile() {
           left={(props) => <CurrencyIcon {...props} icon="rad" paper />}
         />
         <List.Item
+          title={t("kc")}
+          description={user.balances.kc.toString()}
+          descriptionNumberOfLines={1}
+          left={(props) => <CurrencyIcon {...props} icon="kc" paper />}
+        />
+        <List.Item
           title={t("fag")}
           description={user.balances.fag.toString()}
           descriptionNumberOfLines={1}

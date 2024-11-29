@@ -22,16 +22,19 @@ export let defaultUser = {
     main: [] as IShopItem[],
     bundles: [] as IBundle[],
     nightMarket: [] as INightMarketItem[],
+    accessory: [] as IShopItem2[],
     remainingSecs: {
       main: 0,
       bundles: [0],
       nightMarket: 0,
+      accessory: 0,
     },
   },
   balances: {
     vp: 0,
     rad: 0,
     fag: 0,
+    kc: 0
   },
   progress: {
     level: 0,
@@ -40,6 +43,10 @@ export let defaultUser = {
 };
 
 export let skins: ISkin[] = [];
+export let buddies: IAccessoryBuddy[] = [];
+export let sprays: IAccessorySpray[] = [];
+export let cards: IAccessoryCard[] = [];
+export let titles: IAccessoryTitle[] = [];
 
 const extraHeaders = {
   "X-Riot-ClientVersion": "43.0.1.4195386.4190634",
@@ -67,6 +74,30 @@ export async function loadSkins() {
   });
 
   skins = res2.data.data;
+}
+
+export async function loadAccessories() {
+  const res2 = await axios.request({
+    url: `https://valorant-api.com/v1/buddies?language=${getVAPILang()}`,
+    method: "GET",
+  });
+  const res3 = await axios.request({
+    url: `https://valorant-api.com/v1/playercards?language=${getVAPILang()}`,
+    method: "GET",
+  });
+  const res4 = await axios.request({
+    url: `https://valorant-api.com/v1/playertitles?language=${getVAPILang()}`,
+    method: "GET",
+  });
+  const res5 = await axios.request({
+    url: `https://valorant-api.com/v1/sprays?language=${getVAPILang()}`,
+    method: "GET",
+  });
+
+  buddies = res2.data.data;
+  cards = res3.data.data;
+  titles = res4.data.data;
+  sprays = res5.data.data;
 }
 
 export async function getEntitlementsToken(accessToken: string) {
@@ -201,10 +232,71 @@ export async function parseShop(shop: StorefrontResponse) {
     }
   }
 
+  /* ACCESSORY SHOP */
+  let accessoryStore = shop.AccessoryStore.AccessoryStoreOffers;
+  let accessory: IShopItem2[] = [];
+  for (var i = 0; i < accessoryStore.length; i++) {
+    const accessoryItem = accessoryStore[i].Offer;
+
+    // This is a pain because of different return types
+    const buddy = buddies.find((_skin) => _skin.levels[0].uuid === accessoryItem.Rewards[0].ItemID);
+    const card =  cards.find((_skin) => _skin.uuid === accessoryItem.Rewards[0].ItemID);
+    const title = titles.find((_skin) => _skin.uuid === accessoryItem.Rewards[0].ItemID);
+    const spray = sprays.find((_skin) => _skin.levels[0].uuid === accessoryItem.Rewards[0].ItemID);
+
+    let skin: IAccessoryTitle | undefined;
+
+    // Convert needed data for display to IAccessoryTitle
+    if (buddy) {
+      skin = {
+        uuid: buddy.levels[0].uuid,
+        displayName: buddy.displayName,
+        isHiddenIfNotOwned: buddy.isHiddenIfNotOwned,
+        titleText: "",
+        assetPath: buddy.levels[0].displayIcon
+      }
+    }
+    if (card) {
+      skin = {
+        uuid: card.uuid,
+        displayName: card.displayName,
+        isHiddenIfNotOwned: card.isHiddenIfNotOwned,
+        titleText: "",
+        assetPath: card.largeArt
+      }
+    }
+    if (title) {
+      skin = {
+        uuid: title.uuid,
+        displayName: title.displayName,
+        isHiddenIfNotOwned: title.isHiddenIfNotOwned,
+        titleText: title.titleText,
+        assetPath: "",
+      }
+    }
+    if (spray) {
+      skin = {
+        uuid: spray.levels[0].uuid,
+        displayName: spray.displayName,
+        isHiddenIfNotOwned: spray.hideIfNotOwned,
+        titleText: "",
+        assetPath: spray.levels[0].displayIcon
+      }
+    }
+
+    if (skin) {
+      accessory[i] = {
+        ...skin,
+        price: accessoryItem.Cost[VCurrencies.KC],
+      };
+    }
+  }
+
   return {
     main,
     bundles,
     nightMarket,
+    accessory,
     remainingSecs: {
       main:
         shop.SkinsPanelLayout.SingleItemOffersRemainingDurationInSeconds ?? 0,
@@ -212,6 +304,7 @@ export async function parseShop(shop: StorefrontResponse) {
         (bundle) => bundle.DurationRemainingInSeconds
       ) ?? [0],
       nightMarket: shop.BonusStore?.BonusStoreRemainingDurationInSeconds ?? 0,
+      accessory: shop.AccessoryStore.AccessoryStoreRemainingDurationInSeconds ?? 0,
     },
   };
 }
@@ -236,6 +329,7 @@ export async function getBalances(
     vp: res.data.Balances[VCurrencies.VP],
     rad: res.data.Balances[VCurrencies.RAD],
     fag: res.data.Balances[VCurrencies.FAG],
+    kc: res.data.Balances[VCurrencies.KC]
   };
 }
 
