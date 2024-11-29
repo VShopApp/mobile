@@ -8,7 +8,7 @@ import {
 import { Dimensions } from "react-native";
 import { useWishlistStore } from "~/hooks/useWishlistStore";
 import GalleryItem from "~/components/GalleryItem";
-import { skins } from "~/utils/valorant-api";
+import { getAssets } from "~/utils/valorant-assets";
 
 function useDebounceValue(value: string, delay: number) {
   const [debouncedValue, setDebouncedValue] = React.useState(value);
@@ -27,7 +27,7 @@ function useDebounceValue(value: string, delay: number) {
 function Gallery() {
   const [searchQuery, setSearchQuery] = React.useState("");
   const debouncedQuery = useDebounceValue(searchQuery, 100);
-  const [gallerySkins, setGallerySkins] = React.useState<IGalleryItem[]>([]);
+  const [gallerySkins, setGallerySkins] = React.useState<GalleryItem[]>([]);
   const galleryDataProvider = new DataProvider((r1, r2) => {
     return r1.uuid !== r2.uuid;
   }).cloneWithRows(gallerySkins);
@@ -35,8 +35,8 @@ function Gallery() {
 
   React.useEffect(() => {
     setGallerySkins(
-      skins
-        .filter(
+      getAssets()
+        .skins.filter(
           (skin) =>
             skin.displayName.match(
               new RegExp(
@@ -57,7 +57,7 @@ function Gallery() {
 
   const rowRenderer = (
     type: string | number,
-    data: IGalleryItem,
+    data: GalleryItem,
     index: number
   ) => <GalleryItem item={data} toggleFromWishlist={toggleSkin} />;
 

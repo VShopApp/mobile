@@ -5,7 +5,7 @@ import Countdown from "./Countdown";
 import { useFeatureStore } from "~/hooks/useFeatureStore";
 
 interface props {
-  bundle: IBundle;
+  bundle: BundleShopItem;
   remainingSecs: number;
 }
 export default function Bundle({ bundle, remainingSecs }: props) {

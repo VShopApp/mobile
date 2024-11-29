@@ -13,9 +13,7 @@ import {
   getProgress,
   getShop,
   getUserId,
-  getUsername, loadAccessories,
-  loadSkins,
-  loadVersion,
+  getUsername,
   parseShop,
 } from "~/utils/valorant-api";
 import { checkDonator } from "~/utils/vshop-api";
@@ -23,6 +21,7 @@ import Loading from "./Loading";
 import { View } from "react-native";
 import WebView from "react-native-webview";
 import { usePostHog } from "posthog-react-native";
+import { loadAssets } from "~/utils/valorant-assets";
 
 const LOGIN_URL =
   "https://auth.riotgames.com/authorize?redirect_uri=https%3A%2F%2Fplayvalorant.com%2Fopt_in&client_id=play-valorant-web-prod&response_type=token%20id_token&nonce=1&scope=account%20openid";
@@ -50,14 +49,8 @@ export default function LoginWebView() {
         const region =
           (await AsyncStorage.getItem("region")) || defaultUser.region;
 
-        setLoading(t("fetching.version"));
-        await loadVersion();
-
-        setLoading(t("fetching.skins"));
-        await loadSkins();
-
-        setLoading(t("fetching.accessories"))
-        await loadAccessories();
+        setLoading(t("fetching.assets"));
+        await loadAssets();
 
         setLoading(t("fetching.entitlements_token"));
         const entitlementsToken = await getEntitlementsToken(accessToken);
@@ -115,8 +108,11 @@ export default function LoginWebView() {
         router.replace("/shop");
       } catch (e) {
         console.log(e);
-        await CookieManager.clearAll(true);
-        router.replace("/setup"); // Fallback to setup, so user doesn't get stuck
+
+        if (!__DEV__) {
+          await CookieManager.clearAll(true);
+          router.replace("/setup"); // Fallback to setup, so user doesn't get stuck
+        }
       }
     }
   };

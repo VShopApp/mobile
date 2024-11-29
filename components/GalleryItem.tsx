@@ -7,7 +7,7 @@ import { getDisplayIcon } from "~/utils/misc";
 import { useState } from "react";
 
 interface props {
-  item: IGalleryItem;
+  item: GalleryItem;
   toggleFromWishlist: Function;
 }
 export default function GalleryItem(props: React.PropsWithChildren<props>) {

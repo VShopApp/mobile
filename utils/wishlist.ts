@@ -3,7 +3,6 @@ import {
   getEntitlementsToken,
   getShop,
   getUserId,
-  loadVersion,
   reAuth,
 } from "./valorant-api";
 import AsyncStorage from "@react-native-async-storage/async-storage";
@@ -14,6 +13,7 @@ import { useWishlistStore } from "~/hooks/useWishlistStore";
 import * as Notifications from "expo-notifications";
 import BackgroundFetch from "react-native-background-fetch";
 import { posthog } from "~/components/Posthog";
+import { fetchVersion } from "./valorant-assets";
 
 Notifications.setNotificationHandler({
   handleNotification: async () => ({
@@ -58,10 +58,10 @@ export async function checkShop(wishlist: string[]) {
   });
 
   try {
-    await loadVersion();
+    const version = await fetchVersion();
 
     // Automatic cookies: https://github.com/facebook/react-native/issues/1274
-    const res = await reAuth();
+    const res = await reAuth(version);
     const accessToken = getAccessTokenFromUri(res.data.response.parameters.uri);
     const userId = getUserId(accessToken);
 
@@ -78,7 +78,7 @@ export async function checkShop(wishlist: string[]) {
       if (shop.SkinsPanelLayout.SingleItemOffers.includes(wishlist[i])) {
         const skinData = await axios.get<{
           status: number;
-          data: ISkinLevel;
+          data: ValorantSkinLevel;
         }>(
           `https://valorant-api.com/v1/weapons/skinlevels/${
             wishlist[i]

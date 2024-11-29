@@ -7,7 +7,7 @@ import { useFeatureStore } from "~/hooks/useFeatureStore";
 import { getDisplayIcon } from "~/utils/misc";
 
 interface props {
-  item: IShopItem;
+  item: SkinShopItem;
 }
 export default function ShopItem(props: React.PropsWithChildren<props>) {
   const { t } = useTranslation();

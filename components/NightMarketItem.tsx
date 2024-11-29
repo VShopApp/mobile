@@ -13,7 +13,7 @@ import { getDisplayIcon } from "~/utils/misc";
 import { useFeatureStore } from "~/hooks/useFeatureStore";
 
 interface props {
-  item: INightMarketItem;
+  item: NightMarketItem;
 }
 export default function NightMarketItem(props: React.PropsWithChildren<props>) {
   const { t } = useTranslation();
