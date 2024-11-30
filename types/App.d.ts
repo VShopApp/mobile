@@ -1,87 +1,35 @@
-interface ISkin {
-  uuid: string;
-  displayName: string;
-  themeUuid: string;
-  contentTierUuid?: string;
-  displayIcon?: string;
-  wallpaper?: string;
-  assetPath: string;
-  chromas: ISkinChroma[];
-  levels: ISkinLevel[];
-}
-
-interface IBundle {
-  uuid: string;
-  displayName: string;
-  displayNameSubText?: string;
-  description: string;
-  extraDescription?: string;
-  promoDescription?: string;
-  useAdditionalContext: boolean;
-  displayIcon: string;
-  displayIcon2: string;
-  verticalPromoImage?: string;
-  assetPath: string;
-}
-
-interface ISkinChroma {
-  uuid: string;
-  displayName: string;
-  displayIcon?: string;
-  fullRender: string;
-  swatch?: string;
-  streamedVideo?: string;
-  assetPath: string;
-}
-
-interface ISkinLevel {
-  uuid: string;
-  displayName: string;
-  levelItem?: string;
-  displayIcon?: string;
-  streamedVideo?: string;
-  assetPath: string;
-}
-
-interface IShopItem extends ISkin {
+interface SkinShopItem extends ValorantSkin {
   price: number;
 }
 
-interface IGalleryItem extends ISkin {
+interface AccessoryShopItem {
+  uuid: string;
+  displayName: string;
+  displayIcon?: string;
+  price: number;
+}
+
+interface GalleryItem extends ValorantSkin {
   onWishlist: boolean;
 }
 
-interface INightMarketItem extends IShopItem {
+interface NightMarketItem extends SkinShopItem {
   discountedPrice: number;
   discountPercent: number;
 }
 
-interface IBundleItem extends IShopItem {
-  discountedPrice: number;
-}
-
-interface IBundle {
-  uuid: string;
-  displayName: string;
-  description: string;
-  extraDescription: any;
-  promoDescription: any;
-  useAdditionalContext: boolean;
-  displayIcon: string;
-  displayIcon2: string;
-  verticalPromoImage: string;
-  assetPath: string;
+interface BundleShopItem extends ValorantBundle {
   price: number;
-  items: IBundleItem[];
+  items: SkinShopItem[];
 }
 
-interface IBalance {
+interface Balance {
   vp: number;
   rad: number;
   fag: number;
 }
 
-interface IProgress {
+interface Progress {
   level: number;
   xp: number;
 }

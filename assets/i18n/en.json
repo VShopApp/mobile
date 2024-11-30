@@ -20,16 +20,15 @@
   "donate_unlocked": "You've unlocked donator perks.",
   "fag": "Free Agents",
   "fetching": {
+    "assets": "Fetching assets…",
     "balances": "Fetching balances…",
     "donator": "Fetching donator status…",
     "entitlements_token": "Fetching entitlements token…",
     "offers": "Fetching offers…",
     "progress": "Fetching progress…",
-    "skins": "Fetching skins…",
     "storefront": "Fetching storefront…",
     "user_id": "Fetching user id…",
-    "username": "Fetching username…",
-    "version": "Fetching version…"
+    "username": "Fetching username…"
   },
   "gallery": "Gallery",
   "general": "General",
@@ -119,5 +118,7 @@
     },
     "remove": "Remove from wishlist"
   },
-  "xp": "XP"
+  "xp": "XP",
+  "accessories": "Accessory Shop",
+  "kc": "Kingdom Credits"
 }

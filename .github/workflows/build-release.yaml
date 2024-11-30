@@ -43,8 +43,8 @@ jobs:
         env:
           EXPO_PUBLIC_API_URL: ${{ secrets.API_URL }}
           EXPO_PUBLIC_STRIPE_PUBLIC_KEY: ${{ secrets.STRIPE_PUBLIC_KEY }}
-          EXPO_PUBLIC_POSTHOG_HOST: ${{ secrets.POSTHOG_HOST }}
-          EXPO_PUBLIC_POSTHOG_API_KEY: ${{ secrets.POSTHOG_API_KEY }}
+          EXPO_PUBLIC_PLAUSIBLE_URL: ${{ secrets.PLAUSIBLE_URL }}
+          EXPO_PUBLIC_PLAUSIBLE_DOMAIN: ${{ secrets.PLAUSIBLE_DOMAIN }}
 
       - name: Upload Artifact GitHub Action
         uses: actions/upload-artifact@v4
@@ -85,8 +85,10 @@ jobs:
       - name: 🔐 Create .env
         run: |
           touch .env
-          echo API_URL=${{ secrets.API_URL }} >> .env
-          echo STRIPE_PUBLIC_KEY=${{ secrets.STRIPE_PUBLIC_KEY }} >> .env
+          echo EXPO_PUBLIC_API_URL=${{ secrets.API_URL }} >> .env
+          echo EXPO_PUBLIC_STRIPE_PUBLIC_KEY=${{ secrets.STRIPE_PUBLIC_KEY }} >> .env
+          echo EXPO_PUBLIC_PLAUSIBLE_URL=${{ secrets.PLAUSIBLE_URL }} >> .env
+          echo EXPO_PUBLIC_PLAUSIBLE_DOMAIN=${{ secrets.PLAUSIBLE_DOMAIN }} >> .env
 
       - name: Build Archive
         run: |

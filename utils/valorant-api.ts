@@ -2,7 +2,7 @@ import axios from "axios";
 import { jwtDecode } from "jwt-decode";
 import { VCurrencies, VItemTypes } from "./misc";
 import https from "https-browserify";
-import { getVAPILang } from "./localization";
+import { fetchBundle, getAssets } from "./valorant-assets";
 
 axios.interceptors.request.use(
   function (config) {
@@ -19,19 +19,22 @@ export let defaultUser = {
   name: "",
   region: "",
   shops: {
-    main: [] as IShopItem[],
-    bundles: [] as IBundle[],
-    nightMarket: [] as INightMarketItem[],
+    main: [] as SkinShopItem[],
+    bundles: [] as BundleShopItem[],
+    nightMarket: [] as NightMarketItem[],
+    accessory: [] as AccessoryShopItem[],
     remainingSecs: {
       main: 0,
       bundles: [0],
       nightMarket: 0,
+      accessory: 0,
     },
   },
   balances: {
     vp: 0,
     rad: 0,
     fag: 0,
+    kc: 0,
   },
   progress: {
     level: 0,
@@ -39,44 +42,21 @@ export let defaultUser = {
   },
 };
 
-export let skins: ISkin[] = [];
-
-const extraHeaders = {
-  "X-Riot-ClientVersion": "43.0.1.4195386.4190634",
+const extraHeaders = () => ({
+  "X-Riot-ClientVersion":
+    getAssets().riotClientVersion || "43.0.1.4195386.4190634",
   "X-Riot-ClientPlatform":
     "eyJwbGF0Zm9ybVR5cGUiOiJQQyIsInBsYXRmb3JtT1MiOiJXaW5kb3dzIiwicGxhdGZvcm1PU1ZlcnNpb24iOiIxMC4wLjE5MDQyLjEuMjU2LjY0Yml0IiwicGxhdGZvcm1DaGlwc2V0IjoiVW5rbm93biJ9",
-};
-
-export async function loadVersion() {
-  try {
-    const res = await axios.request({
-      url: "https://valorant-api.com/v1/version",
-      method: "GET",
-    });
-
-    extraHeaders["X-Riot-ClientVersion"] = res.data.data.riotClientVersion;
-  } catch (e) {
-    console.log(e);
-  }
-}
-
-export async function loadSkins() {
-  const res2 = await axios.request({
-    url: `https://valorant-api.com/v1/weapons/skins?language=${getVAPILang()}`,
-    method: "GET",
-  });
-
-  skins = res2.data.data;
-}
+});
 
 export async function getEntitlementsToken(accessToken: string) {
   const res = await axios.request<EntitlementResponse>({
     url: getUrl("entitlements"),
     method: "POST",
     headers: {
+      ...extraHeaders(),
       "Content-Type": "application/json",
       Authorization: `Bearer ${accessToken}`,
-      ...extraHeaders,
     },
     data: {},
   });
@@ -100,10 +80,10 @@ export async function getUsername(
     url: getUrl("name", region),
     method: "PUT",
     headers: {
+      ...extraHeaders(),
       "Content-Type": "application/json",
       Authorization: `Bearer ${accessToken}`,
       "X-Riot-Entitlements-JWT": entitlementsToken,
-      ...extraHeaders,
     },
     data: [userId],
   });
@@ -121,7 +101,7 @@ export async function getShop(
     url: getUrl("storefront", region, userId),
     method: "POST",
     headers: {
-      ...extraHeaders,
+      ...extraHeaders(),
       "Content-Type": "application/json",
       Authorization: `Bearer ${accessToken}`,
       "X-Riot-Entitlements-JWT": entitlementsToken,
@@ -135,7 +115,9 @@ export async function getShop(
 export async function parseShop(shop: StorefrontResponse) {
   /* NORMAL SHOP */
   let singleItemStoreOffers = shop.SkinsPanelLayout.SingleItemStoreOffers;
-  let main: IShopItem[] = [];
+  let main: SkinShopItem[] = [];
+  const { skins, buddies, cards, sprays, titles } = getAssets();
+
   for (var i = 0; i < singleItemStoreOffers.length; i++) {
     const offer = singleItemStoreOffers[i];
 
@@ -150,20 +132,13 @@ export async function parseShop(shop: StorefrontResponse) {
   }
 
   /* BUNDLES */
-  const bundles: IBundle[] = [];
+  const bundles: BundleShopItem[] = [];
   for (var b = 0; b < shop.FeaturedBundle.Bundles.length; b++) {
     const bundle = shop.FeaturedBundle.Bundles[b];
-    const bundleVAPI = (
-      await axios.request({
-        url: `https://valorant-api.com/v1/bundles/${
-          bundle.DataAssetID
-        }?language=${getVAPILang()}`,
-        method: "GET",
-      })
-    ).data.data;
+    const bundleAsset = await fetchBundle(bundle.DataAssetID);
 
     bundles.push({
-      ...bundleVAPI,
+      ...bundleAsset,
       price: bundle.Items.map((item) => item.DiscountedPrice).reduce(
         (a, b) => a + b
       ),
@@ -172,7 +147,7 @@ export async function parseShop(shop: StorefrontResponse) {
       ).map((item) => {
         const skin = skins.find(
           (_skin) => _skin.levels[0].uuid === item.Item.ItemID
-        ) as ISkin;
+        ) as ValorantSkin;
 
         return {
           ...skin,
@@ -183,14 +158,14 @@ export async function parseShop(shop: StorefrontResponse) {
   }
 
   /* NIGHT MARKET */
-  let nightMarket: INightMarketItem[] = [];
+  let nightMarket: NightMarketItem[] = [];
   if (shop.BonusStore) {
     var bonusStore = shop.BonusStore.BonusStoreOffers;
     for (var k = 0; k < bonusStore.length; k++) {
       let itemid = bonusStore[k].Offer.Rewards[0].ItemID;
       const skin = skins.find(
         (_skin) => _skin.levels[0].uuid === itemid
-      ) as ISkin;
+      ) as ValorantSkin;
 
       nightMarket.push({
         ...skin,
@@ -201,10 +176,61 @@ export async function parseShop(shop: StorefrontResponse) {
     }
   }
 
+  /* ACCESSORY SHOP */
+  let accessoryStore = shop.AccessoryStore.AccessoryStoreOffers;
+  let accessory: AccessoryShopItem[] = [];
+  for (var i = 0; i < accessoryStore.length; i++) {
+    const accessoryItem = accessoryStore[i].Offer;
+
+    // This is a pain because of different return types
+    const buddy = buddies.find(
+      (_skin) => _skin.levels[0].uuid === accessoryItem.Rewards[0].ItemID
+    );
+    const card = cards.find(
+      (_skin) => _skin.uuid === accessoryItem.Rewards[0].ItemID
+    );
+    const title = titles.find(
+      (_skin) => _skin.uuid === accessoryItem.Rewards[0].ItemID
+    );
+    const spray = sprays.find(
+      (_skin) => _skin.levels[0].uuid === accessoryItem.Rewards[0].ItemID
+    );
+
+    if (buddy) {
+      accessory[i] = {
+        uuid: buddy.levels[0].uuid,
+        displayName: buddy.displayName,
+        displayIcon: buddy.levels[0].displayIcon,
+        price: accessoryItem.Cost[VCurrencies.KC],
+      };
+    } else if (card) {
+      accessory[i] = {
+        uuid: card.uuid,
+        displayName: card.displayName,
+        displayIcon: card.largeArt,
+        price: accessoryItem.Cost[VCurrencies.KC],
+      };
+    } else if (title) {
+      accessory[i] = {
+        uuid: title.uuid,
+        displayName: title.displayName,
+        price: accessoryItem.Cost[VCurrencies.KC],
+      };
+    } else if (spray) {
+      accessory[i] = {
+        uuid: spray.levels[0].uuid,
+        displayName: spray.displayName,
+        displayIcon: spray.levels[0].displayIcon,
+        price: accessoryItem.Cost[VCurrencies.KC],
+      };
+    }
+  }
+
   return {
     main,
     bundles,
     nightMarket,
+    accessory,
     remainingSecs: {
       main:
         shop.SkinsPanelLayout.SingleItemOffersRemainingDurationInSeconds ?? 0,
@@ -212,6 +238,8 @@ export async function parseShop(shop: StorefrontResponse) {
         (bundle) => bundle.DurationRemainingInSeconds
       ) ?? [0],
       nightMarket: shop.BonusStore?.BonusStoreRemainingDurationInSeconds ?? 0,
+      accessory:
+        shop.AccessoryStore.AccessoryStoreRemainingDurationInSeconds ?? 0,
     },
   };
 }
@@ -226,9 +254,9 @@ export async function getBalances(
     url: getUrl("wallet", region, userId),
     method: "GET",
     headers: {
+      ...extraHeaders(),
       Authorization: `Bearer ${accessToken}`,
       "X-Riot-Entitlements-JWT": entitlementsToken,
-      ...extraHeaders,
     },
   });
 
@@ -236,6 +264,7 @@ export async function getBalances(
     vp: res.data.Balances[VCurrencies.VP],
     rad: res.data.Balances[VCurrencies.RAD],
     fag: res.data.Balances[VCurrencies.FAG],
+    kc: res.data.Balances[VCurrencies.KC],
   };
 }
 
@@ -249,9 +278,9 @@ export async function getProgress(
     url: getUrl("playerxp", region, userId),
     method: "GET",
     headers: {
+      ...extraHeaders(),
       Authorization: `Bearer ${accessToken}`,
       "X-Riot-Entitlements-JWT": entitlementsToken,
-      ...extraHeaders,
     },
   });
 
@@ -261,12 +290,12 @@ export async function getProgress(
   };
 }
 
-export const reAuth = () =>
+export const reAuth = (version: string) =>
   axios.request({
     url: "https://auth.riotgames.com/api/v1/authorization",
     method: "POST",
     headers: {
-      "User-Agent": `RiotClient/${extraHeaders["X-Riot-ClientVersion"]} rso-auth (Windows; 10;;Professional, x64)`,
+      "User-Agent": `RiotClient/${version} rso-auth (Windows; 10;;Professional, x64)`,
       "Content-Type": "application/json",
     },
     data: {
