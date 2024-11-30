@@ -13,9 +13,6 @@
   "donate_msg": "Supporta il Developer, donando ogni cifra ed avrai accesso alle notifiche riguardanti la tua wishlist. Grazie Mille <3",
   "donate_unlocked": "Hai sbloccato i vantaggi da donatore.",
   "fag": "Agenti Gratis",
-  "fetching": {
-    "skins": "Recuperando le skin…"
-  },
   "fetching.balances": "Recupero saldi…",
   "fetching.entitlements_token": "Recupero del token dei diritti in corso…",
   "fetching.offers": "Recuperando le offerte attuali …",
@@ -23,7 +20,6 @@
   "fetching.storefront": "Recupero vetrina…",
   "fetching.user_id": "Recuperando l' ID utente…",
   "fetching.username": "Recuperando l'username…",
-  "fetching.version": "Recuperando la versione attuale…",
   "gallery": "Galleria",
   "general": "Generale",
   "info": "Informazioni",
