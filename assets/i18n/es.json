@@ -35,6 +35,7 @@
   "general": "General",
   "info": "Información",
   "invalid_amount": "El importe mínimo es {{amount}}.",
+  "kc": "Créditos del reino",
   "language": "Idioma",
   "languages": {
     "es": "Español",
