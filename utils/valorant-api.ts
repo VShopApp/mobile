@@ -218,9 +218,9 @@ export async function parseShop(shop: StorefrontResponse) {
       };
     } else if (spray) {
       accessory[i] = {
-        uuid: spray.levels[0].uuid,
+        uuid: spray.uuid,
         displayName: spray.displayName,
-        displayIcon: spray.levels[0].displayIcon,
+        displayIcon: spray.fullTransparentIcon,
         price: accessoryItem.Cost[VCurrencies.KC],
       };
     }
