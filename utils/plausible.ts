@@ -17,11 +17,13 @@ export async function capture(
     return;
 
   if (!userAgent) {
-    const osName = Device.osName || "Unknown OS";
-    const osVersion = Device.osVersion || "Unknown Version";
-    const modelName = Device.modelName || "Unknown Device";
+    const os = Device.osName
+      ? `${Device.osName} ${Device.osVersion ?? ""}`
+      : null;
+    const modelName = Device.modelName;
+    const platform = [os, modelName].filter((i) => !!i).join("; ");
 
-    userAgent = `Mozilla/5.0 (${osName} ${osVersion}; ${modelName}) Gecko/20100101 Chrome/53.0`;
+    userAgent = `Mozilla/5.0 (${platform}) Gecko/20100101 Chrome/53.0`;
   }
 
   if (!appVersion) {
