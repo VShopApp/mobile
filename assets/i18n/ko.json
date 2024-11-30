@@ -1,9 +1,15 @@
 {
   "account": "계정",
+  "amount": "후원",
   "back": "돌아가기",
   "balances": "잔액",
+  "battery_optimization_warning": {
+    "action": "배터리 설정 비활성화",
+    "description": "배터리 설정이 활성화 되어있습니다.이 설정은 찜 목록 알림이 작동하는데 문제가 생길수 있습니다."
+  },
   "bundles": "세트",
   "chromas": "변형",
+  "copy_riot_id": "라이엇 아이디 복사",
   "credits": "크레딧",
   "credits_techchrism": "발로란트 API 문서",
   "credits_valorantapi": "비공식 발로란트 API",
@@ -13,6 +19,9 @@
   "donate_msg": "개발자에게 후원하고 찜 목록 안내를 받아보세요<3",
   "donate_unlocked": "후원 특전이 해금 되었습니다.",
   "fag": "무료 요원",
+  "fetching": {
+    "donator": "후원자 상태 불러오는중…"
+  },
   "fetching.balances": "잔액 불러오는 중…",
   "fetching.entitlements_token": "자격 토큰 불러오는 중…",
   "fetching.offers": "주문 불러오는 중…",
@@ -25,9 +34,12 @@
   "gallery": "갤러리",
   "general": "일반",
   "info": "정보",
+  "invalid_amount": "최소 후원금은 {{amount}}입니다.",
   "language": "언어",
   "languages": {
-    "es": "스페인어"
+    "es": "스페인어",
+    "no": "노르웨이어",
+    "uk": "우크라이나어"
   },
   "languages.ar": "아랍어",
   "languages.de": "독일어",
@@ -61,27 +73,34 @@
   "promotional": "언제, 어디서든 발로란트 상점을 확인하세요.",
   "purchase": {
     "error": "오류가 발생했습니다",
-    "restore": "환불하기",
+    "restore": "구매 복구하기",
     "success": "VShop을 지원해주셔서 감사합니다."
   },
   "rad": "레디어나이트 포인트",
   "region": "지역",
-  "region_info": "올바른 지역을 선택하세요,올바르지않은 지역을 선택 할시에는 상점이 달라질 수 있습니다.",
+  "region_info": "올바른 지역을 선택하세요,올바르지 않은 지역을 선택 시에는 상점이 달라질 수 있습니다.",
   "regions.ap": "아시아 - 태평양",
   "regions.eu": "유럽",
   "regions.kr": "한국",
   "regions.na": "북아메리카",
+  "screenshot_mode": "스크린샷 모드",
   "separate": "단품 구매시 가격",
   "settings": "설정",
   "shop": "오늘의 상점",
   "signin": "라이엇 ID로 로그인",
   "signin_info": "로그인 세부 정보는 라이엇 게임즈에게 직접 전송됩니다.",
-  "sure": "물론",
   "translators": "번역가",
+  "update": {
+    "available": {
+      "description": "새로운 버전의 Vshop을 다운로드 할 수 있습니다",
+      "title": "업데이트 가능"
+    },
+    "download_github": "GitHub에서 다운로드"
+  },
   "videos": "동영상",
   "vp": "발로란트 포인트",
   "welcome": "VShop에 오신 것을 환영합니다",
-  "welcome_back": "다시 오신것을 환영합니다",
+  "welcome_back": "다시 오신 것을 환영합니다",
   "welcome_back_info": "다시 로그인 하는 동안 잠시 기다려 주세요.",
   "wishlist": {
     "add": "찜 목록에 추가하기",
@@ -93,7 +112,7 @@
       "hit": "{{displayname}} 상품이 상점에 등장했습니다!",
       "info": "찜 해놓은 상품이 상점에 나온다면 알림을 받습니다.",
       "name": "찜 목록 알림",
-      "no_hit": "운이 없군요 :v 찜해놓은 상품이 상점에 없습니다.",
+      "no_hit": "운이 없군요 :v 찜 해놓은 상품이 상점에 없습니다.",
       "no_permission": "알림을 보내기 위한 권한이 없습니다!"
     },
     "remove": "찜 목록에서 삭제하기"

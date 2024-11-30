@@ -3,6 +3,10 @@
   "amount": "Amount",
   "back": "back",
   "balances": "Balances",
+  "battery_optimization_warning": {
+    "action": "Disable battery optimization",
+    "description": "Battery optimization is enabled for VShop. This may prevent wishlist notifications from working properly."
+  },
   "bundles": "Bundles",
   "chromas": "Chromas",
   "copy_riot_id": "Copy Riot Account ID",
@@ -68,7 +72,7 @@
   "promotional": "See your Valorant shop anywhere, anytime.",
   "purchase": {
     "error": "An error occurred",
-    "restore": "Restore Purchases",
+    "restore": "Restore purchase",
     "success": "Your order is processing. An app restart may be required to see your perks."
   },
   "rad": "Radianite Points",
@@ -86,7 +90,6 @@
   "shop": "Shop",
   "signin": "Sign In with Riot ID",
   "signin_info": "Your login details will be sent directly to Riot Games.",
-  "sure": "Sure",
   "translators": "Translators",
   "update": {
     "available": {
@@ -116,10 +119,6 @@
     "remove": "Remove from wishlist"
   },
   "xp": "XP",
-  "battery_optimization_warning": {
-    "description": "Battery optimization is enabled for VShop. This may prevent wishlist notifications from working properly.",
-    "action": "Disable battery optimization"
-  },
   "accessories": "Accessory Shop",
   "kc": "Kingdom Credits"
 }
