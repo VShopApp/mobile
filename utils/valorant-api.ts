@@ -193,7 +193,7 @@ export async function parseShop(shop: StorefrontResponse) {
       (_skin) => _skin.uuid === accessoryItem.Rewards[0].ItemID
     );
     const spray = sprays.find(
-      (_skin) => _skin.levels[0].uuid === accessoryItem.Rewards[0].ItemID
+      (_skin) => _skin.uuid === accessoryItem.Rewards[0].ItemID
     );
 
     if (buddy) {
