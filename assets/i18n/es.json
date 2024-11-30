@@ -1,4 +1,5 @@
 {
+  "accessories": "Tienda de accesorios",
   "account": "Cuenta",
   "amount": "Importe",
   "back": "atrás",
@@ -20,6 +21,7 @@
   "donate_unlocked": "Has desbloqueado ventajas de donante.",
   "fag": "Agentes gratis",
   "fetching": {
+    "assets": "Obteniendo activos…",
     "donator": "Cargando estado del donante…"
   },
   "fetching.balances": "Cargando balances…",
