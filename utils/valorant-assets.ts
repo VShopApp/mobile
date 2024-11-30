@@ -1,5 +1,6 @@
 import axios from "axios";
 import { getVAPILang } from "./localization";
+import * as FileSystem from "expo-file-system";
 
 type StoredAssets = {
   riotClientVersion?: string;
@@ -17,18 +18,35 @@ let assets: StoredAssets = {
   cards: [],
   titles: [],
 };
+const FILE_LOCATION = FileSystem.cacheDirectory + "/valorant_assets.json";
 
 export function getAssets() {
   return assets;
 }
 
 export async function loadAssets() {
-  assets.riotClientVersion = await fetchVersion();
+  const { exists } = await FileSystem.getInfoAsync(FILE_LOCATION);
+  const version = await fetchVersion();
+
+  if (exists) {
+    const storedAssets = await FileSystem.readAsStringAsync(FILE_LOCATION);
+    const storedAssetsJson: StoredAssets = JSON.parse(storedAssets);
+
+    if (storedAssetsJson.riotClientVersion === version) {
+      assets = storedAssetsJson;
+
+      return;
+    }
+  }
+
+  assets.riotClientVersion = version;
   assets.skins = await fetchSkins();
   assets.buddies = await fetchBuddies();
   assets.sprays = await fetchSprays();
   assets.cards = await fetchPlayerCards();
   assets.titles = await fetchPlayerTitles();
+
+  await FileSystem.writeAsStringAsync(FILE_LOCATION, JSON.stringify(assets));
 }
 
 export async function fetchVersion() {
