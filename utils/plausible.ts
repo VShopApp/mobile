@@ -3,7 +3,7 @@ import * as Device from "expo-device";
 import * as Application from "expo-application";
 
 let userAgent: string;
-let appVersion: string;
+let appVersion: string | undefined;
 
 // https://plausible.io/docs/events-api
 export async function capture(
@@ -27,7 +27,7 @@ export async function capture(
   }
 
   if (!appVersion) {
-    appVersion = Application.nativeApplicationVersion || "Unknown Version";
+    appVersion = Application.nativeApplicationVersion || undefined;
   }
 
   await axios.request({
