@@ -1,6 +1,7 @@
 import axios from "axios";
 import * as Device from "expo-device";
 import * as Application from "expo-application";
+import { Platform } from "react-native";
 
 let userAgent: string;
 let appVersion: string | undefined;
@@ -17,9 +18,12 @@ export async function capture(
     return;
 
   if (!userAgent) {
-    const os = Device.osName
-      ? `${Device.osName} ${Device.osVersion ?? ""}`
-      : null;
+    const os =
+      Platform.OS === "android"
+        ? "Android"
+        : Platform.OS === "ios"
+        ? "iOS"
+        : null;
     const modelName = Device.modelName;
     const platform = [os, modelName].filter((i) => !!i).join("; ");
 
@@ -40,7 +44,7 @@ export async function capture(
     data: {
       name,
       domain: process.env.EXPO_PUBLIC_PLAUSIBLE_DOMAIN,
-      url: `app://localhost/${path ?? ""}`,
+      url: `app://localhost${path ?? ""}`,
       props: {
         app_version: appVersion,
       },
