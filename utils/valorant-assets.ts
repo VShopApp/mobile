@@ -4,6 +4,7 @@ import * as FileSystem from "expo-file-system";
 
 type StoredAssets = {
   riotClientVersion?: string;
+  language?: string;
   skins: ValorantSkin[];
   buddies: ValorantBuddyAccessory[];
   sprays: ValorantSprayAccessory[];
@@ -27,12 +28,16 @@ export function getAssets() {
 export async function loadAssets() {
   const { exists } = await FileSystem.getInfoAsync(FILE_LOCATION);
   const version = await fetchVersion();
+  const language = getVAPILang();
 
   if (exists) {
     const storedAssets = await FileSystem.readAsStringAsync(FILE_LOCATION);
     const storedAssetsJson: StoredAssets = JSON.parse(storedAssets);
 
-    if (storedAssetsJson.riotClientVersion === version) {
+    if (
+      storedAssetsJson.riotClientVersion === version &&
+      storedAssetsJson.language === language
+    ) {
       assets = storedAssetsJson;
 
       return;
@@ -40,11 +45,12 @@ export async function loadAssets() {
   }
 
   assets.riotClientVersion = version;
-  assets.skins = await fetchSkins();
-  assets.buddies = await fetchBuddies();
-  assets.sprays = await fetchSprays();
-  assets.cards = await fetchPlayerCards();
-  assets.titles = await fetchPlayerTitles();
+  assets.language = language;
+  assets.skins = await fetchSkins(language);
+  assets.buddies = await fetchBuddies(language);
+  assets.sprays = await fetchSprays(language);
+  assets.cards = await fetchPlayerCards(language);
+  assets.titles = await fetchPlayerTitles(language);
 
   await FileSystem.writeAsStringAsync(FILE_LOCATION, JSON.stringify(assets));
 }
@@ -58,54 +64,66 @@ export async function fetchVersion() {
   return res.data.data.riotClientVersion;
 }
 
-export async function fetchSkins() {
+export async function fetchSkins(language?: string) {
   const res = await axios.request<{ data: ValorantSkin[] }>({
-    url: `https://valorant-api.com/v1/weapons/skins?language=${getVAPILang()}`,
+    url: `https://valorant-api.com/v1/weapons/skins?language=${
+      language ?? getVAPILang()
+    }`,
     method: "GET",
   });
 
   return res.data.data;
 }
 
-export async function fetchBuddies() {
+export async function fetchBuddies(language?: string) {
   const res = await axios.request<{ data: ValorantBuddyAccessory[] }>({
-    url: `https://valorant-api.com/v1/buddies?language=${getVAPILang()}`,
+    url: `https://valorant-api.com/v1/buddies?language=${
+      language ?? getVAPILang()
+    }`,
     method: "GET",
   });
 
   return res.data.data;
 }
 
-export async function fetchSprays() {
+export async function fetchSprays(language?: string) {
   const res = await axios.request<{ data: ValorantSprayAccessory[] }>({
-    url: `https://valorant-api.com/v1/sprays?language=${getVAPILang()}`,
+    url: `https://valorant-api.com/v1/sprays?language=${
+      language ?? getVAPILang()
+    }`,
     method: "GET",
   });
 
   return res.data.data;
 }
 
-export async function fetchPlayerCards() {
+export async function fetchPlayerCards(language?: string) {
   const res = await axios.request<{ data: ValorantCardAccessory[] }>({
-    url: `https://valorant-api.com/v1/playercards?language=${getVAPILang()}`,
+    url: `https://valorant-api.com/v1/playercards?language=${
+      language ?? getVAPILang()
+    }`,
     method: "GET",
   });
 
   return res.data.data;
 }
 
-export async function fetchPlayerTitles() {
+export async function fetchPlayerTitles(language?: string) {
   const res = await axios.request<{ data: ValorantTitleAccessory[] }>({
-    url: `https://valorant-api.com/v1/playertitles?language=${getVAPILang()}`,
+    url: `https://valorant-api.com/v1/playertitles?language=${
+      language ?? getVAPILang()
+    }`,
     method: "GET",
   });
 
   return res.data.data;
 }
 
-export async function fetchBundle(bundleId: string) {
+export async function fetchBundle(bundleId: string, language?: string) {
   const res = await axios.request<{ data: ValorantBundle }>({
-    url: `https://valorant-api.com/v1/bundles/${bundleId}?language=${getVAPILang()}`,
+    url: `https://valorant-api.com/v1/bundles/${bundleId}?language=${
+      language ?? getVAPILang()
+    }`,
     method: "GET",
   });
 
