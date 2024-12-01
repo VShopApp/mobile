@@ -40,7 +40,7 @@ export async function capture(
     data: {
       name,
       domain: process.env.EXPO_PUBLIC_PLAUSIBLE_DOMAIN,
-      url: path ?? `app://localhost/${path}`,
+      url: `app://localhost/${path ?? ""}`,
       props: {
         app_version: appVersion,
       },
