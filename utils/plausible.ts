@@ -18,12 +18,13 @@ export async function capture(
     return;
 
   if (!userAgent) {
-    const os =
+    const osName =
       Platform.OS === "android"
         ? "Android"
         : Platform.OS === "ios"
         ? "iOS"
         : null;
+    const os = osName ? `${osName} ${Device.osVersion ?? ""}` : null;
     const modelName = Device.modelName;
     const platform = [os, modelName].filter((i) => !!i).join("; ");
 
