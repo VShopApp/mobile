@@ -1,8 +1,8 @@
 import { Portal, Modal, Button, Text, useTheme } from "react-native-paper";
 import { View } from "react-native";
-import { ResizeMode, Video } from "expo-av";
+import { useVideoPlayer, VideoView } from "expo-video";
 import { create } from "zustand";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Image } from "expo-image";
 
 interface IStore {
@@ -26,8 +26,25 @@ export const useMediaPopupStore = create<IStore>((set) => ({
 function MediaPopup() {
   const { uris, text, selectedIndex, setSelectedIndex, hideMediaPopup } =
     useMediaPopupStore();
-  const [loading, setLoading] = useState(true);
+  const [imageLoading, setImageLoading] = useState(false);
   const { colors } = useTheme();
+
+  const isImage = uris[selectedIndex]
+    ? uris[selectedIndex].endsWith(".png") ||
+      uris[selectedIndex].endsWith(".jpg")
+    : false;
+  const player = useVideoPlayer(
+    !isImage ? uris[selectedIndex] : null,
+    (player) => {
+      player.loop = true;
+      player.muted = false;
+      player.play();
+    }
+  );
+
+  useEffect(() => {
+    console.log(player.status);
+  }, [player.status]);
 
   return (
     <Portal>
@@ -45,8 +62,7 @@ function MediaPopup() {
         >
           <View style={{ padding: 10 }}>
             {uris.length > 0 &&
-              (uris[selectedIndex].endsWith(".png") ||
-              uris[selectedIndex].endsWith(".jpg") ? (
+              (isImage ? (
                 <Image
                   style={{
                     aspectRatio: 16 / 9,
@@ -57,24 +73,19 @@ function MediaPopup() {
                   }}
                   contentFit="contain"
                   source={{ uri: uris[selectedIndex] }}
-                  onLoadStart={() => setLoading(true)}
-                  onLoad={() => setLoading(false)}
+                  onLoadStart={() => setImageLoading(true)}
+                  onLoad={() => setImageLoading(false)}
                 />
               ) : (
-                <Video
-                  source={{ uri: uris[selectedIndex] }}
+                <VideoView
+                  player={player}
+                  allowsFullscreen
                   style={{
                     aspectRatio: 16 / 9,
                     width: "100%",
                     borderTopLeftRadius: 5,
                     borderTopRightRadius: 5,
                   }}
-                  resizeMode={ResizeMode.CONTAIN}
-                  shouldPlay
-                  isMuted={false}
-                  isLooping={true}
-                  onLoadStart={() => setLoading(true)}
-                  onLoad={() => setLoading(false)}
                 />
               ))}
             <View
@@ -108,7 +119,10 @@ function MediaPopup() {
                 >
                   <Button
                     onPress={() => setSelectedIndex(i)}
-                    loading={i === selectedIndex && loading}
+                    loading={
+                      i === selectedIndex &&
+                      (imageLoading || player.status === "loading")
+                    }
                   >
                     {i + 1}
                   </Button>

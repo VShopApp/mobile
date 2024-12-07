@@ -48,12 +48,12 @@ function RootLayout() {
 
     // If user has set the region, he *should* be a returning user
     AsyncStorage.getItem("region").then((region) => {
+      SplashScreen.hideAsync();
       if (region) {
         router.replace("/reauth");
       } else {
         router.replace("/setup");
       }
-      SplashScreen.hideAsync();
     });
   }, [router]);
 
