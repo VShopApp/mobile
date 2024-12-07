@@ -49,7 +49,7 @@ export default function GalleryItem(props: React.PropsWithChildren<props>) {
               }
               icon={props.item.onWishlist ? "minus" : "plus"}
             />
-            <Divider />
+            <Divider tvParallaxProperties={undefined} />
             <Menu.Item
               onPress={() => {
                 setMenuVisible(false);

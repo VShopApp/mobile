@@ -16,7 +16,7 @@ import { Platform } from "react-native";
 import UpdatePopup from "~/components/popups/UpdatePopup";
 import { useEffect } from "react";
 import AsyncStorage from "@react-native-async-storage/async-storage";
-import { SplashScreen } from "expo-router";
+import * as SplashScreen from "expo-splash-screen";
 import { useTranslation } from "react-i18next";
 import { initBackgroundFetch, stopBackgroundFetch } from "~/utils/wishlist";
 import { useWishlistStore } from "~/hooks/useWishlistStore";
@@ -81,7 +81,10 @@ function RootLayout() {
                       }}
                     >
                       <Appbar.BackAction onPress={navigation.goBack} />
-                      <Appbar.Content title={options.title} />
+                      <Appbar.Content
+                        title={options.title}
+                        tvParallaxProperties={undefined}
+                      />
                     </Appbar.Header>
                   ),
                   gestureEnabled: false,

@@ -56,6 +56,7 @@ export default function BatteryOptimizationWarning() {
       icon={({ color, size }) => (
         <Icon name="battery-alert" color={color} size={size} />
       )}
+      tvParallaxProperties={undefined}
     >
       {t("battery_optimization_warning.description")}
     </Banner>

@@ -53,7 +53,10 @@ function Layout() {
           header: ({ options, navigation }) => (
             <Appbar.Header style={{ backgroundColor: colors.primary }}>
               <Appbar.Action icon="menu" onPress={navigation.openDrawer} />
-              <Appbar.Content title={options.title} />
+              <Appbar.Content
+                title={options.title}
+                tvParallaxProperties={undefined}
+              />
             </Appbar.Header>
           ),
         }}

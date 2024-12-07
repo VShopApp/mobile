@@ -7,11 +7,6 @@
     "icon": "./assets/images/icon.png",
     "scheme": "vshop",
     "userInterfaceStyle": "automatic",
-    "splash": {
-      "image": "./assets/images/splash.png",
-      "resizeMode": "contain",
-      "backgroundColor": "#fa4454"
-    },
     "ios": {
       "bundleIdentifier": "dev.vasc.vshop",
       "buildNumber": "28",
@@ -39,6 +34,14 @@
         "expo-dev-launcher",
         {
           "launchMode": "most-recent"
+        }
+      ],
+      [
+        "expo-splash-screen",
+        {
+          "image": "./assets/images/adaptive-icon.png",
+          "backgroundColor": "#fa4454",
+          "imageWidth": 200
         }
       ],
       [
