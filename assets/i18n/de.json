@@ -1,4 +1,5 @@
 {
+  "accessories": "",
   "account": "Konto",
   "amount": "Betrag",
   "back": "zurück",
@@ -20,6 +21,7 @@
   "donate_unlocked": "Du hast Spendervorteile freigeschaltet.",
   "fag": "Gratis Agenten",
   "fetching": {
+    "assets": "Lade Inhalte…",
     "donator": "Lade Spenderstatus…"
   },
   "fetching.balances": "Lade Bilanzen…",
