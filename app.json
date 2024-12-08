@@ -2,7 +2,7 @@
   "expo": {
     "name": "VShop",
     "slug": "vshop",
-    "version": "3.1.0-beta.2",
+    "version": "3.1.0-beta.3",
     "orientation": "portrait",
     "icon": "./assets/images/icon.png",
     "scheme": "vshop",
@@ -14,7 +14,7 @@
     },
     "ios": {
       "bundleIdentifier": "dev.vasc.vshop",
-      "buildNumber": "28",
+      "buildNumber": "29",
       "supportsTablet": true
     },
     "android": {
@@ -26,7 +26,7 @@
         "android.permission.REQUEST_IGNORE_BATTERY_OPTIMIZATIONS"
       ],
       "package": "dev.vasc.vshop2",
-      "versionCode": 73
+      "versionCode": 74
     },
     "web": {
       "bundler": "metro",
