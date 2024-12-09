@@ -1,4 +1,5 @@
 {
+  "accessories": "Accessoires-Shop",
   "account": "Konto",
   "amount": "Betrag",
   "back": "zurück",
@@ -34,6 +35,7 @@
   "general": "Allgemein",
   "info": "Info",
   "invalid_amount": "Der Mindestbetrag ist {{amount}}.",
+  "kc": "Kingdom-Credits",
   "language": "Sprache",
   "languages": {
     "es": "Spanisch",
