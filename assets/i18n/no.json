@@ -21,11 +21,9 @@
     "entitlements_token": "Henter berettighetssymbol …",
     "offers": "Henter tilbud …",
     "progress": "Henter fremdrift …",
-    "skins": "Henter drakter …",
     "storefront": "Henter butikkfront …",
     "user_id": "Henter bruker-ID …",
-    "username": "Henter brukernavn …",
-    "version": "Henter versjon …"
+    "username": "Henter brukernavn …"
   },
   "gallery": "Galleri",
   "general": "Generelt",

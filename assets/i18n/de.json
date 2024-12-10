@@ -1,4 +1,5 @@
 {
+  "accessories": "Accessoires-Shop",
   "account": "Konto",
   "amount": "Betrag",
   "back": "zurück",
@@ -20,21 +21,21 @@
   "donate_unlocked": "Du hast Spendervorteile freigeschaltet.",
   "fag": "Gratis Agenten",
   "fetching": {
+    "assets": "Lade Inhalte…",
     "donator": "Lade Spenderstatus…"
   },
   "fetching.balances": "Lade Bilanzen…",
   "fetching.entitlements_token": "Lade Berechtigungstoken…",
   "fetching.offers": "Lade Angebote…",
   "fetching.progress": "Lade Fortschritt…",
-  "fetching.skins": "Lade Skins…",
   "fetching.storefront": "Lade Shop…",
   "fetching.user_id": "Lade Benutzer-ID…",
   "fetching.username": "Lade Benutzername…",
-  "fetching.version": "Lade Version…",
   "gallery": "Galerie",
   "general": "Allgemein",
   "info": "Info",
   "invalid_amount": "Der Mindestbetrag ist {{amount}}.",
+  "kc": "Kingdom-Credits",
   "language": "Sprache",
   "languages": {
     "es": "Spanisch",

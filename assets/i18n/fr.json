@@ -1,9 +1,15 @@
 {
   "account": "Compte",
+  "amount": "Montant",
   "back": "Retournez",
   "balances": "Soldes",
+  "battery_optimization_warning": {
+    "action": "Désactiver l’optimisation de la batterie",
+    "description": "L’optimisation de la batterie est activée pour VShop. Cela pourrait empêcher le bon fonctionnement des notifications de la liste de souhaits."
+  },
   "bundles": "Paquets",
   "chromas": "Couleurs",
+  "copy_riot_id": "Copier l'ID du compte Riot",
   "credits": "Crédits",
   "credits_techchrism": "Documentation d'API de Valorant",
   "credits_valorantapi": "API inofficielle de Valorant",
@@ -13,19 +19,27 @@
   "donate_msg": "Vous pouvez soutenir le développement en cours en devenant donateur, et obtenez l'accès aux Notifications de Wishlist. Merci beaucoup <3",
   "donate_unlocked": "Vous avez obtenu les avantages du donateur.",
   "fag": "Agents gratuits",
+  "fetching": {
+    "assets": "Chargement des ressources…",
+    "donator": "Récupération du statut de donateur…"
+  },
   "fetching.balances": "Récupération des soldes…",
   "fetching.entitlements_token": "Récupération du jeton de droits…",
   "fetching.offers": "Récupération des offres…",
   "fetching.progress": "Récupération du progrès…",
-  "fetching.skins": "Récupération des skins…",
   "fetching.storefront": "Récupération de la devanture…",
   "fetching.user_id": "Récupération de l'identifiant…",
   "fetching.username": "Récupération du nom d'utilisateur…",
-  "fetching.version": "Récupération de la version…",
   "gallery": "Galerie",
   "general": "Général",
   "info": "Info",
+  "invalid_amount": "Le montant minimum est de {{amount}}.",
   "language": "Langue",
+  "languages": {
+    "es": "Espagnol",
+    "no": "Norvégien",
+    "uk": "Ukrainien"
+  },
   "languages.ar": "Arabe",
   "languages.de": "Allemand",
   "languages.en": "Anglais",

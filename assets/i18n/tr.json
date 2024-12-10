@@ -1,4 +1,5 @@
 {
+  "accessories": "Aksesuar Mağazası",
   "account": "Hesap",
   "amount": "Miktar",
   "back": "Önceki",
@@ -20,21 +21,21 @@
   "donate_unlocked": "Bağışcı özellikleri aktif edildi.",
   "fag": "Bedava Ajanlar",
   "fetching": {
+    "assets": "Varlıklar alınıyor…",
     "donator": "Bağış durumunuz kontrol ediliyor…"
   },
   "fetching.balances": "Bakiyeler alınıyor…",
   "fetching.entitlements_token": "Yetkiler alınıyor…",
   "fetching.offers": "Teklifler alınıyor…",
   "fetching.progress": "İlerleme alınıyor…",
-  "fetching.skins": "Skinler alınıyor…",
   "fetching.storefront": "Vitrin alınıyor…",
   "fetching.user_id": "Kullanıcı numarası alınıyor…",
   "fetching.username": "Kullanıcı adı alınıyor…",
-  "fetching.version": "Versiyon alınıyor…",
   "gallery": "Galeri",
   "general": "Genel",
   "info": "Bilgi",
   "invalid_amount": "Minimum miktar {{amount}}.",
+  "kc": "Kingdom Kredisi",
   "language": "Dil",
   "languages": {
     "es": "İspanyolca",
@@ -63,7 +64,7 @@
   "logout": "Çıkış yap",
   "never_show_again": "Tekrar gösterme",
   "next": "Sonraki",
-  "nightmarket": "Gece pazarı",
+  "nightmarket": "Gece Pazarı",
   "no": "Hayır, teşekkürler",
   "no_nightmarket": "Gece pazarı yakın zamanda tekrar gelecek.",
   "okay": "Tamam",

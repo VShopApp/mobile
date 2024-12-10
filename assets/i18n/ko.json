@@ -1,4 +1,5 @@
 {
+  "accessories": "엑세서리 상점",
   "account": "계정",
   "amount": "후원",
   "back": "돌아가기",
@@ -20,21 +21,21 @@
   "donate_unlocked": "후원 특전이 해금 되었습니다.",
   "fag": "무료 요원",
   "fetching": {
+    "assets": "에셋 불러오는중…",
     "donator": "후원자 상태 불러오는중…"
   },
   "fetching.balances": "잔액 불러오는 중…",
   "fetching.entitlements_token": "자격 토큰 불러오는 중…",
   "fetching.offers": "주문 불러오는 중…",
   "fetching.progress": "진행도 불러오는 중…",
-  "fetching.skins": "스킨 불러오는 중…",
   "fetching.storefront": "상점 불러오는 중…",
   "fetching.user_id": "유저 ID 가져오는 중…",
   "fetching.username": "유저 이름 가져오는 중…",
-  "fetching.version": "버전 가져오는중…",
   "gallery": "갤러리",
   "general": "일반",
   "info": "정보",
   "invalid_amount": "최소 후원금은 {{amount}}입니다.",
+  "kc": "킹덤 크레딧",
   "language": "언어",
   "languages": {
     "es": "스페인어",
