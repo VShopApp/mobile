@@ -1,8 +1,13 @@
 {
+  "accessories": "Cửa hàng phụ kiện",
   "account": "Tài khoản",
   "amount": "Số lượng",
   "back": "Quay lại",
   "balances": "Số dư",
+  "battery_optimization_warning": {
+    "action": "Tắt tối ưu hóa pin",
+    "description": "Tối ưu hóa pin đang được bật cho VShop. Điều này có thể khiến thông báo danh sách yêu thích không hoạt động đúng cách."
+  },
   "bundles": "Bộ",
   "chromas": "Màu",
   "copy_riot_id": "Sao chép ID Tài khoản Riot",
@@ -16,6 +21,7 @@
   "donate_unlocked": "Bạn đã mở khóa các đặc quyền.",
   "fag": "Nhân vật miễn phí",
   "fetching": {
+    "assets": "Đang tải tài nguyên…",
     "donator": "Tìm nạp trạng thái donator…"
   },
   "fetching.balances": "Tìm nạp số dư…",
@@ -29,9 +35,12 @@
   "general": "Chung",
   "info": "Thông tin",
   "invalid_amount": "Số lượng tối thiểu là {{amount}}.",
+  "kc": "kc",
   "language": "Ngôn ngữ",
   "languages": {
-    "es": "Tiếng Tây Ban Nha"
+    "es": "Tiếng Tây Ban Nha",
+    "no": "Tiếng Na Uy",
+    "uk": "Tiếng Ukraina"
   },
   "languages.ar": "Tiếng Ả Rập",
   "languages.de": "Tiếng Đức",
@@ -65,7 +74,7 @@
   "promotional": "Xem cửa hàng Valorant của bạn mọi lúc, mọi nơi.",
   "purchase": {
     "error": "Đã có sự cố",
-    "restore": "Khôi phục donate",
+    "restore": "Khôi phục giao dịch mua",
     "success": "Đang xử lý đơn hàng của bạn. Bạn cần khởi động lại app để sử dụng đặc quyền."
   },
   "rad": "Điểm Radianite",
