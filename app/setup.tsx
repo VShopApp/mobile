@@ -30,6 +30,7 @@ function Setup() {
         pagingEnabled
         showsHorizontalScrollIndicator={false}
         ref={scrollViewRef}
+        scrollEnabled={false}
         onMomentumScrollEnd={(event) =>
           setOffsetX(event.nativeEvent.contentOffset.x)
         }
