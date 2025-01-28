@@ -33,7 +33,8 @@
   "gallery": "Gallery",
   "general": "General",
   "info": "Info",
-  "invalid_amount": "Minimum amount is {{amount}}.",
+  "invalid_amount": "Invalid amount",
+  "minimum_amount": "Minimum amount is {{amount}}",
   "language": "Language",
   "languages": {
     "ar": "Arabic",
@@ -72,7 +73,6 @@
   "promotional": "See your Valorant shop anywhere, anytime.",
   "purchase": {
     "error": "An error occurred",
-    "restore": "Restore purchase",
     "success": "Your order is processing. An app restart may be required to see your perks."
   },
   "rad": "Radianite Points",

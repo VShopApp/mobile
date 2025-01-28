@@ -19,7 +19,6 @@ import {
   getCurrencies,
 } from "~/utils/vshop-api";
 import { PaymentSheet, useStripe } from "@stripe/stripe-react-native";
-import { MaskedTextInput } from "react-native-mask-text";
 import { useUserStore } from "~/hooks/useUserStore";
 import { useFeatureStore } from "~/hooks/useFeatureStore";
 import { useEffect, useState } from "react";
@@ -40,10 +39,9 @@ export default function DonatePopup() {
   const { t } = useTranslation();
   const { visible, hideDonatePopup } = useDonatePopupStore();
   const [currency, setCurrency] = useState<ICurrency>();
-  const [amount, setAmount] = useState({ rawText: "", text: "" });
-  const validAmount = currency
-    ? Number.parseFloat(amount.text) >= currency.minimum
-    : false;
+  const [amount, setAmount] = useState("");
+  const parsedAmount = Number.parseFloat(amount.replace(",", "."));
+  const isValidAmount = /^[0-9]+([,.][0-9]{1,2})?$/.test(amount);
   const { user } = useUserStore();
   const { initPaymentSheet, presentPaymentSheet } = useStripe();
   const { enableDonator } = useFeatureStore();
@@ -51,7 +49,7 @@ export default function DonatePopup() {
 
   const initializePaymentSheet = async () => {
     const res = await generatePaymentSheet({
-      amount: Number.parseFloat(amount.text),
+      amount: parsedAmount,
       riotId: user.id,
       currencyCode: currency?.code.toLowerCase() ?? "",
     });
@@ -148,46 +146,34 @@ export default function DonatePopup() {
                 label={t("amount")}
                 keyboardType="numeric"
                 mode="flat"
-                render={(props) => (
-                  <MaskedTextInput
-                    {...props}
-                    value={amount.rawText}
-                    onChangeText={(text, rawText) =>
-                      setAmount({ text, rawText })
-                    }
-                    type="currency"
-                    options={{
-                      decimalSeparator: !currency?.zeroDecimal && ".",
-                      precision: 2,
-                    }}
-                  />
-                )}
+                value={amount}
+                onChangeText={(value) => setAmount(value)}
                 style={{ marginVertical: 5 }}
               />
-              {currency && !validAmount && (
-                <Text style={{ color: "red" }}>
-                  {t("invalid_amount", {
-                    amount: `${currency.symbol}${currency.minimum}`,
-                  })}
-                </Text>
-              )}
-              <Button
-                mode={"text"}
-                onPress={() =>
-                  Linking.openURL(
-                    `https://vshop.one/restore-purchase?riotid=${user.id}`
+              {amount.length > 0 &&
+                (!isValidAmount ? (
+                  <Text style={{ color: "red" }}>{t("invalid_amount")}</Text>
+                ) : (
+                  currency &&
+                  parsedAmount < currency.minimum && (
+                    <Text style={{ color: "red" }}>
+                      {t("minimum_amount", {
+                        amount: `${currency.symbol}${currency.minimum}`,
+                      })}
+                    </Text>
                   )
-                }
-                labelStyle={{ fontSize: 12 }}
-              >
-                {t("purchase.restore")}
-              </Button>
+                ))}
             </Card.Content>
             <Card.Actions style={{ justifyContent: "flex-end" }}>
               <Button onPress={hideDonatePopup}>{t("no")}</Button>
               <Button
                 onPress={openPaymentSheet}
-                disabled={!currency || !validAmount || amount.text.length === 0}
+                disabled={
+                  !currency ||
+                  !isValidAmount ||
+                  amount.length === 0 ||
+                  parsedAmount < currency.minimum
+                }
               >
                 {t("donate")}
               </Button>
