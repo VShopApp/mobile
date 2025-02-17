@@ -34,7 +34,7 @@
   "gallery": "갤러리",
   "general": "일반",
   "info": "정보",
-  "invalid_amount": "최소 후원금은 {{amount}}입니다.",
+  "invalid_amount": "잘못된 금액",
   "kc": "킹덤 크레딧",
   "language": "언어",
   "languages": {
@@ -62,6 +62,7 @@
   "links": "링크",
   "login": "로그인",
   "logout": "로그아웃",
+  "minimum_amount": "최소 후원금은 {{amount}}입니다",
   "never_show_again": "다시 보지 않기",
   "next": "다음",
   "nightmarket": "야시장",
@@ -74,7 +75,6 @@
   "promotional": "언제, 어디서든 발로란트 상점을 확인하세요.",
   "purchase": {
     "error": "오류가 발생했습니다",
-    "restore": "구매 복구하기",
     "success": "VShop을 지원해주셔서 감사합니다."
   },
   "rad": "레디어나이트 포인트",
