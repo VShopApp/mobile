@@ -19,11 +19,10 @@ export const VItemTypes = {
 export const regions = ["eu", "na", "ap", "kr"];
 
 export const getAccessTokenFromUri = (uri: string) => {
-  return (
-    uri.match(
-      /access_token=((?:[a-zA-Z]|\d|\.|-|_)*).*id_token=((?:[a-zA-Z]|\d|\.|-|_)*).*expires_in=(\d*)/
-    ) as any
-  )[1];
+  const match = uri.match(/access_token=([^\s&]+)/);
+  if (!match) throw new Error("Could not extract access token from uri");
+
+  return match[1];
 };
 
 export const getDisplayIcon = (
