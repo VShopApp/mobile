@@ -34,7 +34,7 @@
   "gallery": "Galerie",
   "general": "Allgemein",
   "info": "Info",
-  "invalid_amount": "Der Mindestbetrag ist {{amount}}.",
+  "invalid_amount": "Ungültiger Betrag",
   "kc": "Kingdom-Credits",
   "language": "Sprache",
   "languages": {
@@ -62,6 +62,7 @@
   "links": "Links",
   "login": "Anmelden",
   "logout": "Abmelden",
+  "minimum_amount": "Der Mindestbetrag ist {{amount}}",
   "never_show_again": "Nicht mehr anzeigen",
   "next": "Weiter",
   "nightmarket": "Nachtmarkt",
