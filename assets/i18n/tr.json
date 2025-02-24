@@ -34,7 +34,7 @@
   "gallery": "Galeri",
   "general": "Genel",
   "info": "Bilgi",
-  "invalid_amount": "Minimum miktar {{amount}}.",
+  "invalid_amount": "Geçersizmiktar {{amount}}.",
   "kc": "Kingdom Kredisi",
   "language": "Dil",
   "languages": {
@@ -62,6 +62,7 @@
   "links": "Bağlantılar",
   "login": "Giriş yap",
   "logout": "Çıkış yap",
+  "minimum_amount": "{{amount}}Minimum tutar",
   "never_show_again": "Tekrar gösterme",
   "next": "Sonraki",
   "nightmarket": "Gece Pazarı",
@@ -110,7 +111,7 @@
       "enabled": "Bildirimler aktif edildi",
       "error": "Mağazanızı kontrol ederken bir hata oluştu",
       "hit": "{{displayname}} adlı skin şuan mağazanda!",
-      "info": "İstek listenizdeki bir ürün, mağazana gelince bir bildirim al.",
+      "info": "İstek listenizdeki bir ürün, mağazanıza geldiğinde bir bildirim alın.",
       "name": "İstek listesi bildirimi",
       "no_hit": "Bugün şanslı değilsin: İstek listendeki hiç bir skin mağazanda değil.",
       "no_permission": "Size bildirim göndermek için gereken iznimiz yok!"
