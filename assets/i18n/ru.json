@@ -34,7 +34,7 @@
   "gallery": "Галерея",
   "general": "Общее",
   "info": "Информация",
-  "invalid_amount": "Минимальное количество: {{amount}}.",
+  "invalid_amount": "Неверное количество",
   "kc": "KC",
   "language": "Язык",
   "languages": {
@@ -62,6 +62,7 @@
   "links": "Ссылки",
   "login": "Войти",
   "logout": "Выйти",
+  "minimum_amount": "Минимальное количество: {{amount}}",
   "never_show_again": "Не показывать снова",
   "next": "Далее",
   "nightmarket": "Ночной рынок",
