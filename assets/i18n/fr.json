@@ -1,4 +1,5 @@
 {
+  "accessories": "Boutique d'accessoires",
   "account": "Compte",
   "amount": "Montant",
   "back": "Retournez",
@@ -33,7 +34,8 @@
   "gallery": "Galerie",
   "general": "Général",
   "info": "Info",
-  "invalid_amount": "Le montant minimum est de {{amount}}.",
+  "invalid_amount": "Montant invalide",
+  "kc": "Crédits Kingdom",
   "language": "Langue",
   "languages": {
     "es": "Espagnol",
@@ -60,6 +62,7 @@
   "links": "Liens",
   "login": "Se connecter",
   "logout": "Se déconnecter",
+  "minimum_amount": "Le montant minimum est de {{amount}}",
   "never_show_again": "Ne plus afficher",
   "next": "Suivant",
   "nightmarket": "Marché de nuit",
@@ -77,17 +80,28 @@
   "rad": "Points de Radianite",
   "region": "Région",
   "region_info": "Veuillez assurer que vous avez choisi la bonne région, sinon votre boutique sera incorrecte.",
+  "regions": {
+    "eu": "Europe"
+  },
   "regions.ap": "Asie-pacifique",
   "regions.kr": "Corée",
   "regions.na": "Amérique du Nord",
+  "screenshot_mode": "Mode capture d'écran",
   "separate": "séparé",
   "settings": "Paramètres",
   "shop": "Boutique",
   "signin": "Se connecter avec Riot ID",
   "signin_info": "Vos détails de connexion seront envoyés directement au Riot Games.",
   "translators": "Traducteurs",
+  "update": {
+    "available": {
+      "description": "Une nouvelle version de VShop est disponible",
+      "title": "Mise à jour disponible"
+    },
+    "download_github": "Télécharger sur GitHub"
+  },
   "videos": "Vidéos",
-  "vp": "Points de Valorant",
+  "vp": "Points Valorant",
   "welcome": "Bienvenue à VShop",
   "welcome_back": "Content de vous revoir",
   "welcome_back_info": "En train de vous reconnecter.",
@@ -101,7 +115,8 @@
       "hit": "Le {{displayname}} est dans votre boutique !",
       "info": "Recevoir une notification lorsque les articles de votre Wishlist sont dans votre boutique.",
       "name": "Les notifications de Wishlist",
-      "no_hit": "Pas de chance aujourd'hui : Aucun skin de Wishlist est dans votre boutique."
+      "no_hit": "Pas de chance aujourd'hui : Aucun skin de Wishlist est dans votre boutique.",
+      "no_permission": "Nous n'avons pas la permission de vous envoyer des notifications!"
     },
     "remove": "Supprimer de Wishlist"
   },
