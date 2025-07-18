@@ -1,9 +1,16 @@
 {
+  "accessories": "Negozio Accessori",
   "account": "Account",
-  "back": "Ritorna",
+  "amount": "Quantità",
+  "back": "Indietro",
   "balances": "Bilancio",
+  "battery_optimization_warning": {
+    "action": "Disabilità l'ottimizzazione della batteria",
+    "description": "L'ottimizzazione della batteria è attiva per VShop. Questo potrebbe prevenire il corretto funzionamento delle notifiche."
+  },
   "bundles": "Bundle",
   "chromas": "Colori",
+  "copy_riot_id": "Copia l'ID dell'Account Riot",
   "credits": "Crediti",
   "credits_techchrism": "Documentazione Valorant API",
   "credits_valorantapi": "Valorant API non ufficiale",
@@ -13,6 +20,10 @@
   "donate_msg": "Supporta il Developer, donando ogni cifra ed avrai accesso alle notifiche riguardanti la tua wishlist. Grazie Mille <3",
   "donate_unlocked": "Hai sbloccato i vantaggi da donatore.",
   "fag": "Agenti Gratis",
+  "fetching": {
+    "assets": "Recupero gli assests…",
+    "donator": "Recupero stato donatore…"
+  },
   "fetching.balances": "Recupero saldi…",
   "fetching.entitlements_token": "Recupero del token dei diritti in corso…",
   "fetching.offers": "Recuperando le offerte attuali …",
@@ -23,7 +34,14 @@
   "gallery": "Galleria",
   "general": "Generale",
   "info": "Informazioni",
+  "invalid_amount": "Quantità non valida",
+  "kc": "Crediti Kingdom",
   "language": "Lingua",
+  "languages": {
+    "es": "Spagnolo",
+    "no": "Norvegese",
+    "uk": "Ucraino"
+  },
   "languages.ar": "Arabo",
   "languages.de": "Tedesco",
   "languages.en": "Inglese",
@@ -44,6 +62,7 @@
   "links": "Collegamenti",
   "login": "Accedi",
   "logout": "disconnettersi",
+  "minimum_amount": "La quantità minima è {{amount}}",
   "never_show_again": "Non mostrare più",
   "next": "Prossimo",
   "nightmarket": "Mercato notturno",
@@ -65,12 +84,20 @@
   "regions.eu": "Europa",
   "regions.kr": "Corea",
   "regions.na": "Nord America",
+  "screenshot_mode": "Modalità Screenshot",
   "separate": "Separatamente",
   "settings": "Impostazioni",
   "shop": "Negozio",
   "signin": "Accedi con il tuo Riot ID",
   "signin_info": "Le tue credenziali saranno mandate direttamente a Riot Games.",
   "translators": "Traduttori",
+  "update": {
+    "available": {
+      "description": "Una nuova versione di VShop è disponibile per il download",
+      "title": "Aggiornamento disponibile"
+    },
+    "download_github": "Scarica da GitHub"
+  },
   "videos": "Video",
   "vp": "Punti Valore",
   "welcome": "Benvenuto in VShop",
@@ -86,7 +113,8 @@
       "hit": "Il {{display name}} è ora nel tuo negozio!",
       "info": "Ricevi una notifica quando il tuo oggetto desiderato sarà nel negozio.",
       "name": "Notifica della Wishlist",
-      "no_hit": "Nessuna fortuna oggi: Nessun oggetto desiderato è nel negozio."
+      "no_hit": "Nessuna fortuna oggi: Nessun oggetto desiderato è nel negozio.",
+      "no_permission": "Non abbiamo il permesso di inviarti notifiche!"
     },
     "remove": "Rimuovi dalla wishlist"
   },
