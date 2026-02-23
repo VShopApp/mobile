@@ -34,12 +34,13 @@
   "gallery": "Galeri",
   "general": "Genel",
   "info": "Bilgi",
-  "invalid_amount": "Geçersizmiktar {{amount}}.",
+  "invalid_amount": "Geçersiz miktar",
   "kc": "Kingdom Kredisi",
   "language": "Dil",
   "languages": {
     "es": "İspanyolca",
     "no": "Norveççe",
+    "ta": "Tamilce",
     "uk": "Ukraynaca"
   },
   "languages.ar": "Arapça",
@@ -67,6 +68,7 @@
   "next": "Sonraki",
   "nightmarket": "Gece Pazarı",
   "no": "Hayır, teşekkürler",
+  "no_bundle": "Şu anda mevcut paket bulunmamaktadır.\nLütfen daha sonra tekrar kontrol edin.",
   "no_nightmarket": "Gece pazarı yakın zamanda tekrar gelecek.",
   "okay": "Tamam",
   "privacy_policy": "Gizlilik politikası",

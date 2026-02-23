@@ -40,6 +40,7 @@
   "languages": {
     "es": "Spanisch",
     "no": "Norwegisch",
+    "ta": "Tamil",
     "uk": "Ukrainisch"
   },
   "languages.ar": "Arabisch",
@@ -67,6 +68,7 @@
   "next": "Weiter",
   "nightmarket": "Nachtmarkt",
   "no": "Nein danke",
+  "no_bundle": "Derzeit ist kein Bundle verfügbar.\nBitte schauen sie später noch einmal.",
   "no_nightmarket": "Der Nachtmarkt kommt bald wieder zurück.",
   "okay": "Okay",
   "privacy_policy": "Datenschutzerklärung",

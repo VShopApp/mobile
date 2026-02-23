@@ -40,6 +40,7 @@
   "languages": {
     "es": "스페인어",
     "no": "노르웨이어",
+    "ta": "타밀어",
     "uk": "우크라이나어"
   },
   "languages.ar": "아랍어",
@@ -62,11 +63,12 @@
   "links": "링크",
   "login": "로그인",
   "logout": "로그아웃",
-  "minimum_amount": "최소 후원금은 {{amount}}입니다",
+  "minimum_amount": "최소 금액은 {{amount}}입니다",
   "never_show_again": "다시 보지 않기",
   "next": "다음",
   "nightmarket": "야시장",
   "no": "아뇨 괜찮습니다",
+  "no_bundle": "현재 이용 가능한 번들이 없습니다.\n나중에 다시 확인해 주세요.",
   "no_nightmarket": "야시장은 곧 돌아옵니다.",
   "okay": "확인",
   "privacy_policy": "개인정보 보호 정책",
